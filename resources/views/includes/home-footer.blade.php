@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="spacer-large is-foter"></div>
-            <div>&copy; 2024 {{ env('APP_NAME') }} . All rights reserved.</div>
+            <div>&copy; {{ date('Y') }} {{ env('APP_NAME') }} . All rights reserved.</div>
             <div class="spacer-medium"></div>
         </div>
     </div>
