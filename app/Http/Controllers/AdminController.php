@@ -54,8 +54,6 @@ class AdminController extends Controller
     {
         if ($request->method() == 'GET') {
 
-            $user_data = $user->get()->first();
-
             $total_withdrawn = $user->transactions()->where("transaction_category", 2)
                 ->where("transaction_status", 2)
                 ->sum("transaction_amount");
@@ -64,7 +62,7 @@ class AdminController extends Controller
 
             return view('admin.admin-ai-trade', [
                 "title" => "Ai trade",
-                "user_data" => $user_data,
+                "user_data" => $user,
                 "total_withdrawn" => $total_withdrawn,
                 "admin_data" => Auth::user(),
             ]);
