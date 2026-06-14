@@ -1,6 +1,6 @@
-<div class="col col-login mx-auto">
-    <form class="card shadow-none" wire:submit.throttle.1000.prevent="resetPassword" method="post">
-        <div class="card-body">
+<div class="card-body" style="padding: 50px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <form class="shadow-none" wire:submit.throttle.1000.prevent="resetPassword" method="post">
+        <div>
             <div class="text-center">
                 <span class="login100-form-title">
                     Forgot Password
@@ -26,19 +26,6 @@
                 </div>
             </div>
 
-        </div>
-        <div class="card-footer">
-            <div class="d-flex justify-content-center my-3">
-                <a href="javascript:void(0);" class="social-login  text-center me-4">
-                    <i class="fa fa-google"></i>
-                </a>
-                <a href="javascript:void(0);" class="social-login  text-center me-4">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a href="javascript:void(0);" class="social-login  text-center">
-                    <i class="fa fa-twitter"></i>
-                </a>
-            </div>
         </div>
     </form>
 </div>

@@ -1,4 +1,4 @@
-<div class="card-body">
+<div class="card-body" style="padding: 50px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <form class="login100-form validate-form" wire:submit.throttle.1000.prevent="register" method="post">
         <span class="login100-form-title">
             Registration
