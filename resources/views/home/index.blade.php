@@ -1,2624 +1,724 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" data-wf-page="647ae04ed1e08695681f7e9c"
-    data-wf-site="647ae04ed1e08695681f7e4e">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 
-{{-- heead tag start --}}
-@include('includes.home-head')
-{{-- heead tag end --}}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ env('APP_NAME') }} | Next-Gen Crypto & Forex Trading Platform</title>
 
-<body>
-    <div class="page-wrapper">
-        <div data-animation="default" class="navbar w-nav" data-easing2="ease" data-easing="ease" data-collapse="small"
-            data-w-id="54f4eddd-9c06-6454-1245-b303e07fb54b" role="banner" data-duration="400" id="Navbar">
-            @include('includes.home-nav')
-            <div class="bg-nav"></div>
+    <meta name="description"
+        content="Unlock your trading potential with our comprehensive solutions designed to support traders. Explore our expert guidance and lucrative opportunities to propel your trading career.">
+    <meta name="keywords" content="{{ env('APP_NAME') }} ">
+    <meta property="og:title" content="{{ env('APP_NAME') }}   Forex Trading">
+    <meta property="og:description"
+        content="Unlock your trading potential with our comprehensive solutions designed to support traders. Explore our expert guidance and lucrative opportunities to propel your trading career.">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0B0F19',
+                            card: '#151B2C',
+                            primary: '#6366F1', // Indigo
+                            accent: '#10B981', // Emerald Green
+                            crypto: '#F59E0B' // Amber
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for premium feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+
+<body class="bg-brand-dark text-gray-100 font-sans antialiased overflow-x-hidden">
+
+    <!-- JS Preloader Screen -->
+    <div id="preloader"
+        class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-brand-dark transition-opacity duration-500">
+        <div class="relative w-16 h-16">
+            <div class="absolute inset-0 border-4 border-brand-primary/20 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-t-brand-accent rounded-full animate-spin"></div>
         </div>
-        <main data-w-id="3f1e8c66-dc14-e31c-04fc-9dd7679fff7a" class="main-wrapper">
-            <div class="a-header-section">
-                <div class="a-container-regular">
-                    <div id="w-node-fab80dea-51a8-a168-d12e-462c3706cdf7-681f7e9c" class="a-header-block">
-                        <div class="a-header-content-2">
-                            <div class="a-margin-bottom-49" style="margin-top: 20px">
-                                <div class="a-detail-small a-text-color-primary">{{ env('APP_NAME') }} </div>
-                            </div>
-                            <div class="a-margin-bottom-48" style="font-size: 10px">
-                                <h1 class="a-h1-heading" >The Unrivaled Authority  and Top Forex Robot  Developer in South Africa <br> <span
-                                        class="a-span-underline">BUY NOW.</span></h1>
-                            </div>
-                            <div class="one-box-line header"><img
-                                    src="{{ asset('home-assets/assets/img/icon-blue-checkmark.svg') }}"
-                                    loading="lazy" alt="Blue Checkmark Icon" class="one-small_icon">
-                                <div class="text-block-19">No Time Limits</div>
-                            </div>
-                            <div class="one-box-line header"><img
-                                    src="{{ asset('home-assets/assets/img/icon-blue-checkmark.svg') }}"
-                                    loading="lazy" alt="Blue Checkmark Icon" class="one-small_icon">
-                                <div class="text-block-19">100% Profit Split</div>
-                            </div>
-                            <div class="one-box-line header"><img
-                                    src="{{ asset('home-assets/assets/img/icon-blue-checkmark.svg') }}"
-                                    loading="lazy" alt="Blue Checkmark Icon" class="one-small_icon">
-                                <div class="text-block-19">7 Day Payouts</div>
-                            </div>
-                            <div class="a-header-button-wrapper"><a href="{{ route('register')}}" target="_blank"
-                                    class="a-button-primary-2 w-button">Get Started</a>
-                            </div>
-                        </div>
-                    </div>
+        <p class="mt-4 text-sm font-semibold tracking-widest text-gray-400 uppercase animate-pulse">
+            {{ env('APP_NAME') }} Securing
+            Connection...</p>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-brand-dark/80 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <!-- Logo Image -->
+                <img src="{{ asset('home-assets/assets/img/forex-logo.png') }}" alt="{{ env('APP_NAME') }} Logo"
+                    class="w-8 h-8 object-contain">
+
+                <!-- Brand Name -->
+                <span
+                    class="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                    {{ env('APP_NAME') }}
+                </span>
+            </div>
+            <!-- Desktop Navbar -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+                <a href="#markets" class="hover:text-white transition-colors">Markets</a>
+                <a href="#features" class="hover:text-white transition-colors">Features</a>
+                <a href="#about" class="hover:text-white transition-colors">About Us</a>
+                <a href="#testimonials" class="hover:text-white transition-colors">Testimonials</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="/login" class="text-sm font-medium hover:text-white transition-colors hidden sm:block">Sign
+                    In</a>
+                <a href="/register"
+                    class="bg-gradient-to-r from-brand-primary to-indigo-700 hover:opacity-90 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-brand-primary/20 transition-all transform hover:-translate-y-0.5">Start
+                    Trading</a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white focus:outline-none"
+                    aria-label="Toggle Menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-brand-dark/95 border-b border-gray-800 px-4 pt-2 pb-6 absolute w-full left-0 transition-all duration-300">
+            <nav class="flex flex-col gap-4 text-base font-medium text-gray-400">
+                <a href="#markets" class="mobile-link hover:text-white transition-colors py-2">Markets</a>
+                <a href="#features" class="mobile-link hover:text-white transition-colors py-2">Features</a>
+                <a href="#about" class="mobile-link hover:text-white transition-colors py-2">About Us</a>
+                <a href="#testimonials" class="mobile-link hover:text-white transition-colors py-2">Testimonials</a>
+                <a href="#contact" class="mobile-link hover:text-white transition-colors py-2">Contact</a>
+                <hr class="border-gray-800 my-2">
+                <a href="/login" class="mobile-link hover:text-white transition-colors py-2">Sign In</a>
+                <a href="/register" class="mobile-link hover:text-white transition-colors py-2">Create Account</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative pt-8 pb-16 lg:pt-20 lg:pb-28 overflow-hidden">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none">
+                <div
+                    class="absolute top-[-10%] left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-brand-primary/10 rounded-full blur-[120px]">
                 </div>
-                <div class="a-header-image-block">
-                    <div class="w-layout-grid a-header-image-grid"><img
-                            src="{{ asset('home-assets/assets/img/image-mockup-iphone-blue.png') }}" loading="lazy"
-                            sizes="(max-width: 991px) 90vw, 38vw" alt=""
-                            id="w-node-fab80dea-51a8-a168-d12e-462c3706ce1b-681f7e9c" class="a-header-grid-image">
-                    </div>
+                <div
+                    class="absolute bottom-[10%] right-[-10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-brand-accent/10 rounded-full blur-[100px]">
                 </div>
             </div>
-            <div class="spacer-medium"></div>
-            <section class="how-works_section">
-                <div class="padding-global">
-                    <section class="trading-features_section">
-                        <div class="padding-global">
-                            <div class="spacer-xlarge"></div>
-                            <div class="container-large tradingtable">
-                                <div class="h2-wrap">
-                                    <h2>Choose your Robot</h2>
-                                </div>
-                                <div class="new_table">
-                                    <div data-current="Tab 1" data-easing="ease" data-duration-in="300"
-                                        data-duration-out="100" class="outer_table w-tabs">
-                                        <div class="outer_table_menu_wraper w-tab-menu">
-                                            <a data-w-tab="Tab 1"
-                                                class="tab-link-tab-2 w-inline-block w-tab-link w--current">
-                                                <div>2-Step</div>
-                                            </a>
-                                            <a data-w-tab="Tab 2" class="tab-link-tab-2 w-inline-block w-tab-link">
-                                                <div>1-Step</div>
-                                            </a>
-                                        </div>
-                                        <div class="outer_table_content w-tab-content">
-                                            <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
-                                                <div data-current="Tab 5" data-easing="ease" data-duration-in="300"
-                                                    data-duration-out="100" class="w-tabs">
-                                                    <div class="tabs-menu-4 w-tab-menu">
-                                                        <a data-w-tab="Tab 2"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                                                            <div class="text-block-32 table">$10k</div>
-                                                        </a>
-                                                        <a data-w-tab="Tab 3"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                                                            <div class="text-block-32 table">$25k</div>
-                                                        </a>
-                                                        <a data-w-tab="Tab 4"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                                                            <div class="text-block-32 table">$50k</div>
-                                                        </a>
-                                                        <a data-w-tab="Tab 5"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link w--current">
-                                                            <div class="text-block-32 table">$100k</div>
-                                                        </a>
-                                                        <a data-w-tab="Tab 6"
-                                                            id="w-node-e3bac403-3b81-54a4-e903-ddb0af1033e2-681f7e9c"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                                                            <div class="text-block-32 table">$200k</div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="tabs-content-2 w-tab-content">
-                                                        <div data-w-tab="Tab 2" class="w-tab-pane">
-                                                            <div class="columns w-row">
-                                                                <div class="w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10% /
-                                                                                    5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$1,000/$500
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$500</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$1,000 <span
-                                                                                    class="text-span-9">(static)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper"><a href="{{ route('register') }}"
-                                                                                target="_blank"
-                                                                                class="button is-fill small w-button">Get
-                                                                                Started</a><a href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button small w-button">Fee
-                                                                                $100</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-_2b3285a3-6921-d05e-0746-436a0ffc858f-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_2b3285a3-6921-d05e-0746-436a0ffc8593-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_2b3285a3-6921-d05e-0746-436a0ffc8597-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_2b3285a3-6921-d05e-0746-436a0ffc859b-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-_2b3285a3-6921-d05e-0746-436a0ffc859f-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-_2b3285a3-6921-d05e-0746-436a0ffc85a3-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-_2b3285a3-6921-d05e-0746-436a0ffc85a7-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 0
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_2b3285a3-6921-d05e-0746-436a0ffc85ab-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/overnight holding
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button w-button">Help Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-w-tab="Tab 3" class="w-tab-pane">
-                                                            <div class="columns w-row">
-                                                                <div class="w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10% /
-                                                                                    5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$2,500/$1,250
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$1,250</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$2,500 <span
-                                                                                    class="text-span-9">(static)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper"><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button is-fill small w-button">Get
-                                                                                Started</a><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button small w-button">Fee
-                                                                                $200</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-_9f946f70-b6a9-c077-b8a4-edbe5dea52a3-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_9f946f70-b6a9-c077-b8a4-edbe5dea52a7-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_9f946f70-b6a9-c077-b8a4-edbe5dea52ab-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_9f946f70-b6a9-c077-b8a4-edbe5dea52af-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-_9f946f70-b6a9-c077-b8a4-edbe5dea52b3-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-_9f946f70-b6a9-c077-b8a4-edbe5dea52b7-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-_9f946f70-b6a9-c077-b8a4-edbe5dea52bb-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 0
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_9f946f70-b6a9-c077-b8a4-edbe5dea52bf-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/Overnight holding
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button w-button">Help Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-w-tab="Tab 4" class="w-tab-pane">
-                                                            <div class="columns w-row">
-                                                                <div class="w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10% /
-                                                                                    5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$5,000/$2,500
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$2,500</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$5,000 <span
-                                                                                    class="text-span-9">(static)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper"><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button is-fill small w-button">Get
-                                                                                Started</a><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button small w-button">Fee
-                                                                                $300</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-_9dec606e-6bba-acb3-7cdf-d70874ba2bd3-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_9dec606e-6bba-acb3-7cdf-d70874ba2bd7-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_9dec606e-6bba-acb3-7cdf-d70874ba2bdb-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_9dec606e-6bba-acb3-7cdf-d70874ba2bdf-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-_9dec606e-6bba-acb3-7cdf-d70874ba2be3-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-_9dec606e-6bba-acb3-7cdf-d70874ba2be7-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-_9dec606e-6bba-acb3-7cdf-d70874ba2beb-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 0
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_9dec606e-6bba-acb3-7cdf-d70874ba2bef-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/Overnight holding
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button w-button">Help Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-w-tab="Tab 5" class="w-tab-pane w--tab-active">
-                                                            <div class="columns w-row">
-                                                                <div class="column w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10% /
-                                                                                    5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$10,000/$5,000
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$5,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$10,000 <span
-                                                                                    class="text-span-9">(static)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper vertical"><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button is-fill width w-button">Get
-                                                                                Started</a><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button width w-button">Fee
-                                                                                $550</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-a7097486-eefc-21dd-8425-883848401f4a-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-a7097486-eefc-21dd-8425-883848401f4e-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-a7097486-eefc-21dd-8425-883848401f52-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-a7097486-eefc-21dd-8425-883848401f56-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-a7097486-eefc-21dd-8425-883848401f5a-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-a7097486-eefc-21dd-8425-883848401f5e-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-a7097486-eefc-21dd-8425-883848401f62-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 0
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-a7097486-eefc-21dd-8425-883848401f66-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/Overnight holding
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button width w-button">Help
-                                                                            Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-w-tab="Tab 6" class="w-tab-pane">
-                                                            <div class="columns w-row">
-                                                                <div class="w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10% /
-                                                                                    5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$20,000/$10,000
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$10,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$20,000 <span
-                                                                                    class="text-span-9">(static)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper"><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button is-fill small w-button">Get
-                                                                                Started</a><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button small w-button">Fee
-                                                                                $1,000</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-_48934ea7-e3df-b270-eb95-810b345e5230-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_48934ea7-e3df-b270-eb95-810b345e5234-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_48934ea7-e3df-b270-eb95-810b345e5238-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_48934ea7-e3df-b270-eb95-810b345e523c-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-_48934ea7-e3df-b270-eb95-810b345e5240-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-_48934ea7-e3df-b270-eb95-810b345e5244-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-_48934ea7-e3df-b270-eb95-810b345e5248-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 7
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_48934ea7-e3df-b270-eb95-810b345e524c-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/Overnight holding
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button w-button">Help Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-w-tab="Tab 2" class="w-tab-pane">
-                                                <div data-current="Tab 5" data-easing="ease" data-duration-in="300"
-                                                    data-duration-out="100" class="w-tabs">
-                                                    <div class="tabs-menu-4 w-tab-menu">
-                                                        <a data-w-tab="Tab 2"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                                                            <div class="text-block-32">$10k</div>
-                                                        </a>
-                                                        <a data-w-tab="Tab 3"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                                                            <div class="text-block-32">$25k</div>
-                                                        </a>
-                                                        <a data-w-tab="Tab 4"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                                                            <div class="text-block-32">$50k</div>
-                                                        </a>
-                                                        <a data-w-tab="Tab 5"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link w--current">
-                                                            <div class="text-block-32">$100k</div>
-                                                        </a>
-                                                        <a data-w-tab="Tab 6"
-                                                            class="tab-link-tab-2-2 w-inline-block w-tab-link">
-                                                            <div class="text-block-32">$200k</div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="tabs-content-2 w-tab-content">
-                                                        <div data-w-tab="Tab 2" class="w-tab-pane">
-                                                            <div class="columns w-row">
-                                                                <div class="w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$1,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(4%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$400</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$500 <span
-                                                                                    class="text-span-9">(trailing)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper"><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button is-fill small w-button">Get
-                                                                                Started</a><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button small w-button">Fee
-                                                                                $100</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-_09c9d1ab-edfb-768c-591f-57ca38d984a9-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_09c9d1ab-edfb-768c-591f-57ca38d984ad-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_09c9d1ab-edfb-768c-591f-57ca38d984b1-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_09c9d1ab-edfb-768c-591f-57ca38d984b5-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-_09c9d1ab-edfb-768c-591f-57ca38d984b9-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-_09c9d1ab-edfb-768c-591f-57ca38d984bd-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-_09c9d1ab-edfb-768c-591f-57ca38d984c1-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 0
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_09c9d1ab-edfb-768c-591f-57ca38d984c5-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/Overnight holding
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button w-button">Help Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-w-tab="Tab 3" class="w-tab-pane">
-                                                            <div class="columns w-row">
-                                                                <div class="w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$2,500</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(4%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$1,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$1,250 <span
-                                                                                    class="text-span-9">(trailing)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper"><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button is-fill small w-button">Get
-                                                                                Started</a><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button small w-button">Fee
-                                                                                $200</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-_5f711595-dbee-a8d2-7717-284a863546a0-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_5f711595-dbee-a8d2-7717-284a863546a4-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_5f711595-dbee-a8d2-7717-284a863546a8-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_5f711595-dbee-a8d2-7717-284a863546ac-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-_5f711595-dbee-a8d2-7717-284a863546b0-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-_5f711595-dbee-a8d2-7717-284a863546b4-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-_5f711595-dbee-a8d2-7717-284a863546b8-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 0
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_5f711595-dbee-a8d2-7717-284a863546bc-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/Overnight holding
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button w-button">Help Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-w-tab="Tab 4" class="w-tab-pane">
-                                                            <div class="columns w-row">
-                                                                <div class="w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$5,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(4%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$2,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$2,500 <span
-                                                                                    class="text-span-9">(trailing)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper"><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button is-fill small w-button">Get
-                                                                                Started</a><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button small w-button">Fee
-                                                                                $300</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-_2c533984-9fe7-f3df-e017-683767d3f0c8-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_2c533984-9fe7-f3df-e017-683767d3f0cc-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_2c533984-9fe7-f3df-e017-683767d3f0d0-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_2c533984-9fe7-f3df-e017-683767d3f0d4-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-_2c533984-9fe7-f3df-e017-683767d3f0d8-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-_2c533984-9fe7-f3df-e017-683767d3f0dc-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-_2c533984-9fe7-f3df-e017-683767d3f0e0-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 0
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_2c533984-9fe7-f3df-e017-683767d3f0e4-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/Overnight
-                                                                                holding</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button w-button">Help Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-w-tab="Tab 5" class="w-tab-pane w--tab-active">
-                                                            <div class="columns w-row">
-                                                                <div class="w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$10,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(4%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$4,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$5,000 <span
-                                                                                    class="text-span-9">(trailing)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper"><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button is-fill small w-button">Get
-                                                                                Started</a><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button small w-button">Fee
-                                                                                $550</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-f2062058-fab2-7942-273d-9c97358e7c2a-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-f2062058-fab2-7942-273d-9c97358e7c2e-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-f2062058-fab2-7942-273d-9c97358e7c32-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-f2062058-fab2-7942-273d-9c97358e7c36-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-f2062058-fab2-7942-273d-9c97358e7c3a-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-f2062058-fab2-7942-273d-9c97358e7c3e-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-f2062058-fab2-7942-273d-9c97358e7c42-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 0
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-f2062058-fab2-7942-273d-9c97358e7c46-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/Overnight
-                                                                                holding</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button w-button">Help Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-w-tab="Tab 6" class="w-tab-pane">
-                                                            <div class="columns w-row">
-                                                                <div class="w-col w-col-4 w-col-stack">
-                                                                    <div class="div-block-13">
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Profit Target
-                                                                                <span class="text-span-8">(10%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$20,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Daily Drawdown
-                                                                                <span class="text-span-8">(4%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$8,000</div>
-                                                                        </div>
-                                                                        <div class="div-block-12">
-                                                                            <div class="text-block-27">Max Drawdown
-                                                                                <span class="text-span-8">(5%)</span>
-                                                                            </div>
-                                                                            <div class="text-block-29">$10,000 <span
-                                                                                    class="text-span-9">(trailing)</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="item_wrapper"><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button is-fill small w-button">Get
-                                                                                Started</a><a
-                                                                                href="{{ route('register')}}"
-                                                                                target="_blank"
-                                                                                class="button small w-button">Fee
-                                                                                $1,000</a></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="w-col w-col-8 w-col-stack">
-                                                                    <h4>What’s included?</h4>
-                                                                    <div class="w-layout-grid list_wrapper">
-                                                                        <div id="w-node-_1c1562be-26e2-316e-2686-79f43fb5d642-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Up-to 100% profit split*
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_1c1562be-26e2-316e-2686-79f43fb5d646-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">14-Day or 7-Day Payouts
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_1c1562be-26e2-316e-2686-79f43fb5d64a-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Unlimited Trading Days
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_1c1562be-26e2-316e-2686-79f43fb5d64e-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">News trading allowed</p>
-                                                                        </div>
-                                                                        <div id="w-node-_1c1562be-26e2-316e-2686-79f43fb5d652-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Zero commissions*</p>
-                                                                        </div>
-                                                                        <div id="w-node-_1c1562be-26e2-316e-2686-79f43fb5d656-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Max 2% loss per trade
-                                                                                idea</p>
-                                                                        </div>
-                                                                        <div id="w-node-_1c1562be-26e2-316e-2686-79f43fb5d65a-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Minimum trading days: 7
-                                                                            </p>
-                                                                        </div>
-                                                                        <div id="w-node-_1c1562be-26e2-316e-2686-79f43fb5d65e-681f7e9c"
-                                                                            class="item_wrapper"><img loading="lazy"
-                                                                                src="{{ asset('home-assets/assets/img/icon-checkbox.svg') }}"
-                                                                                alt="" class="bullet_icon">
-                                                                            <p class="item">Weekend/Overnight
-                                                                                holding</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="div-block-14"><a
-                                                                            href="{{ route('contact')}}"
-                                                                            target="_blank"
-                                                                            class="button w-button">Help Center</a>
-                                                                        <div>
-                                                                            <div class="text-block-31">*Default profit
-                                                                                split is 80%; with the addon, it&#x27;s
-                                                                                either 90% or 100%</div>
-                                                                            <div class="text-block-31">*Zero
-                                                                                commissions only apply to challenge
-                                                                                accounts</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div><img src="{{ asset('home-assets/assets/img/bg-3.svg') }}" loading="eager"
-                    alt="Background overlay lines two" class="bg-3">
-            </section>
-            <section class="steps_section">
-                <div class="padding-global is-off">
-                    <div class="steps-bg">
-                        <div class="container-large">
-                            <div class="steps-block">
-                                <div class="h2-wrap">
-                                    <h2>Steps To Get Started</h2>
-                                    <div class="subtitle-h2">Choose between a 1 or 2 step challenge and pass them to
-                                        get funding</div>
-                                </div>
-                                <div class="spacer-xmedium"></div>
-                                <div class="switch-wrap">
-                                    <p style="opacity:0.6" class="p-stepone">1-Step</p>
-                                    <div data-w-id="eda9b879-f8b2-3d1a-794e-bceb930c09a5" class="switch">
-                                        <div style="-webkit-transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)"
-                                            class="switcher"></div>
-                                    </div>
-                                    <p class="p-steptwo">2-Step</p>
-                                </div>
-                                <div class="spacer-xmedium"></div>
-                                <div data-current="Tab 1" data-easing="ease" data-duration-in="300"
-                                    data-duration-out="100" class="tabs w-tabs">
-                                    <div class="tabs-menu w-tab-menu">
-                                        <a data-w-tab="Tab 1" class="w-inline-block w-tab-link w--current">
-                                            <div>Tab 1</div>
-                                        </a>
-                                        <a data-w-tab="Tab 2" class="w-inline-block w-tab-link">
-                                            <div>Tab 2</div>
-                                        </a>
-                                    </div>
-                                    <div class="tabs-content w-tab-content">
-                                        <div data-w-tab="Tab 1" class="stepone w-tab-pane w--tab-active">
-                                            <div class="all-steps_grid">
-                                                <div id="w-node-_71700aae-9119-6a48-aa21-4d55184e0ecb-681f7e9c"
-                                                    class="one-step">
-                                                    <div class="one-step_title-wrap">
-                                                        <div class="one-step_nubmer">
-                                                            <div class="text-block-23">1</div>
-                                                        </div>
-                                                        <h3 class="one-step-headline">Trading Challenge</h3>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div class="one-step_col-with-icon"><img alt="Profit icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-profit-target.svg') }}"
-                                                                class="one-small_icon">
-                                                            <div>Profit Target</div>
-                                                        </div>
-                                                        <div class="profit-text">10%</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div class="one-step_col-with-icon"><img alt="Trading icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-trading-period.svg') }}"
-                                                                class="one-small_icon">
-                                                            <div>Trading Period</div>
-                                                        </div>
-                                                        <div class="text-color-white">Unlimited</div>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div>Min.Trading Days</div>
-                                                        <div class="text-color-white">1</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Max.Account Balance Loss</div>
-                                                        <div class="text-color-white">10%</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Maximum Daily Loss</div>
-                                                        <div class="text-color-white">5%</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div>Max Loss per Trade Idea</div>
-                                                        <div class="text-color-white">2%</div>
-                                                    </div>
-                                                </div>
-                                                <div id="w-node-_71700aae-9119-6a48-aa21-4d55184e0ef1-681f7e9c"
-                                                    class="one-step">
-                                                    <div class="one-step_title-wrap">
-                                                        <div class="one-step_nubmer">
-                                                            <div class="text-block-21">2</div>
-                                                        </div>
-                                                        <h3 class="one-step-headline">Verification</h3>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div class="one-step_col-with-icon"><img alt="Profit icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-profit-target.svg') }}"
-                                                                class="one-small_icon">
-                                                            <div>Profit Target</div>
-                                                        </div>
-                                                        <div class="profit-text">5%</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div class="one-step_col-with-icon"><img alt="Trading icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-trading-period.svg') }}"
-                                                                class="one-small_icon">
-                                                            <div>Trading Period</div>
-                                                        </div>
-                                                        <div class="text-color-white">Unlimited</div>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div>Min.Trading Days</div>
-                                                        <div class="text-color-white">1</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Max.Account Balance Loss</div>
-                                                        <div class="text-color-white">10%</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Maximum Daily Loss</div>
-                                                        <div class="text-color-white">5%</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div>Max Loss per Trade Idea</div>
-                                                        <div class="text-color-white">2%</div>
-                                                    </div>
-                                                </div>
-                                                <div id="w-node-_71700aae-9119-6a48-aa21-4d55184e0f17-681f7e9c"
-                                                    class="one-step funded">
-                                                    <div class="one-step_title-wrap">
-                                                        <div class="one-step_nubmer nobg">
-                                                            <div class="text-block-22">3</div>
-                                                        </div>
-                                                        <h3 class="one-step-headline">Funded</h3>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div class="one-step_col-with-icon"><img alt="Profit icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-profit-target.sv') }}g"
-                                                                class="one-small_icon">
-                                                            <div>Profit Split</div>
-                                                        </div>
-                                                        <div class="profit-text">100%*</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div class="one-step_col-with-icon"><img alt="Trading icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-trading-period.svg') }}"
-                                                                class="one-small_icon">
-                                                            <div>Trading Period</div>
-                                                        </div>
-                                                        <div class="text-color-white">Unlimited</div>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div>Min.Trading days</div>
-                                                        <div class="text-color-white">1</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Max.Account Balance Loss</div>
-                                                        <div class="text-color-white">10%</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Maximum Daily Loss</div>
-                                                        <div class="text-color-white">5%</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div>Max Loss per Trade Idea</div>
-                                                        <div class="text-color-white">2%</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div data-w-tab="Tab 2" class="steptwo w-tab-pane">
-                                            <div class="all-steps_grid is-two">
-                                                <div id="w-node-c6af9c48-6734-ede6-e84c-4b6776874940-681f7e9c"
-                                                    class="one-step">
-                                                    <div class="one-step_title-wrap">
-                                                        <div class="one-step_nubmer">
-                                                            <div class="text-block-24">1</div>
-                                                        </div>
-                                                        <h3 class="one-step-headline">Trading Challenge</h3>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div class="one-step_col-with-icon"><img alt="Profit icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-profit-target.svg') }}"
-                                                                class="one-small_icon">
-                                                            <div>Profit Target</div>
-                                                        </div>
-                                                        <div class="profit-text">10%</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div class="one-step_col-with-icon"><img alt="Trading icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-trading-period.svg') }}"
-                                                                class="one-small_icon">
-                                                            <div>Trading Period</div>
-                                                        </div>
-                                                        <div class="text-color-white">Unlimited</div>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div>Min.Trading days</div>
-                                                        <div class="text-color-white">1</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Max.Account Balance Loss</div>
-                                                        <div class="text-color-white">5%</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Maximum Daily Loss</div>
-                                                        <div class="text-color-white">4%</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div>Max Loss per Trade Idea</div>
-                                                        <div class="text-color-white">2%</div>
-                                                    </div>
-                                                </div>
-                                                <div id="w-node-c6af9c48-6734-ede6-e84c-4b6776874966-681f7e9c"
-                                                    class="one-step funded">
-                                                    <div class="one-step_title-wrap">
-                                                        <div class="one-step_nubmer">
-                                                            <div class="text-block-25">2</div>
-                                                        </div>
-                                                        <h3 class="one-step-headline">Funded</h3>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div class="one-step_col-with-icon"><img alt="Profit icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-profit-target.svg') }}"
-                                                                class="one-small_icon">
-                                                            <div>Profit Split</div>
-                                                        </div>
-                                                        <div class="profit-text">100%*</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div class="one-step_col-with-icon"><img alt="Trading icon"
-                                                                loading="lazy"
-                                                                src="{{ asset('home-assets/assets/img/icon-trading-period.svg') }}"
-                                                                class="one-small_icon">
-                                                            <div>Trading Period</div>
-                                                        </div>
-                                                        <div class="text-color-white">Unlimited</div>
-                                                    </div>
-                                                    <div class="gradient-divider"></div>
-                                                    <div class="one-step_line">
-                                                        <div>Min.Trading days</div>
-                                                        <div class="text-color-white">1</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Max.Account Balance Loss</div>
-                                                        <div class="text-color-white">5%</div>
-                                                    </div>
-                                                    <div class="one-step_line">
-                                                        <div>Maximum Daily Loss</div>
-                                                        <div class="text-color-white">4%</div>
-                                                    </div>
-                                                    <div class="one-step_line is-no-mb">
-                                                        <div>Max Loss per Trade Idea</div>
-                                                        <div class="text-color-white">2%</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="h2-wrap _90split">
-                                    <div class="subtitle-h2 is-big _90split">*100% profit split is included as an
-                                        add-on, the default profit split is 80%.</div>
-                                </div>
-                                <div class="one-btn_wrap"><a href="{{ route('register')}}" class="button is-fill w-button">Get
-                                        Started Now</a></div>
-                            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-6 text-center lg:text-left">
+                        <span
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-brand-accent/10 text-brand-accent mb-6 border border-brand-accent/20">
+                            <span class="w-2 h-2 rounded-full bg-brand-accent animate-ping"></span>
+                            New: Zero-fee Crypto Deposits
+                        </span>
+                        <h1
+                            class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                            Trade Forex & Crypto <br class="hidden sm:inline">
+                            <span
+                                class="bg-gradient-to-r from-brand-accent via-brand-primary to-brand-crypto bg-clip-text text-transparent">With
+                                Institutional Power</span>
+                        </h1>
+                        <p class="mt-6 text-base sm:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            Access global markets effortlessly. Trade over 90+ FX pairs and major digital assets with
+                            ultra-low latency execution, deep liquidity, and military-grade encryption.
+                        </p>
+                        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="/register"
+                                class="w-full sm:w-auto bg-brand-accent hover:bg-emerald-600 text-brand-dark font-bold px-8 py-4 rounded-xl shadow-lg shadow-brand-accent/20 transition-all text-center">Create
+                                Free Account</a>
+                            <a href="#markets"
+                                class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-white font-medium px-8 py-4 rounded-xl transition-all border border-gray-700 text-center flex items-center justify-center gap-2">
+                                View Live Charts
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
-                </div>
-            </section>
-            <section class="accaunts-mobile_section">
-                <div class="padding-global is-large">
-                    <div class="container-xlarge">
-                        <div class="discover-block">
-                            <div id="dashboard" class="spacer-xhuge"></div>
-                            <div class="h2-wrap is-small">
-                                <h2>Choose Account Size</h2>
-                                <div class="subtitle-h2">Pick an account size that fits your budget and trading style
+
+                    <!-- Hero Visual (TradingView Advanced Chart Widget) -->
+                    <div class="lg:col-span-6 w-full">
+                        <div class="bg-brand-card border border-gray-800 rounded-2xl p-3 sm:p-4 shadow-2xl relative">
+                            <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                                    <span class="text-[10px] font-mono text-gray-500 ml-1">terminal_core.io</span>
                                 </div>
+                                <span
+                                    class="text-[10px] font-semibold text-brand-accent bg-brand-accent/10 px-2 py-0.5 rounded animate-pulse">Live
+                                    Feed</span>
                             </div>
-                            <div class="spacer-xmedium"></div>
-                            <div class="one-acc-box">
-                                <div class="one-box-acc_title-small">
-                                    <div class="left-side-box">
-                                        <div class="one-box-acc_tagline">Beginner</div>
-                                        <h3 class="one-box-acc-headline">$10,000</h3>
-                                    </div>
-                                    <div class="right-side-box is-t-small">
-                                        <a href="{{ route('register')}}"
-                                            class="button is-price-small w-button">Pay $500</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="one-acc-box">
-                                <div class="one-box-acc_title-small">
-                                    <div class="left-side-box">
-                                        <div class="one-box-acc_tagline">Silver</div>
-                                        <h3 class="one-box-acc-headline">$25,000</h3>
-                                    </div>
-                                    <div class="right-side-box is-t-small">
-                                        <a href="{{ route('register')}}"
-                                            class="button is-price-small w-button">Pay $2,000</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="one-acc-box">
-                                <div class="one-box-acc_title-small">
-                                    <div class="left-side-box">
-                                        <div class="one-box-acc_tagline">Gold</div>
-                                        <h3 class="one-box-acc-headline">$50,000</h3>
-                                    </div>
-                                    <div class="right-side-box is-t-small">
-                                        <a href="{{ route('register')}}"
-                                            class="button is-price-small w-button">Pay $5,000</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="one-acc-box">
-                                <div class="one-box-acc_title">
-                                    <div class="left-side-box">
-                                        <div class="one-box-acc_tagline">Diamond</div>
-                                        <h3 class="one-box-acc-headline">$100,000</h3>
-                                    </div>
-                                    <div class="right-side-box">
-                                        <a href="{{ route('register')}}"
-                                            class="button is-price-small w-button">Pay $15,000</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="one-acc-box">
-                                <div class="one-box-acc_title">
-                                    <div class="left-side-box">
-                                        <div class="one-box-acc_tagline">VIP</div>
-                                        <h3 class="one-box-acc-headline">$800,000</h3>
-                                    </div>
-                                    <div class="right-side-box">
-                                        <a href="{{ route('register')}}"
-                                            class="button is-price-small w-button">Pay $50,000</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section data-w-id="fa69723f-4e6c-578e-f8af-787ea9d13215" class="feedback_section">
-                <div class="padding-global">
-                    <div class="container-xlarge">
-                        <div class="bg-planet_wrap">
-                            <div class="planet-here">
-                                <div class="full-video w-embed w-script"><video
-                                        style="object-fit: cover; background-size: cover; width: 100%; height: 100%;"
-                                        preload="auto" playsinline="" autoplay="" loop=""
-                                        muted="">
-                                        <source src="{{ asset('home-assets/assets/vid/bg-sphere.mp4?dl=0')}}" type="video/mp4">
-                                    </video>
-                                    <script>
-                                        $(document).ready(() => {
-                                            let width = $(window).width();
-                                            let height = $(window).height();
-                                            $("#videoBackground")
-                                                .width(width)
-                                                .height(height);
-                                        });
-                                        $(window).resize(() => {
-                                            let width = $(window).width();
-                                            let height = $(window).height();
-                                            $("#videoBackground")
-                                                .width(width)
-                                                .height(height);
+
+                            <!-- TradingView Widget Container -->
+                            <div class="w-full h-[320px] sm:h-[400px] rounded-lg overflow-hidden bg-[#131722]">
+                                <!-- TradingView Widget BEGIN -->
+                                <div class="tradingview-widget-container" style="height:100%;width:100%;">
+                                    <div id="tradingview_advanced_chart" style="height:100%;width:100%;"></div>
+                                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                                    <script type="text/javascript">
+                                        new TradingView.widget({
+                                            "autosize": true,
+                                            "symbol": "BINANCE:BTCUSDT",
+                                            "interval": "D",
+                                            "timezone": "Etc/UTC",
+                                            "theme": "dark",
+                                            "style": "1",
+                                            "locale": "en",
+                                            "enable_publishing": false,
+                                            "hide_side_toolbar": true,
+                                            "allow_symbol_change": true,
+                                            "container_id": "tradingview_advanced_chart"
                                         });
                                     </script>
                                 </div>
-                            </div>
-                            <div class="spacer-xxhuge"></div>
-                            <div class="spacer-large"></div>
-                            <div class="feedback-block">
-                                <div class="h2-wrap">
-                                    <h2>Hear From Our Traders</h2>
-                                    <div class="subtitle-h2 is-big">See the results you can achieve with the best
-                                        trading firm</div>
-                                </div>
-                                <div class="spacer-medium"></div>
-                                <div class="feedback_block-desctop">
-                                    <div class="feedback-row_wrapper w-dyn-list">
-                                        <div role="list" class="feedback_row w-dyn-items">
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Adrien K</div>
-                                                            </div>
-                                                            <div class="feedback-price">$500.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>What sets Stan and his team apart is their focus on building
-                                                            a community of successful traders who support each other.
-                                                            It&#x27;s not just about making profits, but about working
-                                                            together to achieve
-                                                            shared goals</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="d1cf1956-5a82-d4ae-bd19-c7a7f7989000"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                                {
-                                                                    "items": [],
-                                                                    "group": ""
-                                                                }
-                                                            </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Benjamin B</div>
-                                                            </div>
-                                                            <div class="feedback-price">$100.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>It&#x27;s rare to find a trading firm that feels like a
-                                                            real community, but that&#x27;s exactly what you get with
-                                                            {{ env('APP_NAME') }} . They care about their traders and
-                                                            are dedicated to helping
-                                                            them succeed, and that&#x27;s why I&#x27;ve been with them
-                                                            for so long.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="d1cf1956-5a82-d4ae-bd19-c7a7f7989000"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                                {
-                                                                    "items": [],
-                                                                    "group": ""
-                                                                }
-                                                            </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Fredrik W</div>
-                                                            </div>
-                                                            <div class="feedback-price">$500.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>Working with Stan and his team is a unique experience that
-                                                            you won&#x27;t find with any other trading firm. It
-                                                            feels like being part of a family, with a real person behind
-                                                            the brand who truly
-                                                            cares about your success as a trader.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="d1cf1956-5a82-d4ae-bd19-c7a7f7989000"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                                {
-                                                                    "items": [],
-                                                                    "group": ""
-                                                                }
-                                                            </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Hans D</div>
-                                                            </div>
-                                                            <div class="feedback-price">$200.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>Working with {{ env('APP_NAME') }} is a breath of fresh air
-                                                            in the trading world. It&#x27;s not just about profits
-                                                            - it&#x27;s about being part of a community of traders who
-                                                            are passionate about what
-                                                            they do and who support each other. </p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="d1cf1956-5a82-d4ae-bd19-c7a7f7989000"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Marc R</div>
-                                                            </div>
-                                                            <div class="feedback-price">$100.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>I&#x27;ve been trading with {{ env('APP_NAME') }} for a
-                                                            while now, and I couldn&#x27;t be happier with the level of
-                                                            support and guidance I&#x27;ve received. The team is
-                                                            knowledgeable, responsive, and truly
-                                                            cares about helping their traders succeed.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="d1cf1956-5a82-d4ae-bd19-c7a7f7989000"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">William S</div>
-                                                            </div>
-                                                            <div class="feedback-price">$200.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>I&#x27;ve been a trader with Stan&#x27;s firm for a long time
-                                                            now, and I can honestly say that it feels like being part of
-                                                            a real team. Stan is always available to talk and provide
-                                                            guidance, and his
-                                                            team is made up of traders who are dedicated to helping each
-                                                            other succeed.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="d1cf1956-5a82-d4ae-bd19-c7a7f7989000"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="feedback-row_wrapper is-rev w-dyn-list">
-                                        <div role="list" class="feedback_row-rev w-dyn-items">
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">William S</div>
-                                                            </div>
-                                                            <div class="feedback-price">$200.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>I&#x27;ve been a trader with Stan&#x27;s firm for a long time
-                                                            now, and I can honestly say that it feels like being part of
-                                                            a real team. Stan is always available to talk and provide
-                                                            guidance, and his
-                                                            team is made up of traders who are dedicated to helping each
-                                                            other succeed.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="63f05754-05c1-c057-552d-3f84c19a9921"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Marc R</div>
-                                                            </div>
-                                                            <div class="feedback-price">$100.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>I&#x27;ve been trading with {{ env('APP_NAME') }} for a
-                                                            while now, and I couldn&#x27;t be happier with the level of
-                                                            support and guidance I&#x27;ve received. The team is
-                                                            knowledgeable, responsive, and truly
-                                                            cares about helping their traders succeed.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="63f05754-05c1-c057-552d-3f84c19a9921"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Hans D</div>
-                                                            </div>
-                                                            <div class="feedback-price">$200.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>Working with {{ env('APP_NAME') }} is a breath of fresh air
-                                                            in the trading world. It&#x27;s not just about profits
-                                                            - it&#x27;s about being part of a community of traders who
-                                                            are passionate about what
-                                                            they do and who support each other. </p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="63f05754-05c1-c057-552d-3f84c19a9921"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Fredrik W</div>
-                                                            </div>
-                                                            <div class="feedback-price">$500.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>Working with Stan and his team is a unique experience that
-                                                            you won&#x27;t find with any other trading firm. It
-                                                            feels like being part of a family, with a real person behind
-                                                            the brand who truly cares
-                                                            about your success as a trader.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="63f05754-05c1-c057-552d-3f84c19a9921"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Benjamin B</div>
-                                                            </div>
-                                                            <div class="feedback-price">$100.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>It&#x27;s rare to find a trading firm that feels like a
-                                                            real community, but that&#x27;s exactly what you get with
-                                                            {{ env('APP_NAME') }} . They care about their traders and
-                                                            are dedicated to helping them
-                                                            succeed, and that&#x27;s why I&#x27;ve been with them for so
-                                                            long.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="63f05754-05c1-c057-552d-3f84c19a9921"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Adrien K</div>
-                                                            </div>
-                                                            <div class="feedback-price">$500.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>What sets Stan and his team apart is their focus on building
-                                                            a community of successful traders who support each other.
-                                                            It&#x27;s not just about making profits, but about working
-                                                            together to achieve shared
-                                                            goals</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="63f05754-05c1-c057-552d-3f84c19a9921"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="bg-feed pointer-events-off"></div>
-                                    <div class="bg-feed is-right pointer-events-off"></div>
-                                </div>
-                                <div class="feedback_block-mobile">
-                                    <div class="feedback-row_wrapper w-dyn-list">
-                                        <div fs-cmsslider-element="list" role="list"
-                                            class="feedback_row w-dyn-items">
-                                            <div role="listitem" class="collection-item w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Adrien K</div>
-                                                            </div>
-                                                            <div class="feedback-price">$500.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>What sets Stan and his team apart is their focus on building
-                                                            a community of successful traders who support each other.
-                                                            It&#x27;s not just about making profits, but about working
-                                                            together to achieve shared
-                                                            goals</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="df153db0-a659-3608-7baa-14272b147245"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="collection-item w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Benjamin B</div>
-                                                            </div>
-                                                            <div class="feedback-price">$100.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>It&#x27;s rare to find a trading firm that feels like a
-                                                            real community, but that&#x27;s exactly what you get with
-                                                            {{ env('APP_NAME') }} . They care about their traders and
-                                                            are dedicated to helping them
-                                                            succeed, and that&#x27;s why I&#x27;ve been with them for so
-                                                            long.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="df153db0-a659-3608-7baa-14272b147245"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="collection-item w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Fredrik W</div>
-                                                            </div>
-                                                            <div class="feedback-price">$500.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>Working with Stan and his team is a unique experience that
-                                                            you won&#x27;t find with any other trading firm. It
-                                                            feels like being part of a family, with a real person behind
-                                                            the brand who truly cares
-                                                            about your success as a trader.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="df153db0-a659-3608-7baa-14272b147245"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="collection-item w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Hans D</div>
-                                                            </div>
-                                                            <div class="feedback-price">$200.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>Working with {{ env('APP_NAME') }} is a breath of fresh air
-                                                            in the trading world. It&#x27;s not just about profits
-                                                            - it&#x27;s about being part of a community of traders who
-                                                            are passionate about what
-                                                            they do and who support each other. </p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="df153db0-a659-3608-7baa-14272b147245"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="collection-item w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">Marc R</div>
-                                                            </div>
-                                                            <div class="feedback-price">$100.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>I&#x27;ve been trading with {{ env('APP_NAME') }} for a
-                                                            while now, and I couldn&#x27;t be happier with the level of
-                                                            support and guidance I&#x27;ve received. The team is
-                                                            knowledgeable, responsive, and truly
-                                                            cares about helping their traders succeed.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="df153db0-a659-3608-7baa-14272b147245"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div role="listitem" class="collection-item w-dyn-item">
-                                                <div class="one-feedback">
-                                                    <div class="feedback_main-part">
-                                                        <div class="one-feed_title-wrap">
-                                                            <div class="one-step_col-with-icon">
-                                                                <div class="feedback_name">William S</div>
-                                                            </div>
-                                                            <div class="feedback-price">$200.000</div>
-                                                        </div>
-                                                        <div class="feed_gradient-divider"></div>
-                                                        <p>I&#x27;ve been a trader with Stan&#x27;s firm for a long time
-                                                            now, and I can honestly say that it feels like being part of
-                                                            a real team. Stan is always available to talk and provide
-                                                            guidance, and his
-                                                            team is made up of traders who are dedicated to helping each
-                                                            other succeed.</p>
-                                                    </div>
-                                                    <div class="feedback-btn_wrap w-condition-invisible">
-                                                        <a href="#"
-                                                            data-w-id="df153db0-a659-3608-7baa-14272b147245"
-                                                            class="review-button w-inline-block w-dyn-bind-empty w-lightbox">
-                                                            <div>Watch video review</div>
-                                                            <div class="feed-icon-code w-embed"><svg width="22"
-                                                                    height="22" viewbox="0 0 22 22"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M11 22C17.0751 22 22 17.0751 22 11C22 4.92487 17.0751 0 11 0C4.92487 0 0 4.92487 0 11C0 17.0751 4.92487 22 11 22ZM9.51343 7.67865L14.3445 10.7067C14.4394 10.7666 14.4985 10.8783 14.4985 11.0001C14.4985 11.1219 14.4394 11.2336 14.3445 11.2935L9.51343 14.3216C9.46753 14.3505 9.4162 14.3646 9.36547 14.3646C9.31294 14.3646 9.2604 14.3491 9.21329 14.3189C9.12029 14.2583 9.06353 14.1479 9.06353 14.0282V7.97203C9.06353 7.85226 9.12029 7.7419 9.21329 7.68134C9.30569 7.62145 9.41982 7.6201 9.51343 7.67865Z"
-                                                                        fill="currentColor"></path>
-                                                                </svg></div>
-                                                            <script type="application/json" class="w-json">
-                                                            {
-                                                                "items": [],
-                                                                "group": ""
-                                                            }
-                                                        </script>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div data-delay="4000" data-animation="slide" class="feedback-slider w-slider"
-                                        data-autoplay="false" data-easing="ease" data-hide-arrows="false"
-                                        data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3"
-                                        data-duration="500" data-infinite="true" fs-cmsslider-element="slider">
-                                        <div class="w-slider-mask">
-                                            <div class="one-hero-slide w-slide"></div>
-                                        </div>
-                                        <div class="hide-arr w-slider-arrow-left">
-                                            <div class="w-icon-slider-left"></div>
-                                        </div>
-                                        <div class="hide-arr w-slider-arrow-right">
-                                            <div class="w-icon-slider-right"></div>
-                                        </div>
-                                        <div class="slide-nav w-slider-nav w-round"></div>
-                                    </div>
-                                </div>
-                            </div><img src="{{ asset('home-assets/assets/img/bg-blur.svg')}}" loading="eager"
-                                alt="Background blur overlay blue" class="blur-in-bg">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="faq_section">
-                <div class="padding-global">
-                    <div class="container-large">
-                        <div id="faq" class="spacer-xhuge"></div>
-                        <div class="faq-block">
-                            <div class="h2-wrap">
-                                <h2>Frequently Asked Questions</h2>
-                                <div class="subtitle-h2 is-big">Still got more questions? Read our FAQ</div>
-                            </div>
-                            <div class="spacer-xmedium"></div>
-                            <div class="all-items-faq">
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3 class="faq-title">Who are we?</h3>
-                                        <div class="p-m-wrap">
-                                            <div class="minus"></div>
-                                            <div class="plus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-inner">
-                                            <p class="paragraph">We are a company dedicated to providing traders with
-                                                the necessary resources, support, and capital to succeed in the
-                                                competitive FX market. Our goal is to help traders reach their full
-                                                potential by offering
-                                                a range of services, including mentorship, educational materials, and
-                                                advanced trading tools.<br></p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-horizontal-divider"></div>
-                                </div>
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3 class="faq-title">How much money can you make?</h3>
-                                        <div class="p-m-wrap">
-                                            <div class="minus"></div>
-                                            <div class="plus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-inner">
-                                            <p class="paragraph">The amount of money you can make with our program is
-                                                truly unlimited and entirely up to you. We have seen traders who
-                                                consistently earn $2,000 per month, while others are making well over
-                                                $20,000 per month.
-                                                The sky&#x27;s the limit! Your earning potential will depend on a
-                                                variety of factors, such as your experience level, risk tolerance, and
-                                                trading strategy. However, we provide you with all the tools and
-                                                resources
-                                                necessary to succeed and reach your financial goals. We encourage you to
-                                                take advantage of our training and mentorship programs, as well as our
-                                                community of traders who can offer support and guidance along
-                                                the way. With dedication, discipline, and a commitment to learning, you
-                                                have the potential to achieve financial freedom with our
-                                                program.&quot;<br></p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-horizontal-divider"></div>
-                                </div>
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3 class="faq-title">1 Step Rules</h3>
-                                        <div class="p-m-wrap">
-                                            <div class="minus"></div>
-                                            <div class="plus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-inner">
-                                            <p class="paragraph">Phase 1: 10% Target<br>Phase 2: None<br>4% Daily
-                                                Drawdown<br>Max 2% Loss per Trade Idea<br>5% Overall Drawdown (Trailing
-                                                on highest balance)<br><br>7-14 Day Withdrawals<br></p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-horizontal-divider"></div>
-                                </div>
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3 class="faq-title">2 Step Rules</h3>
-                                        <div class="p-m-wrap">
-                                            <div class="minus"></div>
-                                            <div class="plus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-inner">
-                                            <p class="paragraph">Phase 1: 10% Target <br>Phase 2: 5% Target <br>5%
-                                                Daily Drawdown<br>10% Overall Drawdown (static on balance)<br>Max 2%
-                                                Loss per Trade Idea<br>Drawdown reset end of day<br>‍<br>7-14 Day
-                                                Withdrawals<br></p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-horizontal-divider"></div>
-                                </div>
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3 class="faq-title">What leverage is available?</h3>
-                                        <div class="p-m-wrap">
-                                            <div class="minus"></div>
-                                            <div class="plus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-inner">
-                                            <p class="paragraph">FX 1:100<br>Indices/Gold 1:50<br>Coins: 1:5<br></p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-horizontal-divider"></div>
-                                </div>
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3 class="faq-title">Max allocation &amp; scaling</h3>
-                                        <div class="p-m-wrap">
-                                            <div class="minus"></div>
-                                            <div class="plus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-inner">
-                                            <p class="paragraph">We offer scaling plan of 25% growth for every 3
-                                                months you&#x27;re profitable 10% at the end of the 3 month period.
-                                                <br><br>Current max allocation is set to $750,000 per customer.
-                                                <br><br>For the bigger
-                                                plans, maximum account merging is $2m (ex. $1m x 2)<br>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-horizontal-divider"></div>
-                                </div>
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3 class="faq-title">Can I merge accounts?</h3>
-                                        <div class="p-m-wrap">
-                                            <div class="minus"></div>
-                                            <div class="plus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-inner">
-                                            <p class="paragraph">Yes we allow account merging, simply just send us an
-                                                email with the account Id’s you’d like to merge.<br></p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-horizontal-divider"></div>
-                                </div>
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3 class="faq-title">Profit split and payout times</h3>
-                                        <div class="p-m-wrap">
-                                            <div class="minus"></div>
-                                            <div class="plus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-inner">
-                                            <p class="paragraph">The first payout is available after 7-14 days since
-                                                the first trade placed on a funded account. Subsequent payouts will be
-                                                available to you every 7-14 days. <br><br>Unlike other firms, we
-                                                want to make
-                                                sure that you have regular access to the hard earned profits you have
-                                                made. <br><br>Payout is only valid if the trader does not violate any
-                                                trading rule or go against the signed terms of use agreement.
-                                                Any suspicious activities upon review of the account can delay this
-                                                process. Please cooperate with us in order to receive your profit split
-                                                quicker if it is a false alert.<br><br>Our default profit split
-                                                is capped at 80% for the trader and 20% to us. The good news is, you may
-                                                upgrade your profit split to 90% or 100% when you purchase the add-on
-                                                through our checkout. If you’re willing to have more skin in
-                                                the game, we give you the opportunity to earn more.<br></p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-horizontal-divider"></div>
-                                </div>
-                                <div class="faq-item">
-                                    <div class="faq-question">
-                                        <h3 class="faq-title">Key Rules</h3>
-                                        <div class="p-m-wrap">
-                                            <div class="minus"></div>
-                                            <div class="plus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="faq-answer">
-                                        <div class="faq-answer-inner">
-                                            <p class="paragraph">We believe that success in trading requires not only
-                                                skill and knowledge, but also discipline and adherence to rules.
-                                                <br><br>Therefore, we require all traders to follow the basic rules set
-                                                out in our plan,
-                                                which includes daily and total drawdown limits. We believe that this
-                                                helps to manage risk and prevent large losses that could wipe out your
-                                                account.<br><br>In addition, we prohibit any attempts to cheat
-                                                the system through glitches or high-frequency trading, as we believe in
-                                                fair and ethical trading practices.<br><br>That being said, we do allow
-                                                traders to trade news events and to hold positions overnight
-                                                or over weekends. <br><br>We believe that these opportunities can lead
-                                                to profitable trades and increased earnings potential. It&#x27;s
-                                                important to note that we are looking for profitable traders who
-                                                can make us both money. <br><br>Therefore, traders who consistently
-                                                violate our rules or fail to generate profits may not be a good fit for
-                                                our challenge. <br><br>We want to work with traders who are
-                                                dedicated, disciplined, and committed to achieving success in the
-                                                markets. <br><br>If you&#x27;re ready to take your trading to the next
-                                                level and generate consistent profits, we invite you to join our
-                                                community and start your journey to financial freedom.<br>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-horizontal-divider"></div>
-                                </div>
+                                <!-- TradingView Widget END -->
                             </div>
                         </div>
                     </div>
                 </div>
-                <img src="{{ asset('home-assets/assets/img/bg-2.svg')}}" loading="eager" alt="Background overlay lines four"
-                    class="bg-2">
-                <img src="{{ asset('home-assets/assets/img/bg-5.svg')}}" loading="eager" alt="Background overlay lines five"
-                    class="bg-5">
-            </section>
-            <section class="cta_section">
-                <div class="padding-global is-off">
-                    <div class="container-xlarge">
-                        <div id="cta" class="cta-block">
-                            <div class="spacer-xlarge"></div>
-                            <div class="h2-wrap">
-                                <h2>Trade with more capital today.</h2>
-                                <div class="subtitle-h2">Start trading with confidence today</div>
-                            </div>
-                            <div class="spacer-medium"></div><a href="{{ route('register')}}"
-                                class="button is-fill w-button">Get Started</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            @include('includes.home-footer')
-        </main>
-    </div>
-</body>
+            </div>
+        </section>
 
-@include('includes.home-script')
+        <!-- Markets Live Ticker Section (TradingView Ticker Widget) -->
+        <section id="markets" class="py-4 border-y border-gray-800 bg-brand-card/30">
+            <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+                        {
+                            "symbols": [{
+                                    "proName": "FOREXCOM:SPX500",
+                                    "title": "S&P 500 Index"
+                                },
+                                {
+                                    "proName": "FX_IDC:EURUSD",
+                                    "title": "EUR/USD"
+                                },
+                                {
+                                    "proName": "BITSTAMP:BTCUSD",
+                                    "title": "Bitcoin"
+                                },
+                                {
+                                    "proName": "BITSTAMP:ETHUSD",
+                                    "title": "Ethereum"
+                                }
+                            ],
+                            "colorTheme": "dark",
+                            "isTransparent": true,
+                            "showSymbolLogo": true,
+                            "locale": "en"
+                        }
+                    </script>
+                </div>
+                <!-- TradingView Widget END -->
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16 lg:py-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                    <h2 class="text-2xl sm:text-4xl font-bold tracking-tight">Engineered for Elite Performance</h2>
+                    <p class="mt-4 text-gray-400 text-sm sm:text-base">Skip the middlemen. Experience clean,
+                        institutional trading infrastructure designed for retail investors.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- Feature 1 -->
+                    <div
+                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-brand-primary/10 flex items-center justify-center text-brand-primary mb-6 group-hover:bg-brand-primary group-hover:text-white transition-all">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-3 text-white">Ultra-Fast Execution</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Trades processed under 4ms within global data
+                            hubs, minimizing slippage to ensure accurate pricing.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div
+                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-6 group-hover:bg-brand-accent group-hover:text-brand-dark transition-all">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-3 text-white">Advanced Data Feed</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Over 100+ native indicators, customizable
+                            order flow layouts, and native high-speed engine modules.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div
+                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-brand-crypto/10 flex items-center justify-center text-brand-crypto mb-6 group-hover:bg-brand-crypto group-hover:text-brand-dark transition-all">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-3 text-white">Multi-Asset Wallet</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Safely store fiat capital and crypto holdings
+                            concurrently in an isolated multi-sig secure environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-16 bg-brand-card/20 border-t border-gray-800 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div
+                        class="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-800 h-64 sm:h-96 order-last lg:order-first">
+                        <img id="about-img"
+                            data-src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80"
+                            alt="{{ env('APP_NAME') }} Global Team Office"
+                            class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-brand-primary uppercase tracking-widest">Who We Are</span>
+                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white mt-2">Pioneering Financial
+                            Freedom Since 2018</h2>
+                        <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">
+                            {{ env('APP_NAME') }} was built by a coalition of quantitative traders, cybersecurity
+                            researchers, and
+                            blockchain engineers. Our goal is simple: eliminate unequal access to financial tools by
+                            bringing professional, low-latency market infrastructure right to your screen.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 mt-8 border-t border-gray-800 pt-6">
+                            <div>
+                                <h4 class="text-xl sm:text-2xl font-bold text-white">$4.2B+</h4>
+                                <p class="text-xs text-gray-500 mt-1">Quarterly Volume</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl sm:text-2xl font-bold text-brand-accent">99.99%</h4>
+                                <p class="text-xs text-gray-500 mt-1">System Uptime</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl sm:text-2xl font-bold text-brand-crypto">200k+</h4>
+                                <p class="text-xs text-gray-500 mt-1">Active Accounts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Spotlight (Split Image Content) -->
+        <section id="security" class="py-16 border-y border-gray-800 bg-brand-card/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white">Your Funds, Protected
+                            Tier-1 Style.</h2>
+                        <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">
+                            Security isn't an added feature; it's our foundational metric. We preserve strict 1:1 asset
+                            backing ratios on all client assets, stored safely within multi-sig ledger structures.
+                        </p>
+                        <ul class="mt-6 space-y-4 text-sm text-gray-300">
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-accent flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Multi-Signature Cold Vault Operations
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-accent flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Full SAFU Coverage Policy Protections
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-brand-accent flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Real-Time Cryptographic Proof of Reserves
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-800 h-64 sm:h-96">
+                        <img id="security-img"
+                            data-src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80"
+                            alt="Cybersecurity Cryptographic Key Network"
+                            class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brand-dark to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-16 lg:py-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                    <span class="text-xs font-bold text-brand-crypto uppercase tracking-widest">Global Feedback</span>
+                    <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white mt-2">Trusted by Traders
+                        Worldwide</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- Card 1 -->
+                    <div
+                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 flex flex-col justify-between">
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"The latency scaling here is
+                            incomparable. I run high-frequency intra-day forex strategies and slippage is virtually
+                            nonexistent. Best institutional terminal layout for retail accounts."</p>
+                        <div class="flex items-center gap-4 mt-6 border-t border-gray-800 pt-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
+                                <img id="user1-img"
+                                    data-src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+                                    alt="User Marcus V."
+                                    class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Marcus V.</h4>
+                                <p class="text-xs text-brand-accent">Algo-Trader & Quant</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div
+                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 flex flex-col justify-between">
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"Managing cross-asset liquidity across
+                            physical FX setups and on-chain decentralized vaults was a mess until
+                            {{ env('APP_NAME') }}.
+                            The unified
+                            wallet dashboard is remarkably intuitive and responsive."</p>
+                        <div class="flex items-center gap-4 mt-6 border-t border-gray-800 pt-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
+                                <img id="user2-img"
+                                    data-src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80"
+                                    alt="User Elena R."
+                                    class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Elena R.</h4>
+                                <p class="text-xs text-brand-primary">Portfolio Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div
+                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 flex flex-col justify-between md:col-span-2 lg:col-span-1">
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"What stood out to me most was the
+                            transparent Proof of Reserves asset confirmation model. It gives you immediate peace of mind
+                            knowing your margin requirements are backed 1:1."</p>
+                        <div class="flex items-center gap-4 mt-6 border-t border-gray-800 pt-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
+                                <img id="user3-img"
+                                    data-src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"
+                                    alt="User David K."
+                                    class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">David K.</h4>
+                                <p class="text-xs text-brand-crypto">Crypto Derivatives Specialist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="py-16 bg-brand-card/30 border-y border-gray-800 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-5 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-brand-accent uppercase tracking-widest">Connect With
+                                Us</span>
+                            <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white mt-2">Have questions?
+                                Get in touch.</h2>
+                            <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed"> Our engineering and
+                                financial desks operate 24/7/365 to handle client onboarding queries, account
+                                verifications, or premium infrastructure configurations.</p>
+                        </div>
+
+                        <div class="mt-8 space-y-4">
+                            <div class="flex items-center gap-4 p-4 bg-brand-card rounded-xl border border-gray-800">
+                                <div class="text-brand-accent">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L22 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs text-gray-500">Corporate Inquiries</h4>
+                                    <p class="text-sm font-semibold text-white">{{ config('app.Admin_email') }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 p-4 bg-brand-card rounded-xl border border-gray-800">
+                                <div class="text-brand-primary">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs text-gray-500">Global Hub Location</h4>
+                                    <p class="text-sm font-semibold text-white">Marina Bay Sands Tower 3, Singapore</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <form id="apex-contact-form"
+                            class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 space-y-4">
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-xs font-semibold text-gray-400">First Name</label>
+                                    <input type="text" required placeholder="John"
+                                        class="bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-primary transition-colors">
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-xs font-semibold text-gray-400">Email Address</label>
+                                    <input type="email" required placeholder="john@example.com"
+                                        class="bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-primary transition-colors">
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-xs font-semibold text-gray-400">Subject Area</label>
+                                <select
+                                    class="bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-sm text-gray-400 focus:outline-none focus:border-brand-primary transition-colors">
+                                    <option>Account Onboarding & KYC</option>
+                                    <option>Institutional OTC Desk</option>
+                                    <option>API Connection Integration</option>
+                                    <option>Other / General Inquiry</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-xs font-semibold text-gray-400">Message Content</label>
+                                <textarea rows="4" required placeholder="How can our trading desks assist you?"
+                                    class="bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-primary transition-colors resize-none"></textarea>
+                            </div>
+                            <button type="submit"
+                                class="w-full bg-brand-primary hover:bg-indigo-600 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-brand-primary/10">Dispatch
+                                Transmission</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {{-- the contact success modal --}}
+        <div id="contact-success-modal"
+            class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-dark/80 backdrop-blur-sm transition-opacity duration-300">
+            <div
+                class="bg-brand-card border border-gray-800 rounded-2xl max-w-md w-full p-6 text-center shadow-2xl transform scale-95 transition-transform duration-300">
+                <div
+                    class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-brand-accent/10 text-brand-accent mb-4">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Message Dispatched Successfully</h3>
+                <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                    We have received your message! For a faster response, please chat with our <span
+                        class="text-brand-accent font-semibold">Live Chat</span> team directly on the site.
+                </p>
+                <button id="close-modal-btn"
+                    class="w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2.5 rounded-xl transition-all border border-gray-700">
+                    Acknowledge
+                </button>
+            </div>
+        </div>
+
+
+        <!-- Final CTA conversion section -->
+        <section class="py-16 sm:py-24 relative">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Ready to Master the Markets?</h2>
+                <p class="mt-4 text-gray-400 max-w-xl mx-auto text-sm sm:text-base">Join 400,000+ active global traders
+                    maximizing performance margins daily.</p>
+                <div class="mt-8">
+                    <a href="/register"
+                        class="inline-block bg-gradient-to-r from-brand-accent to-emerald-500 text-brand-dark font-bold px-8 py-4 rounded-xl shadow-xl shadow-brand-accent/10 hover:opacity-90 transition-all transform hover:-translate-y-0.5">Open
+                        Your Account Now</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 bg-brand-dark py-12 text-sm text-gray-500">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <p>&copy; 2026 {{ env('APP_NAME') }} Technologies Inc. All rights reserved.</p>
+            <p class="max-w-md text-center md:text-right text-xs leading-relaxed">
+                Risk Warning: Trading derivative contracts carries extreme levels of portfolio risk. Ensure your
+                objectives align with financial realities before engaging.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Smart JS Navigation & Preloader Logic -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Mobile Menu Toggle Execution
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+
+                // Swap icon outlines depending on state
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                } else {
+                    menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                }
+            });
+
+            // Close mobile layout menu on click of dropdown items
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                });
+            });
+
+            // Preloader Image Asset Management Code
+            const preloader = document.getElementById('preloader');
+            const imagesToLoad = document.querySelectorAll('img[data-src]');
+            let loadedCount = 0;
+
+            if (imagesToLoad.length === 0) {
+                hidePreloader();
+            }
+
+            imagesToLoad.forEach((img) => {
+                const src = img.getAttribute('data-src');
+                if (!src) return;
+
+                const tempImg = new Image();
+                tempImg.src = src;
+                tempImg.onload = () => {
+                    img.src = src;
+                    img.classList.remove('opacity-0');
+                    img.classList.add('opacity-100');
+
+                    loadedCount++;
+                    if (loadedCount === imagesToLoad.length) {
+                        hidePreloader();
+                    }
+                };
+                tempImg.onerror = () => {
+                    img.src = src;
+                    hidePreloader();
+                };
+            });
+
+            function hidePreloader() {
+                setTimeout(() => {
+                    preloader.classList.add('opacity-0');
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 400);
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const contactForm = document.getElementById('apex-contact-form');
+            const successModal = document.getElementById('contact-success-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            if (contactForm && successModal && closeModalBtn) {
+                // Handle Form Submission Interception
+                contactForm.addEventListener('submit', (event) => {
+                    event.preventDefault(); // Stop page from refreshing natively
+
+                    // Reveal popup modal layer smoothly
+                    successModal.classList.remove('hidden');
+
+                    // Clear out text boxes upon transmission completion
+                    contactForm.reset();
+                });
+
+                // Handle Closing Event
+                closeModalBtn.addEventListener('click', () => {
+                    successModal.classList.add('hidden');
+                });
+
+                // Optional: Close modal if background context overlay wrapper is clicked
+                successModal.addEventListener('click', (e) => {
+                    if (e.target === successModal) {
+                        successModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
 
 </html>

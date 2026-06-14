@@ -22,22 +22,30 @@
                 <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto mt-7">
                     <div class="text-center">
-                        <a href="/">
-                            <img src="{{ asset('home-assets/assets/img/forex-logo.png') }}" class="header-brand-img" alt="">
-                        </a>
+                        <div
+                            style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0.5rem 0; width: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+
+                            <span
+                                style="font-size: 1.1rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; background: linear-gradient(135deg, #ffffff 30%, #a0aec0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; drop-shadow: 0px 2px 8px rgba(0,0,0,0.5);">
+                                <a href="{{ route('home') }}" style="text-decoration: none; color: inherit;">
+                                    {{ env('APP_NAME') }}
+                                </a>
+                            </span>
+
+                        </div>
                     </div>
                 </div>
                 <center>
                     @if (session()->has('error'))
-                    <div class="alert alert-danger alert-dismissible fade show w-50 bg-dark" role="alert">
-                        <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
-                        <span class="alert-inner--text"><strong>error!</strong>
-                            {{ session('error') }}
-                        </span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
+                        <div class="alert alert-danger alert-dismissible fade show w-50 bg-dark" role="alert">
+                            <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
+                            <span class="alert-inner--text"><strong>error!</strong>
+                                {{ session('error') }}
+                            </span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
                     @endif
                     @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show w-50 bg-dark" role="alert">

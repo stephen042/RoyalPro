@@ -1,12 +1,6 @@
 <div class="navbar navbar-collapse responsive-navbar p-0">
     <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
         <div class="d-flex order-lg-2">
-            <div class="dropdown d-md-flex">
-                <a class="nav-link icon theme-layout nav-link-bg layout-setting">
-                    <span class="dark-layout"><i class="fe fe-moon"></i></span>
-                    <span class="light-layout"><i class="fe fe-sun"></i></span>
-                </a>
-            </div>
             <!-- FULL-SCREEN -->
             <div class="dropdown d-md-flex">
                 <a class="nav-link icon full-screen-link nav-link-bg">

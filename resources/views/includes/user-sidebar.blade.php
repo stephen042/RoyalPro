@@ -4,8 +4,8 @@
         <div class="side-header">
             <a class="header-brand1" href="{{ route('user_dashboard') }}">
                 <!-- Site Name in place of first commented-out logo -->
-                <span style="font-size: 18px; font-weight: 600; color: #fff;" class="header-brand-img desktop-logo">{{
-                    env('APP_NAME') }}</span>
+                <span style="font-size: 18px; font-weight: 600; color: #fff;"
+                    class="header-brand-img desktop-logo">{{ env('APP_NAME') }}</span>
                 <img src="{{ URL('home-assets/assets/img/forex-logo.png') }}" class="header-brand-img toggle-logo"
                     alt="logo">
                 <img src="{{ URL('home-assets/assets/img/forex-logo.png') }}" class="header-brand-img light-logo"
@@ -21,6 +21,7 @@
 
             </div>
             <ul class="side-menu">
+
                 <li class="sub-category">
                     <h3>Main</h3>
                 </li>
@@ -86,7 +87,7 @@
                             Estate</span></a>
                 </li> --}}
                 <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="{{route('user_withdraw')}}"><i
+                    <a class="side-menu__item" data-bs-toggle="slide" href="{{ route('user_withdraw') }}"><i
                             class="side-menu__icon fe fe-credit-card"></i><span class="side-menu__label">-
                             Withdrawal</span></a>
                 </li>
@@ -99,6 +100,7 @@
                         <li><a href="{{ route('security_settings') }}" class="slide-item">Security Settings</a></li>
                     </ul>
                 </li>
+            </ul>
         </div>
     </aside>
 </div>

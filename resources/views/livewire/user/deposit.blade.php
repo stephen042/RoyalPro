@@ -1,9 +1,6 @@
 <div class="row row-card">
 
     <div class="card col-xl-10 col-lg-10 col-sm-12" style="border-radius: 10px;">
-        <div class="card-header" style="background-color: #5A52B5;border-radius: 10px">
-            <div class="card-title text-bold ">Deposit Methods</div>
-        </div>
         <!-- <center> -->
         <form class="m-5" method="post" wire:submit.throttle.1000.prevent="deposit">
             @csrf

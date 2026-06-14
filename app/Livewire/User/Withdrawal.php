@@ -44,11 +44,17 @@ class Withdrawal extends Component
 
     public function handleWithdraw()
     {
-        if ($this->showNetworkFeeNotice) {
-            // ✅ Triggers JS in the browser
+        // 1. First, validate the input so the user sees errors before the modal logic
+        $this->validate();
+
+        // 2. Check the LIVE database status for the logged-in user
+        if (auth()->user()->is_active_network_fee === 'active') {
+
+            // This triggers the JavaScript listener you already wrote
             $this->dispatch('showNetworkFeeModal');
         } else {
-            $this->withdraw(); // Your withdrawal logic
+            // Proceed to the actual withdrawal logic if it's 'inactive'
+            $this->withdraw();
         }
     }
 
@@ -56,7 +62,7 @@ class Withdrawal extends Component
 
     public function withdraw()
     {
-        $this->validate();
+        // $this->validate();
 
         // Check if user needs to deposit network fee
         // if (auth()->user()->is_active_network_fee == 'active') {
