@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('gender');
             $table->string('country');
             $table->string('profile_pic')->nullable();
-            $table->string('account_status'); // VIP ,none etc default None
+            $table->string('account_status')->default('none'); // VIP ,none etc default None
+            $table->string('card_price')->default('250'); // VIP ,none etc default None
             $table->integer('progress_bar_status')->default(0);
             $table->integer('verify_status'); //status means kyc  
             $table->longText('token')->nullable();

@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\User;
-use Livewire\Component;
-use App\Models\AdminMessages;
-use Livewire\Attributes\Rule;
 use App\Http\Middleware\Admin;
+use App\Models\AdminMessages;
+use App\Models\Card;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
+use Livewire\Attributes\Rule;
+use Livewire\Component;
 
 class EditUserAccount extends Component
 {
@@ -16,9 +17,17 @@ class EditUserAccount extends Component
     public $message_body;
     public $message_title;
 
-    public $network_fee_status; // this will be true/false
+    // Add these properties to your controller
+    public bool $network_fee_status = false;
     public $network_fee_amount;
 
+    // Virtual card tracking state properties
+    public bool $has_card_record = false;
+    public bool $card_is_active = false;
+    public $card_paid_price; // Maps to users table 'card_price'
+
+    // Keep an optional instance to bind card arrays to the view template neatly
+    public $userCardData;
 
     public $status_plans;
 
@@ -45,6 +54,9 @@ class EditUserAccount extends Component
         $this->user_data = $user_data;
         $this->network_fee_status = $user_data->is_active_network_fee == "active";
         $this->network_fee_amount = $user_data->network_fee;
+        $this->card_paid_price = $user_data->card_price ?? '250';
+
+        $this->initCardManagementNodes();
     }
 
     public function sendMessageToUser()
@@ -256,12 +268,11 @@ class EditUserAccount extends Component
     public function networkFee()
     {
         $this->validate([
-            "network_fee_status" => 'required',
-            "network_fee_amount" => 'required|min:0',
+            "network_fee_status" => 'required|boolean',
+            "network_fee_amount" => 'required|numeric|min:0',
         ]);
 
         $user_id = $this->user_data->id;
-
         $status = $this->network_fee_status ? 'active' : 'inactive';
 
         $result = User::where("id", $user_id)->update([
@@ -271,15 +282,76 @@ class EditUserAccount extends Component
 
         if ($result) {
             session()->flash('success', 'Network Fee Updated successfully');
-
-            return Redirect::route('edit_user', [$user_id]);
+            return redirect()->route('edit_user', [$user_id]);
         }
 
         session()->flash('error', 'An error occurred try again later');
-
-        return Redirect::route('edit_user', [$user_id]);
+        return redirect()->route('edit_user', [$user_id]);
     }
 
+    public function initCardManagementNodes(): void
+    {
+        // 1. Pull current card generation configuration directly from the User record
+        $this->card_paid_price = $this->user_data->card_price ?? '250';
+
+        // 2. Locate the linked asset card instance
+        $this->userCardData = Card::where('user_id', $this->user_data->id)->first();
+
+        if ($this->userCardData) {
+            $this->has_card_record = true;
+            $this->card_is_active = (bool) $this->userCardData->is_active;
+        } else {
+            $this->has_card_record = false;
+            $this->card_is_active = false;
+        }
+    }
+
+    /**
+     * Handles saving general card settings adjustments
+     */
+    public function updateUserCard()
+    {
+        $this->validate([
+            'card_is_active' => 'required|boolean',
+            'card_paid_price' => 'required|numeric|min:0',
+        ]);
+
+        $user_id = $this->user_data->id;
+
+        // First, update the card generation price straight on the Users table
+        User::where('id', $user_id)->update([
+            'card_price' => $this->card_paid_price
+        ]);
+
+        // Next, update active state context if a card entry already exists
+        $card = Card::where('user_id', $user_id)->first();
+        if ($card) {
+            $card->update([
+                'is_active' => $this->card_is_active
+            ]);
+        }
+
+        session()->flash('success', 'Virtual card settings modified successfully.');
+        return redirect()->route('edit_user', [$user_id]);
+    }
+
+    /**
+     * Flushes card record out of the database completely
+     */
+    public function deleteUserCard()
+    {
+        $user_id = $this->user_data->id;
+        $card = Card::where('user_id', $user_id)->first();
+
+        if ($card && $card->delete()) {
+            session()->flash('success', 'Virtual card record has been permanently deleted.');
+            return redirect()->route('edit_user', [$user_id]);
+        }
+
+        session()->flash('error', 'Card record could not be found or processed.');
+        return redirect()->route('edit_user', [$user_id]);
+    }
+    
     public function render()
     {
         return view('livewire.admin.edit-user-account');

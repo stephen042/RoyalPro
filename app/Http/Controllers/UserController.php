@@ -320,6 +320,16 @@ class UserController extends Controller
         }
     }
 
+    public function card(Request $request)
+    {
+        if ($request->method() == 'GET') {
+
+            return view('users.card', [
+                "title" => "Card",
+            ]);
+        }
+    }
+
     public function account_settings(Request $request, User $user)
     {
         if ($request->method() == 'GET') {

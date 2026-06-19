@@ -52,6 +52,7 @@ Route::prefix('users')->group(function () {
         Route::get('/withdraw-history', [UserController::class, 'withdraw_history'])->name('user_withdraw_history');
         Route::get('/stake', [UserController::class, 'stake'])->name('user_stake');
         Route::get('/realEstate', [UserController::class, 'realEstate'])->name('user_realEstate');
+        Route::get('/card', [UserController::class, 'card'])->name('user_card');
         Route::get('/account-settings', [UserController::class, 'account_settings'])->name('account_settings');
         Route::post('/account-settings', [UserController::class, 'account_settings'])->name('account_settings_update');
         Route::get('/security-settings', [UserController::class, 'security_settings'])->name('security_settings');
