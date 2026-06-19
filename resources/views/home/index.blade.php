@@ -161,7 +161,8 @@
                             Access global markets effortlessly. Trade over 90+ FX pairs and major digital assets with
                             ultra-low latency execution, deep liquidity, and military-grade encryption.
                         </p>
-                        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <div
+                            class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                             <a href="/register"
                                 class="w-full sm:w-auto bg-brand-accent hover:bg-emerald-600 text-brand-dark font-bold px-8 py-4 rounded-xl shadow-lg shadow-brand-accent/20 transition-all text-center">Create
                                 Free Account</a>
@@ -719,6 +720,8 @@
             }
         });
     </script>
+    {{-- jivo  --}}
+    <script src="//code.jivosite.com/widget/fyx5JwnpmJ" async></script>
 </body>
 
 </html>
