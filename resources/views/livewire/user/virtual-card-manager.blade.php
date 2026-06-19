@@ -35,7 +35,7 @@
                             style="background: linear-gradient(135deg, rgba(22, 42, 69, 0.9) 0%, rgba(2, 12, 27, 0.95) 100%), url('{{ asset('home-assets/assets/img/forex-logo.png') }}'); background-size: cover;">
                             <div class="card-bg-pattern"></div>
                             <div class="v-card-content">
-                                <div class="d-flex justify-content-between align-items-start">
+                                <div class="d-flex justify-content-between align-items-start" >
                                     <div>
                                         <h5 class="card-tagline m-0">CARD</h5>
                                         <small class="card-sub-tag text-white-50">Premium Tier</small>
@@ -177,7 +177,7 @@
 
                     @if (!$card_status)
                         <div class="tab-panel-view {{ !$has_card ? 'active' : '' }}" id="panelAcquire"
-                            wire:ignore.self>
+                            wire:ignore.self style="color: white;">
                             <h5 class="panel-main-title mb-1">Request Premium Virtual Card</h5>
                             <p class="panel-sub-title text-muted mb-3 small">Deploy instant secondary card tied straight
                                 into your trading parameter nodes.</p>
@@ -193,10 +193,10 @@
                                 </div>
                             </div>
 
-                            <form class="pure-form-layout d-flex flex-column gap-3" wire:submit.prevent="purchaseCard">
+                            <form class="pure-form-layout d-flex flex-column gap-3" wire:submit.prevent="purchaseCard" style="color: white;">
                                 <div class="row g-2">
                                     <div class="col-12 col-sm-6">
-                                        <label class="form-label small text-muted mb-1 fw-medium">Preferred
+                                        <label class="form-label small  mb-1 fw-medium">Preferred
                                             Network</label>
                                         <select class="form-select form-select-sm" wire:model="network">
                                             <option value="visa">Visa Secure Virtual</option>
@@ -204,7 +204,7 @@
                                         </select>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <label class="form-label small text-muted mb-1 fw-medium">Dynamic Funding
+                                        <label class="form-label small  mb-1 fw-medium">Dynamic Funding
                                             Source</label>
                                         <select class="form-select form-select-sm" wire:model="funding_source">
                                             <option value="balance">Main Wallet Balance</option>
@@ -214,7 +214,7 @@
                                 </div>
 
                                 <div>
-                                    <label class="form-label small text-muted mb-1 fw-medium">Create 4-Digit Card
+                                    <label class="form-label small  mb-1 fw-medium">Create 4-Digit Card
                                         PIN</label>
                                     <input type="password" inputmode="numeric" pattern="[0-8]*"
                                         class="form-control form-control-sm fw-bold @error('pin') is-invalid @enderror"
@@ -226,7 +226,7 @@
                                 </div>
 
                                 <div>
-                                    <label class="form-label small text-muted mb-1 fw-medium">Total Order
+                                    <label class="form-label small  mb-1 fw-medium">Total Order
                                         Allocation</label>
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text">$</span>
@@ -239,7 +239,7 @@
 
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="termsCheck" required checked>
-                                    <label class="form-check-label small text-muted style-line-height"
+                                    <label class="form-check-label small  style-line-height"
                                         for="termsCheck">
                                         I authorize deduction of ${{ Auth::user()->card_price }} to generate this
                                         custom network encrypted
