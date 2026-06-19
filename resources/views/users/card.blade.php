@@ -13,10 +13,14 @@
         }
 
         .v-card-flip {
+            width: 100%;
+            /* Allow the grid to control responsiveness */
             max-width: 380px;
             height: 220px;
             cursor: pointer;
             perspective: 1000px;
+            -webkit-perspective: 1000px;
+            /* Crucial for iOS Safari structural rendering */
         }
 
         .v-card-inner {
@@ -26,19 +30,25 @@
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
             transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            /* Forces 3D space hierarchy tracking on mobile */
         }
 
         .v-card-flip.flipped .v-card-inner {
             transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
         }
 
         .v-card-front,
         .v-card-back {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden !important;
+            /* Fixed: Added strong isolation for WebKit */
+            backface-visibility: hidden !important;
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -50,11 +60,15 @@
                 url("{{ asset('home-assets/assets/img/forex-logo.png') }}");
             background-size: contain;
             background-position: center;
+            z-index: 2;
+            /* Forces proper stack layer when unrotated */
         }
 
         .v-card-back {
             background: linear-gradient(135deg, #09131e 0%, #15202b 100%);
             transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            z-index: 1;
         }
 
         .card-bg-pattern {
@@ -280,10 +294,10 @@
             line-height: 1.3;
         }
 
-        /* MEDIA BREAKPOINT ENHANCEMENTS */
+        /* FIXED MEDIA BREAKPOINT ENHANCEMENTS */
         @media (max-width: 767.98px) {
             .v-card-flip {
-                max-width: 100%;
+                /* Kept width: 100% stable; removed the max-width conflict inside the media block */
                 height: 200px;
             }
 
