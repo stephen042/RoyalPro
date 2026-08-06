@@ -62,11 +62,11 @@
         <td>
           <!-- Full Width Header Image -->
           <table width="100%" style="max-width: 620px; margin: 0 auto;" role="presentation">
-            <tr>
+            {{-- <tr>
               <td style="padding: 0;">
                 <img src="https://forex-royals181.online/public/home-assets/assets/img/forex-logo.png" width="100%" style="max-width: 100%; height: auto; display: block;" alt="Email Header">
               </td>
-            </tr>
+            </tr> --}}
 
             <!-- Space for Site Name -->
             <tr>
