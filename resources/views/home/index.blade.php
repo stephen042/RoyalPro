@@ -1,727 +1,645 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ env('APP_NAME') }} | Next-Gen Crypto & Forex Trading Platform</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ env('APP_NAME') }} | Financial & Consulting Services</title>
 
-    <meta name="description"
-        content="Unlock your trading potential with our comprehensive solutions designed to support traders. Explore our expert guidance and lucrative opportunities to propel your trading career.">
-    <meta name="keywords" content="{{ env('APP_NAME') }} ">
-    <meta property="og:title" content="{{ env('APP_NAME') }}   Forex Trading">
-    <meta property="og:description"
-        content="Unlock your trading potential with our comprehensive solutions designed to support traders. Explore our expert guidance and lucrative opportunities to propel your trading career.">
-    <meta property="og:type" content="website">
+  <!-- Meta tags -->
+  <meta name="description" content="Trade smarter with zero commissions on stocks, ETFs, and crypto. Access lightning-fast execution, AI insights, and 24/7 markets.">
+  <meta name="keywords" content="online trading, zero commission broker, invest in stocks, crypto trading, ETF investing, trading platform">
+  <meta property="og:title" content="{{ env('APP_NAME') }} – Financial & Investment Solutions">
+  <meta property="og:description" content="Institutional-grade execution, real-time data, and wealth management services.">
+  <meta property="og:type" content="website">
 
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
-    <link rel="shortcut icon" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
+  <link rel="shortcut icon" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#0B0F19',
-                            card: '#151B2C',
-                            primary: '#6366F1', // Indigo
-                            accent: '#10B981', // Emerald Green
-                            crypto: '#F59E0B' // Amber
-                        }
-                    }
-                }
+  <!-- Font Awesome for Financo Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            financo: {
+              blue: '#002e5b',       // Deep Navy Corporate Blue
+              gold: '#fdb813',       // Bright Gold Accent
+              hover: '#001e3d',
+              lightGray: '#f8fafc',
+              border: '#e2e8f0',
+              heading: '#0f172a',
+              body: '#475569'
             }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Roboto', 'sans-serif'],
+          }
         }
-    </script>
-    <style>
-        /* Custom scrollbar for premium feel */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-        ::-webkit-scrollbar-track {
-            background: #0B0F19;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #475569;
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        ::-webkit-scrollbar-thumb {
-            background: #1E293B;
-            border-radius: 4px;
-        }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #002e5b; border-radius: 4px; }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #334155;
-        }
-    </style>
+    /* Card Hover Transitions */
+    .financo-card {
+      transition: all 0.3s ease-in-out;
+    }
+    .financo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 35px -10px rgba(0, 46, 91, 0.08);
+    }
+
+    #preloader {
+      transition: opacity 0.4s ease;
+    }
+  </style>
 </head>
+<body class="overflow-x-hidden">
 
-<body class="bg-brand-dark text-gray-100 font-sans antialiased overflow-x-hidden">
+  <!-- PRELOADER -->
+  <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+    <div class="flex flex-col items-center gap-3">
+      <div class="w-12 h-12 border-4 border-slate-200 border-t-financo-gold rounded-full animate-spin"></div>
+      <p class="text-xs font-bold text-financo-blue tracking-widest uppercase">{{ env('APP_NAME') }}</p>
+    </div>
+  </div>
 
-    <!-- JS Preloader Screen -->
-    <div id="preloader"
-        class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-brand-dark transition-opacity duration-500">
-        <div class="relative w-16 h-16">
-            <div class="absolute inset-0 border-4 border-brand-primary/20 rounded-full"></div>
-            <div class="absolute inset-0 border-4 border-t-brand-accent rounded-full animate-spin"></div>
+  <!-- HEADER / NAVIGATION (Financo Light Style) -->
+  <header class="w-full">
+    <!-- Top Contact Bar (Light) -->
+    <div class="bg-slate-100 text-financo-body text-xs py-2.5 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="flex items-center gap-6 font-medium">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-envelope text-financo-blue"></i>
+            <span>{{ config('app.Admin_email') }}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-location-dot text-financo-blue"></i>
+            <span>Marina Bay, Singapore</span>
+          </div>
         </div>
-        <p class="mt-4 text-sm font-semibold tracking-widest text-gray-400 uppercase animate-pulse">
-            {{ env('APP_NAME') }} Securing
-            Connection...</p>
+        <div class="flex items-center gap-4">
+          <span class="text-slate-400 font-semibold">Follow Us:</span>
+          <a href="#" class="text-slate-500 hover:text-financo-blue transition"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="text-slate-500 hover:text-financo-blue transition"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="text-slate-500 hover:text-financo-blue transition"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="text-slate-500 hover:text-financo-blue transition"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
     </div>
 
-    <!-- Navigation Header -->
-    <header class="sticky top-0 z-40 backdrop-blur-md bg-brand-dark/80 border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <!-- Logo Image -->
-                <img src="{{ asset('home-assets/assets/img/forex-logo.png') }}" alt="{{ env('APP_NAME') }} Logo"
-                    class="w-8 h-8 object-contain">
+    <!-- Main Navigation Bar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40 border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <!-- Brand Logo -->
+        <a href="#" class="flex items-center gap-3">
+          <img src="{{ asset('home-assets/assets/img/forex-logo.png') }}" alt="{{ env('APP_NAME') }}" class="w-9 h-9 object-contain" />
+          <span class="text-2xl font-black text-financo-blue tracking-tight uppercase">{{ env('APP_NAME') }}</span>
+        </a>
 
-                <!-- Brand Name -->
-                <span
-                    class="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                    {{ env('APP_NAME') }}
-                </span>
-            </div>
-            <!-- Desktop Navbar -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-                <a href="#markets" class="hover:text-white transition-colors">Markets</a>
-                <a href="#features" class="hover:text-white transition-colors">Features</a>
-                <a href="#about" class="hover:text-white transition-colors">About Us</a>
-                <a href="#testimonials" class="hover:text-white transition-colors">Testimonials</a>
-                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
-            </nav>
-
-            <div class="flex items-center gap-4">
-                <a href="/login" class="text-sm font-medium hover:text-white transition-colors hidden sm:block">Sign
-                    In</a>
-                <a href="/register"
-                    class="bg-gradient-to-r from-brand-primary to-indigo-700 hover:opacity-90 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-brand-primary/20 transition-all transform hover:-translate-y-0.5">Start
-                    Trading</a>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white focus:outline-none"
-                    aria-label="Toggle Menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+        <!-- Desktop Navigation Links -->
+        <div class="hidden md:flex items-center gap-8 font-semibold text-xs text-slate-700 uppercase tracking-wider">
+          <a href="#hero" class="hover:text-financo-blue transition">Home</a>
+          <a href="#about" class="hover:text-financo-blue transition">About Us</a>
+          <a href="#services" class="hover:text-financo-blue transition">Services</a>
+          <a href="#market" class="hover:text-financo-blue transition">Live Terminal</a>
+          <a href="#testimonials" class="hover:text-financo-blue transition">Reviews</a>
+          <a href="#contact" class="hover:text-financo-blue transition">Contact</a>
         </div>
 
-        <!-- Mobile Navigation Dropdown -->
-        <div id="mobile-menu"
-            class="hidden md:hidden bg-brand-dark/95 border-b border-gray-800 px-4 pt-2 pb-6 absolute w-full left-0 transition-all duration-300">
-            <nav class="flex flex-col gap-4 text-base font-medium text-gray-400">
-                <a href="#markets" class="mobile-link hover:text-white transition-colors py-2">Markets</a>
-                <a href="#features" class="mobile-link hover:text-white transition-colors py-2">Features</a>
-                <a href="#about" class="mobile-link hover:text-white transition-colors py-2">About Us</a>
-                <a href="#testimonials" class="mobile-link hover:text-white transition-colors py-2">Testimonials</a>
-                <a href="#contact" class="mobile-link hover:text-white transition-colors py-2">Contact</a>
-                <hr class="border-gray-800 my-2">
-                <a href="/login" class="mobile-link hover:text-white transition-colors py-2">Sign In</a>
-                <a href="/register" class="mobile-link hover:text-white transition-colors py-2">Create Account</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="relative pt-8 pb-16 lg:pt-20 lg:pb-28 overflow-hidden">
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none">
-                <div
-                    class="absolute top-[-10%] left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-brand-primary/10 rounded-full blur-[120px]">
-                </div>
-                <div
-                    class="absolute bottom-[10%] right-[-10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-brand-accent/10 rounded-full blur-[100px]">
-                </div>
-            </div>
-
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid lg:grid-cols-12 gap-12 items-center">
-                    <div class="lg:col-span-6 text-center lg:text-left">
-                        <span
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-brand-accent/10 text-brand-accent mb-6 border border-brand-accent/20">
-                            <span class="w-2 h-2 rounded-full bg-brand-accent animate-ping"></span>
-                            New: Zero-fee Crypto Deposits
-                        </span>
-                        <h1
-                            class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                            Trade Forex & Crypto <br class="hidden sm:inline">
-                            <span
-                                class="bg-gradient-to-r from-brand-accent via-brand-primary to-brand-crypto bg-clip-text text-transparent">With
-                                Institutional Power</span>
-                        </h1>
-                        <p class="mt-6 text-base sm:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                            Access global markets effortlessly. Trade over 90+ FX pairs and major digital assets with
-                            ultra-low latency execution, deep liquidity, and military-grade encryption.
-                        </p>
-                        <div
-                            class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                            <a href="/register"
-                                class="w-full sm:w-auto bg-brand-accent hover:bg-emerald-600 text-brand-dark font-bold px-8 py-4 rounded-xl shadow-lg shadow-brand-accent/20 transition-all text-center">Create
-                                Free Account</a>
-                            <a href="#markets"
-                                class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-white font-medium px-8 py-4 rounded-xl transition-all border border-gray-700 text-center flex items-center justify-center gap-2">
-                                View Live Charts
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Hero Visual (TradingView Advanced Chart Widget) -->
-                    <div class="lg:col-span-6 w-full">
-                        <div class="bg-brand-card border border-gray-800 rounded-2xl p-3 sm:p-4 shadow-2xl relative">
-                            <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-3">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
-                                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
-                                    <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-                                    <span class="text-[10px] font-mono text-gray-500 ml-1">terminal_core.io</span>
-                                </div>
-                                <span
-                                    class="text-[10px] font-semibold text-brand-accent bg-brand-accent/10 px-2 py-0.5 rounded animate-pulse">Live
-                                    Feed</span>
-                            </div>
-
-                            <!-- TradingView Widget Container -->
-                            <div class="w-full h-[320px] sm:h-[400px] rounded-lg overflow-hidden bg-[#131722]">
-                                <!-- TradingView Widget BEGIN -->
-                                <div class="tradingview-widget-container" style="height:100%;width:100%;">
-                                    <div id="tradingview_advanced_chart" style="height:100%;width:100%;"></div>
-                                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                                    <script type="text/javascript">
-                                        new TradingView.widget({
-                                            "autosize": true,
-                                            "symbol": "BINANCE:BTCUSDT",
-                                            "interval": "D",
-                                            "timezone": "Etc/UTC",
-                                            "theme": "dark",
-                                            "style": "1",
-                                            "locale": "en",
-                                            "enable_publishing": false,
-                                            "hide_side_toolbar": true,
-                                            "allow_symbol_change": true,
-                                            "container_id": "tradingview_advanced_chart"
-                                        });
-                                    </script>
-                                </div>
-                                <!-- TradingView Widget END -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Markets Live Ticker Section (TradingView Ticker Widget) -->
-        <section id="markets" class="py-4 border-y border-gray-800 bg-brand-card/30">
-            <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- TradingView Widget BEGIN -->
-                <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-                        {
-                            "symbols": [{
-                                    "proName": "FOREXCOM:SPX500",
-                                    "title": "S&P 500 Index"
-                                },
-                                {
-                                    "proName": "FX_IDC:EURUSD",
-                                    "title": "EUR/USD"
-                                },
-                                {
-                                    "proName": "BITSTAMP:BTCUSD",
-                                    "title": "Bitcoin"
-                                },
-                                {
-                                    "proName": "BITSTAMP:ETHUSD",
-                                    "title": "Ethereum"
-                                }
-                            ],
-                            "colorTheme": "dark",
-                            "isTransparent": true,
-                            "showSymbolLogo": true,
-                            "locale": "en"
-                        }
-                    </script>
-                </div>
-                <!-- TradingView Widget END -->
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="py-16 lg:py-28">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                    <h2 class="text-2xl sm:text-4xl font-bold tracking-tight">Engineered for Elite Performance</h2>
-                    <p class="mt-4 text-gray-400 text-sm sm:text-base">Skip the middlemen. Experience clean,
-                        institutional trading infrastructure designed for retail investors.</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <!-- Feature 1 -->
-                    <div
-                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group">
-                        <div
-                            class="w-12 h-12 rounded-xl bg-brand-primary/10 flex items-center justify-center text-brand-primary mb-6 group-hover:bg-brand-primary group-hover:text-white transition-all">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg sm:text-xl font-bold mb-3 text-white">Ultra-Fast Execution</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Trades processed under 4ms within global data
-                            hubs, minimizing slippage to ensure accurate pricing.</p>
-                    </div>
-
-                    <!-- Feature 2 -->
-                    <div
-                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group">
-                        <div
-                            class="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-6 group-hover:bg-brand-accent group-hover:text-brand-dark transition-all">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg sm:text-xl font-bold mb-3 text-white">Advanced Data Feed</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Over 100+ native indicators, customizable
-                            order flow layouts, and native high-speed engine modules.</p>
-                    </div>
-
-                    <!-- Feature 3 -->
-                    <div
-                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group">
-                        <div
-                            class="w-12 h-12 rounded-xl bg-brand-crypto/10 flex items-center justify-center text-brand-crypto mb-6 group-hover:bg-brand-crypto group-hover:text-brand-dark transition-all">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg sm:text-xl font-bold mb-3 text-white">Multi-Asset Wallet</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Safely store fiat capital and crypto holdings
-                            concurrently in an isolated multi-sig secure environment.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Us Section -->
-        <section id="about" class="py-16 bg-brand-card/20 border-t border-gray-800 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div
-                        class="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-800 h-64 sm:h-96 order-last lg:order-first">
-                        <img id="about-img"
-                            data-src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80"
-                            alt="{{ env('APP_NAME') }} Global Team Office"
-                            class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
-                    </div>
-                    <div>
-                        <span class="text-xs font-bold text-brand-primary uppercase tracking-widest">Who We Are</span>
-                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white mt-2">Pioneering Financial
-                            Freedom Since 2018</h2>
-                        <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">
-                            {{ env('APP_NAME') }} was built by a coalition of quantitative traders, cybersecurity
-                            researchers, and
-                            blockchain engineers. Our goal is simple: eliminate unequal access to financial tools by
-                            bringing professional, low-latency market infrastructure right to your screen.
-                        </p>
-                        <div class="grid grid-cols-3 gap-4 mt-8 border-t border-gray-800 pt-6">
-                            <div>
-                                <h4 class="text-xl sm:text-2xl font-bold text-white">$4.2B+</h4>
-                                <p class="text-xs text-gray-500 mt-1">Quarterly Volume</p>
-                            </div>
-                            <div>
-                                <h4 class="text-xl sm:text-2xl font-bold text-brand-accent">99.99%</h4>
-                                <p class="text-xs text-gray-500 mt-1">System Uptime</p>
-                            </div>
-                            <div>
-                                <h4 class="text-xl sm:text-2xl font-bold text-brand-crypto">200k+</h4>
-                                <p class="text-xs text-gray-500 mt-1">Active Accounts</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Security Spotlight (Split Image Content) -->
-        <section id="security" class="py-16 border-y border-gray-800 bg-brand-card/40">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white">Your Funds, Protected
-                            Tier-1 Style.</h2>
-                        <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">
-                            Security isn't an added feature; it's our foundational metric. We preserve strict 1:1 asset
-                            backing ratios on all client assets, stored safely within multi-sig ledger structures.
-                        </p>
-                        <ul class="mt-6 space-y-4 text-sm text-gray-300">
-                            <li class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-brand-accent flex-shrink-0" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Multi-Signature Cold Vault Operations
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-brand-accent flex-shrink-0" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Full SAFU Coverage Policy Protections
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-brand-accent flex-shrink-0" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Real-Time Cryptographic Proof of Reserves
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-800 h-64 sm:h-96">
-                        <img id="security-img"
-                            data-src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80"
-                            alt="Cybersecurity Cryptographic Key Network"
-                            class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-r from-brand-dark to-transparent"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="py-16 lg:py-28">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                    <span class="text-xs font-bold text-brand-crypto uppercase tracking-widest">Global Feedback</span>
-                    <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white mt-2">Trusted by Traders
-                        Worldwide</h2>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <!-- Card 1 -->
-                    <div
-                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 flex flex-col justify-between">
-                        <p class="text-gray-300 text-sm leading-relaxed italic">"The latency scaling here is
-                            incomparable. I run high-frequency intra-day forex strategies and slippage is virtually
-                            nonexistent. Best institutional terminal layout for retail accounts."</p>
-                        <div class="flex items-center gap-4 mt-6 border-t border-gray-800 pt-4">
-                            <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
-                                <img id="user1-img"
-                                    data-src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
-                                    alt="User Marcus V."
-                                    class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-white">Marcus V.</h4>
-                                <p class="text-xs text-brand-accent">Algo-Trader & Quant</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div
-                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 flex flex-col justify-between">
-                        <p class="text-gray-300 text-sm leading-relaxed italic">"Managing cross-asset liquidity across
-                            physical FX setups and on-chain decentralized vaults was a mess until
-                            {{ env('APP_NAME') }}.
-                            The unified
-                            wallet dashboard is remarkably intuitive and responsive."</p>
-                        <div class="flex items-center gap-4 mt-6 border-t border-gray-800 pt-4">
-                            <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
-                                <img id="user2-img"
-                                    data-src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80"
-                                    alt="User Elena R."
-                                    class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-white">Elena R.</h4>
-                                <p class="text-xs text-brand-primary">Portfolio Manager</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div
-                        class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 flex flex-col justify-between md:col-span-2 lg:col-span-1">
-                        <p class="text-gray-300 text-sm leading-relaxed italic">"What stood out to me most was the
-                            transparent Proof of Reserves asset confirmation model. It gives you immediate peace of mind
-                            knowing your margin requirements are backed 1:1."</p>
-                        <div class="flex items-center gap-4 mt-6 border-t border-gray-800 pt-4">
-                            <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden">
-                                <img id="user3-img"
-                                    data-src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"
-                                    alt="User David K."
-                                    class="w-full h-full object-cover opacity-0 transition-opacity duration-700">
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-white">David K.</h4>
-                                <p class="text-xs text-brand-crypto">Crypto Derivatives Specialist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Us Section -->
-        <section id="contact" class="py-16 bg-brand-card/30 border-y border-gray-800 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-12 gap-12">
-                    <div class="lg:col-span-5 flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs font-bold text-brand-accent uppercase tracking-widest">Connect With
-                                Us</span>
-                            <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-white mt-2">Have questions?
-                                Get in touch.</h2>
-                            <p class="mt-4 text-gray-400 text-sm sm:text-base leading-relaxed"> Our engineering and
-                                financial desks operate 24/7/365 to handle client onboarding queries, account
-                                verifications, or premium infrastructure configurations.</p>
-                        </div>
-
-                        <div class="mt-8 space-y-4">
-                            <div class="flex items-center gap-4 p-4 bg-brand-card rounded-xl border border-gray-800">
-                                <div class="text-brand-accent">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L22 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-xs text-gray-500">Corporate Inquiries</h4>
-                                    <p class="text-sm font-semibold text-white">{{ config('app.Admin_email') }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4 p-4 bg-brand-card rounded-xl border border-gray-800">
-                                <div class="text-brand-primary">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                        </path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-xs text-gray-500">Global Hub Location</h4>
-                                    <p class="text-sm font-semibold text-white">Marina Bay Sands Tower 3, Singapore</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-7">
-                        <form id="apex-contact-form"
-                            class="p-6 sm:p-8 bg-brand-card rounded-2xl border border-gray-800 space-y-4">
-                            <div class="grid sm:grid-cols-2 gap-4">
-                                <div class="flex flex-col gap-1.5">
-                                    <label class="text-xs font-semibold text-gray-400">First Name</label>
-                                    <input type="text" required placeholder="John"
-                                        class="bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-primary transition-colors">
-                                </div>
-                                <div class="flex flex-col gap-1.5">
-                                    <label class="text-xs font-semibold text-gray-400">Email Address</label>
-                                    <input type="email" required placeholder="john@example.com"
-                                        class="bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-primary transition-colors">
-                                </div>
-                            </div>
-                            <div class="flex flex-col gap-1.5">
-                                <label class="text-xs font-semibold text-gray-400">Subject Area</label>
-                                <select
-                                    class="bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-sm text-gray-400 focus:outline-none focus:border-brand-primary transition-colors">
-                                    <option>Account Onboarding & KYC</option>
-                                    <option>Institutional OTC Desk</option>
-                                    <option>API Connection Integration</option>
-                                    <option>Other / General Inquiry</option>
-                                </select>
-                            </div>
-                            <div class="flex flex-col gap-1.5">
-                                <label class="text-xs font-semibold text-gray-400">Message Content</label>
-                                <textarea rows="4" required placeholder="How can our trading desks assist you?"
-                                    class="bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-primary transition-colors resize-none"></textarea>
-                            </div>
-                            <button type="submit"
-                                class="w-full bg-brand-primary hover:bg-indigo-600 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-brand-primary/10">Dispatch
-                                Transmission</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-        {{-- the contact success modal --}}
-        <div id="contact-success-modal"
-            class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-dark/80 backdrop-blur-sm transition-opacity duration-300">
-            <div
-                class="bg-brand-card border border-gray-800 rounded-2xl max-w-md w-full p-6 text-center shadow-2xl transform scale-95 transition-transform duration-300">
-                <div
-                    class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-brand-accent/10 text-brand-accent mb-4">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                        </path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold text-white mb-2">Message Dispatched Successfully</h3>
-                <p class="text-sm text-gray-400 mb-6 leading-relaxed">
-                    We have received your message! For a faster response, please chat with our <span
-                        class="text-brand-accent font-semibold">Live Chat</span> team directly on the site.
-                </p>
-                <button id="close-modal-btn"
-                    class="w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2.5 rounded-xl transition-all border border-gray-700">
-                    Acknowledge
-                </button>
-            </div>
+        <!-- Action Buttons -->
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="/login" class="text-xs uppercase font-bold text-financo-blue hover:text-financo-hover transition px-3 py-2">Sign In</a>
+          <a href="/register" class="bg-financo-gold hover:bg-yellow-500 text-financo-blue font-bold text-xs uppercase px-6 py-3 rounded shadow-sm transition transform hover:-translate-y-0.5">
+            Get Started
+          </a>
         </div>
 
+        <!-- Mobile Menu Toggle -->
+        <button id="menu-toggle" class="md:hidden p-2 text-financo-blue focus:outline-none" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
 
-        <!-- Final CTA conversion section -->
-        <section class="py-16 sm:py-24 relative">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Ready to Master the Markets?</h2>
-                <p class="mt-4 text-gray-400 max-w-xl mx-auto text-sm sm:text-base">Join 400,000+ active global traders
-                    maximizing performance margins daily.</p>
-                <div class="mt-8">
-                    <a href="/register"
-                        class="inline-block bg-gradient-to-r from-brand-accent to-emerald-500 text-brand-dark font-bold px-8 py-4 rounded-xl shadow-xl shadow-brand-accent/10 hover:opacity-90 transition-all transform hover:-translate-y-0.5">Open
-                        Your Account Now</a>
-                </div>
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white text-slate-800 px-6 py-6 border-t border-slate-200 shadow-xl">
+        <div class="flex flex-col gap-4 font-semibold text-xs uppercase">
+          <a href="#hero" class="mobile-link hover:text-financo-blue">Home</a>
+          <a href="#about" class="mobile-link hover:text-financo-blue">About Us</a>
+          <a href="#services" class="mobile-link hover:text-financo-blue">Services</a>
+          <a href="#market" class="mobile-link hover:text-financo-blue">Live Terminal</a>
+          <a href="#testimonials" class="mobile-link hover:text-financo-blue">Reviews</a>
+          <a href="#contact" class="mobile-link hover:text-financo-blue">Contact</a>
+          <hr class="border-slate-200 my-2" />
+          <div class="flex flex-col gap-3">
+            <a href="/login" class="mobile-link text-center border border-slate-300 py-2.5 rounded text-financo-blue font-bold">Sign In</a>
+            <a href="/register" class="mobile-link text-center bg-financo-gold text-financo-blue font-bold py-2.5 rounded">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== HERO SECTION (Bright White Theme with Human Focus) ===== -->
+    <section id="hero" class="relative bg-white text-slate-900 py-16 lg:py-24 overflow-hidden border-b border-slate-100">
+      <!-- Subtle Ambient Background Accents -->
+      <div class="absolute -top-32 -right-32 w-96 h-96 bg-blue-50 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-amber-50 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          <!-- Text Content (7 Cols) -->
+          <div class="lg:col-span-7">
+            <div class="inline-flex items-center gap-2 bg-blue-50 text-financo-blue border border-blue-100 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6">
+              <span class="w-2 h-2 rounded-full bg-financo-gold animate-pulse"></span>
+              Human-Centered Financial Consulting
             </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-gray-800 bg-brand-dark py-12 text-sm text-gray-500">
-        <div
-            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <p>&copy; 2026 {{ env('APP_NAME') }} Technologies Inc. All rights reserved.</p>
-            <p class="max-w-md text-center md:text-right text-xs leading-relaxed">
-                Risk Warning: Trading derivative contracts carries extreme levels of portfolio risk. Ensure your
-                objectives align with financial realities before engaging.
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-financo-heading leading-[1.15] uppercase">
+              Empowering Your <br />
+              <span class="text-financo-blue">Financial Future</span>
+            </h1>
+            <p class="mt-6 text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+              Partner with experienced advisors to build, protect, and grow your wealth. Institutional-grade execution combined with dedicated personal support.
             </p>
+
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <a href="/register" class="bg-financo-blue hover:bg-financo-hover text-white font-bold uppercase text-xs px-8 py-4 rounded shadow-md transition transform hover:-translate-y-0.5">
+                Open Free Account
+              </a>
+              <a href="#about" class="bg-slate-100 hover:bg-slate-200 text-financo-heading font-bold uppercase text-xs px-8 py-4 rounded transition border border-slate-200">
+                Meet Advisors
+              </a>
+            </div>
+
+            <!-- Human Social Proof Avatar Stack -->
+            <div class="mt-10 pt-8 border-t border-slate-100 flex items-center gap-4">
+              <div class="flex -space-x-3">
+                <img class="w-11 h-11 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Advisor" />
+                <img class="w-11 h-11 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Advisor" />
+                <img class="w-11 h-11 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Advisor" />
+                <img class="w-11 h-11 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Advisor" />
+              </div>
+              <div>
+                <div class="flex text-financo-gold text-xs gap-1">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-xs font-bold text-financo-heading mt-0.5">Trusted by 200,000+ Investors</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Image & Floating Cards (5 Cols) -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              <!-- Main Human Advisor Image -->
+              <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="Financial Advisor" class="w-full h-[480px] object-cover" />
+              </div>
+
+              <!-- Floating Stat Card Overlay Bottom Left -->
+              <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border border-slate-100 flex items-center gap-4 max-w-xs">
+                <div class="w-12 h-12 rounded-lg bg-blue-50 text-financo-blue flex items-center justify-center text-xl flex-shrink-0">
+                  <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-400 font-semibold uppercase">Avg Growth</p>
+                  <p class="text-base font-black text-financo-heading">+24.8% <span class="text-xs text-emerald-600 font-bold">This Year</span></p>
+                </div>
+              </div>
+
+              <!-- Floating Stat Card Overlay Top Right -->
+              <div class="absolute -top-6 -right-4 bg-white px-4 py-3 rounded-xl shadow-lg border border-slate-100 flex items-center gap-3">
+                <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
+                <span class="text-xs font-bold text-financo-heading uppercase">Live Advisory Desk Active</span>
+              </div>
+            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <!-- Smart JS Navigation & Preloader Logic -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Mobile Menu Toggle Execution
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('menu-icon');
+    <!-- ===== ABOUT SECTION (Light & Human Focused) ===== -->
+    <section id="about" class="py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <!-- Image Layering -->
+          <div class="relative">
+            <div class="grid grid-cols-2 gap-4">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Consulting Team" class="rounded-xl shadow-md object-cover h-64 w-full" />
+              <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80" alt="Client Advisor" class="rounded-xl shadow-md object-cover h-64 w-full mt-6" />
+            </div>
+            <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white text-financo-blue p-5 rounded-xl shadow-xl border border-slate-100 text-center w-3/4">
+              <span class="text-3xl font-extrabold text-financo-blue block">15+ Years</span>
+              <span class="text-xs uppercase font-bold text-slate-500 tracking-wider">Of Client Satisfaction</span>
+            </div>
+          </div>
 
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
+          <!-- Content -->
+          <div class="mt-8 lg:mt-0">
+            <span class="text-xs font-bold text-financo-gold uppercase tracking-widest block mb-2">About Our Firm</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-financo-heading uppercase tracking-tight mb-6">
+              Human Expertise Powered By Modern Technology
+            </h2>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+              At {{ env('APP_NAME') }}, we believe technology alone is not enough. Our team of seasoned financial advisors works directly with you to craft transparent, zero-commission strategies for wealth creation.
+            </p>
 
-                // Swap icon outlines depending on state
-                if (mobileMenu.classList.contains('hidden')) {
-                    menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-                } else {
-                    menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-                }
+            <div class="space-y-4 mb-8">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded-full bg-blue-100 text-financo-blue flex items-center justify-center font-bold flex-shrink-0">
+                  <i class="fa-solid fa-user-check text-xs"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-financo-heading uppercase">Dedicated Personal Advisors</h4>
+                  <p class="text-xs text-slate-500 mt-1">Direct access to experienced wealth managers 24/7.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded-full bg-blue-100 text-financo-blue flex items-center justify-center font-bold flex-shrink-0">
+                  <i class="fa-solid fa-shield-halved text-xs"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-financo-heading uppercase">Institutional Risk Custody</h4>
+                  <p class="text-xs text-slate-500 mt-1">Fully transparent proof of reserves and insured client assets.</p>
+                </div>
+              </div>
+            </div>
+
+            <a href="/register" class="bg-financo-blue hover:bg-financo-hover text-white font-bold text-xs uppercase px-8 py-3.5 rounded shadow transition inline-block">
+              Get Started Today
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES SECTION (Light Cards with Human Visuals) ===== -->
+    <section id="services" class="py-20 bg-white border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-xs font-bold text-financo-gold uppercase tracking-widest">Our Expertise</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-financo-heading uppercase mt-1">Tailored Financial Solutions</h2>
+          <div class="w-16 h-1 bg-financo-gold mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Service 1 -->
+          <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 financo-card">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" alt="Wealth Management" class="w-full h-52 object-cover" />
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-financo-heading uppercase mb-2">Wealth Management</h3>
+              <p class="text-xs text-slate-500 leading-relaxed mb-4">Personalized portfolio design for long-term growth and capital protection.</p>
+              <a href="/register" class="text-xs font-bold text-financo-blue hover:text-financo-gold uppercase transition flex items-center gap-1">
+                Explore Strategy <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 financo-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Trading Advisory" class="w-full h-52 object-cover" />
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-financo-heading uppercase mb-2">Multi-Asset Brokerage</h3>
+              <p class="text-xs text-slate-500 leading-relaxed mb-4">Zero-commission access to FX, stocks, options, and global crypto liquidity.</p>
+              <a href="/register" class="text-xs font-bold text-financo-blue hover:text-financo-gold uppercase transition flex items-center gap-1">
+                Explore Markets <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 financo-card">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=600&q=80" alt="Corporate Consulting" class="w-full h-52 object-cover" />
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-financo-heading uppercase mb-2">Corporate Advisory</h3>
+              <p class="text-xs text-slate-500 leading-relaxed mb-4">Corporate restructuring, treasury liquidity, and institutional risk management.</p>
+              <a href="/register" class="text-xs font-bold text-financo-blue hover:text-financo-gold uppercase transition flex items-center gap-1">
+                Explore Solutions <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LIVE TRADING TERMINAL SECTION ===== -->
+    <section id="market" class="py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold text-financo-gold uppercase tracking-widest">Real-Time Data</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-financo-heading uppercase mt-1">Live Financial Terminal</h2>
+          <p class="text-slate-500 text-sm mt-2">Institutional execution feeds powered by TradingView.</p>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-xl p-3 shadow-sm">
+          <div id="tv-chart" class="h-[460px] w-full rounded overflow-hidden"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/tv.js" defer></script>
+          <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              function loadChart() {
+                if (typeof TradingView !== 'undefined') {
+                  new TradingView.widget({
+                    "autosize": true,
+                    "symbol": "BINANCE:BTCUSDT",
+                    "interval": "D",
+                    "timezone": "Etc/UTC",
+                    "theme": "light",
+                    "style": "1",
+                    "locale": "en",
+                    "enable_publishing": false,
+                    "hide_side_toolbar": false,
+                    "allow_symbol_change": true,
+                    "container_id": "tv-chart"
+                  });
+                } else { setTimeout(loadChart, 200); }
+              }
+              loadChart();
             });
+          </script>
+        </div>
+      </div>
+    </section>
 
-            // Close mobile layout menu on click of dropdown items
-            document.querySelectorAll('.mobile-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-                });
-            });
+    <!-- ===== STATS BANNER (Soft Light Style) ===== -->
+    <section class="py-16 bg-blue-50 border-y border-blue-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div>
+            <span class="text-4xl sm:text-5xl font-black text-financo-blue block">200K+</span>
+            <span class="text-xs uppercase font-bold text-slate-500 tracking-wider mt-2 block">Active Investors</span>
+          </div>
+          <div>
+            <span class="text-4xl sm:text-5xl font-black text-financo-blue block">$18B+</span>
+            <span class="text-xs uppercase font-bold text-slate-500 tracking-wider mt-2 block">Assets Under Advisory</span>
+          </div>
+          <div>
+            <span class="text-4xl sm:text-5xl font-black text-financo-blue block">&lt; 4ms</span>
+            <span class="text-xs uppercase font-bold text-slate-500 tracking-wider mt-2 block">Execution Latency</span>
+          </div>
+          <div>
+            <span class="text-4xl sm:text-5xl font-black text-financo-blue block">99.9%</span>
+            <span class="text-xs uppercase font-bold text-slate-500 tracking-wider mt-2 block">Platform Uptime</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            // Preloader Image Asset Management Code
-            const preloader = document.getElementById('preloader');
-            const imagesToLoad = document.querySelectorAll('img[data-src]');
-            let loadedCount = 0;
+    <!-- ===== TESTIMONIALS SECTION (People Focused) ===== -->
+    <section id="testimonials" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-xs font-bold text-financo-gold uppercase tracking-widest">Client Feedback</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-financo-heading uppercase mt-1">What Traders &amp; Partners Say</h2>
+          <div class="w-16 h-1 bg-financo-gold mx-auto mt-4"></div>
+        </div>
 
-            if (imagesToLoad.length === 0) {
-                hidePreloader();
-            }
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <p class="text-xs text-slate-600 italic leading-relaxed">
+              "The latency performance on {{ env('APP_NAME') }} is outstanding. Having a dedicated advisor ready to assist makes all the difference."
+            </p>
+            <div class="flex items-center gap-4 mt-6 pt-4 border-t border-slate-200">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-full object-cover" alt="Client" />
+              <div>
+                <h4 class="text-sm font-bold text-financo-heading uppercase">Marcus Vance</h4>
+                <p class="text-xs text-slate-400">Algorithmic Trader</p>
+              </div>
+            </div>
+          </div>
 
-            imagesToLoad.forEach((img) => {
-                const src = img.getAttribute('data-src');
-                if (!src) return;
+          <!-- Card 2 -->
+          <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <p class="text-xs text-slate-600 italic leading-relaxed">
+              "Managing both multi-asset stocks and crypto under one compliant platform with total transparency gives us peace of mind."
+            </p>
+            <div class="flex items-center gap-4 mt-6 pt-4 border-t border-slate-200">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-full object-cover" alt="Client" />
+              <div>
+                <h4 class="text-sm font-bold text-financo-heading uppercase">Elena Rostova</h4>
+                <p class="text-xs text-slate-400">Portfolio Manager</p>
+              </div>
+            </div>
+          </div>
 
-                const tempImg = new Image();
-                tempImg.src = src;
-                tempImg.onload = () => {
-                    img.src = src;
-                    img.classList.remove('opacity-0');
-                    img.classList.add('opacity-100');
+          <!-- Card 3 -->
+          <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <p class="text-xs text-slate-600 italic leading-relaxed">
+              "Clean interface, fast execution, and zero hidden fees. Highly recommended for modern institutional investors."
+            </p>
+            <div class="flex items-center gap-4 mt-6 pt-4 border-t border-slate-200">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-full object-cover" alt="Client" />
+              <div>
+                <h4 class="text-sm font-bold text-financo-heading uppercase">David Koenig</h4>
+                <p class="text-xs text-slate-400">Derivatives Specialist</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                    loadedCount++;
-                    if (loadedCount === imagesToLoad.length) {
-                        hidePreloader();
-                    }
-                };
-                tempImg.onerror = () => {
-                    img.src = src;
-                    hidePreloader();
-                };
-            });
+    <!-- ===== CONTACT SECTION ===== -->
+    <section id="contact" class="py-20 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-5 gap-12">
+          <div class="lg:col-span-2">
+            <span class="text-xs font-bold text-financo-gold uppercase tracking-widest">Get In Touch</span>
+            <h2 class="text-3xl font-extrabold text-financo-heading uppercase mt-1 mb-4">Connect With Our Team</h2>
+            <p class="text-xs text-slate-500 leading-relaxed mb-8">
+              Our specialists are ready 24/7 to help with account onboarding, institutional desks, or platform enquiries.
+            </p>
 
-            function hidePreloader() {
-                setTimeout(() => {
-                    preloader.classList.add('opacity-0');
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                    }, 500);
-                }, 400);
-            }
+            <div class="space-y-4 text-xs">
+              <div class="flex items-center gap-4 p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+                <i class="fa-solid fa-envelope text-lg text-financo-blue"></i>
+                <div>
+                  <span class="text-slate-400 block font-semibold uppercase">Email Us</span>
+                  <span class="font-bold text-financo-heading">{{ config('app.Admin_email') }}</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 p-4 bg-white rounded-lg border border-slate-200 shadow-sm">
+                <i class="fa-solid fa-location-dot text-lg text-financo-blue"></i>
+                <div>
+                  <span class="text-slate-400 block font-semibold uppercase">Headquarters</span>
+                  <span class="font-bold text-financo-heading">Marina Bay Financial Centre, Singapore</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-3">
+            <form id="contact-form" class="p-8 bg-white border border-slate-200 rounded-xl space-y-4 shadow-sm">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs font-bold text-financo-heading uppercase block mb-1">First Name</label>
+                  <input type="text" required class="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-xs focus:border-financo-blue outline-none" placeholder="John" />
+                </div>
+                <div>
+                  <label class="text-xs font-bold text-financo-heading uppercase block mb-1">Email</label>
+                  <input type="email" required class="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-xs focus:border-financo-blue outline-none" placeholder="john@example.com" />
+                </div>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-financo-heading uppercase block mb-1">Subject</label>
+                <select class="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-xs focus:border-financo-blue outline-none">
+                  <option>Account Onboarding</option>
+                  <option>Institutional Desk</option>
+                  <option>API & Execution</option>
+                  <option>General Enquiry</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-financo-heading uppercase block mb-1">Message</label>
+                <textarea rows="4" required class="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-xs focus:border-financo-blue outline-none resize-none" placeholder="How can we assist you?"></textarea>
+              </div>
+              <button type="submit" class="w-full bg-financo-blue hover:bg-financo-hover text-white font-bold text-xs uppercase py-4 rounded transition shadow">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER (Clean Corporate Navy Footer) ===== -->
+  <footer class="bg-financo-blue text-white pt-16 pb-8 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <!-- Col 1 -->
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <img src="{{ asset('home-assets/assets/img/forex-logo.png') }}" alt="{{ env('APP_NAME') }}" class="w-7 h-7 object-contain" />
+            <span class="text-lg font-black tracking-tight text-white uppercase">{{ env('APP_NAME') }}</span>
+          </div>
+          <p class="text-slate-300 leading-relaxed mb-4">
+            Institutional quality execution, modern portfolio tools, and dedicated advisory services.
+          </p>
+          <div class="flex items-center gap-3">
+            <a href="#" class="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-financo-gold hover:text-financo-blue transition"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-financo-gold hover:text-financo-blue transition"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-financo-gold hover:text-financo-blue transition"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2 -->
+        <div>
+          <h4 class="text-sm font-bold text-financo-gold uppercase mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-slate-300">
+            <li><a href="#about" class="hover:text-financo-gold transition">About Firm</a></li>
+            <li><a href="#services" class="hover:text-financo-gold transition">Our Services</a></li>
+            <li><a href="#market" class="hover:text-financo-gold transition">Live Terminal</a></li>
+            <li><a href="/login" class="hover:text-financo-gold transition">Client Portal</a></li>
+            <li><a href="/register" class="hover:text-financo-gold transition">Create Account</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3 -->
+        <div>
+          <h4 class="text-sm font-bold text-financo-gold uppercase mb-4">Services</h4>
+          <ul class="space-y-2 text-slate-300">
+            <li><a href="#" class="hover:text-financo-gold transition">Wealth Management</a></li>
+            <li><a href="#" class="hover:text-financo-gold transition">Zero-Commission Brokerage</a></li>
+            <li><a href="#" class="hover:text-financo-gold transition">Corporate Consulting</a></li>
+            <li><a href="#" class="hover:text-financo-gold transition">Multi-Asset Custody</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4 -->
+        <div>
+          <h4 class="text-sm font-bold text-financo-gold uppercase mb-4">Newsletter</h4>
+          <p class="text-slate-300 mb-4">Subscribe for market intelligence updates.</p>
+          <form class="flex flex-col gap-2" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+            <input type="email" required placeholder="Enter your email" class="bg-white/10 border border-white/20 text-white rounded px-3 py-2 outline-none text-xs focus:border-financo-gold" />
+            <button type="submit" class="bg-financo-gold text-financo-blue font-bold uppercase py-2.5 rounded hover:bg-yellow-500 transition">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-400 text-xs">
+        <p>&copy; 2026 {{ env('APP_NAME') }}. All rights reserved.</p>
+        <p class="max-w-md text-center sm:text-right">Trading involves financial risk. Please consult disclosures prior to investing.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SUCCESS MODAL -->
+  <div id="success-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-sm w-full p-6 text-center shadow-2xl border border-slate-200">
+      <div class="w-12 h-12 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
+        <i class="fa-solid fa-check text-xl"></i>
+      </div>
+      <h3 class="text-lg font-bold text-financo-heading uppercase">Message Sent</h3>
+      <p class="text-xs text-slate-500 mt-2">Our team will reach out to you within 24 hours.</p>
+      <button id="close-modal" class="mt-6 w-full bg-financo-blue hover:bg-financo-hover text-white font-bold text-xs uppercase py-3 rounded transition">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Preloader Handler
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        setTimeout(() => { 
+          preloader.style.opacity = '0'; 
+          setTimeout(() => preloader.style.display = 'none', 300); 
+        }, 200);
+      }
+
+      // Mobile Menu Toggle
+      const toggle = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+          link.addEventListener('click', () => menu.classList.add('hidden'));
         });
-    </script>
+      }
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const contactForm = document.getElementById('apex-contact-form');
-            const successModal = document.getElementById('contact-success-modal');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-
-            if (contactForm && successModal && closeModalBtn) {
-                // Handle Form Submission Interception
-                contactForm.addEventListener('submit', (event) => {
-                    event.preventDefault(); // Stop page from refreshing natively
-
-                    // Reveal popup modal layer smoothly
-                    successModal.classList.remove('hidden');
-
-                    // Clear out text boxes upon transmission completion
-                    contactForm.reset();
-                });
-
-                // Handle Closing Event
-                closeModalBtn.addEventListener('click', () => {
-                    successModal.classList.add('hidden');
-                });
-
-                // Optional: Close modal if background context overlay wrapper is clicked
-                successModal.addEventListener('click', (e) => {
-                    if (e.target === successModal) {
-                        successModal.classList.add('hidden');
-                    }
-                });
-            }
+      // Contact Form Modal
+      const form = document.getElementById('contact-form');
+      const modal = document.getElementById('success-modal');
+      const close = document.getElementById('close-modal');
+      if (form && modal && close) {
+        form.addEventListener('submit', (e) => { 
+          e.preventDefault(); 
+          modal.classList.remove('hidden'); 
+          form.reset(); 
         });
-    </script>
-    {{-- jivo  --}}
-    <script src="//code.jivosite.com/widget/fyx5JwnpmJ" async></script>
+        close.addEventListener('click', () => modal.classList.add('hidden'));
+        modal.addEventListener('click', (e) => { 
+          if (e.target === modal) modal.classList.add('hidden'); 
+        });
+      }
+    });
+  </script>
 </body>
-
 </html>

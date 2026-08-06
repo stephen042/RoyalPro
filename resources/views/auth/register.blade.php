@@ -8,7 +8,7 @@
 </head>
 
 <body class="login-img"
-    style="background-image: url('https://images.unsplash.com/photo-1771029580794-255d3e82680e?q=80&w=1025&auto=format&fit=crop&'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1920&q=80](https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 
     <div
         style="min-height: 100vh; width: 100%; background: radial-gradient(circle at center, rgba(15, 15, 26, 0.40) 0%, rgba(10, 10, 15, 0.85) 100%); display: flex; flex-column; align-items: center; justify-content: center; padding: 20px 0;">
