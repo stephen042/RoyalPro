@@ -64,7 +64,7 @@
           <table width="100%" style="max-width: 620px; margin: 0 auto;" role="presentation">
             <tr>
               <td style="padding: 0;">
-                <img src="https://forexroyalspro.online/public/assets/images/emailbg.jpg" width="100%" style="max-width: 100%; height: auto; display: block;" alt="Email Header">
+                <img src="https://forex-royals181.online/public/assets/images/emailbg.jpg" width="100%" style="max-width: 100%; height: auto; display: block;" alt="Email Header">
               </td>
             </tr>
 
