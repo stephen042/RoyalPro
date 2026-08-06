@@ -6,15 +6,14 @@
       content="{{ config('app.name') }} – crypto, We are the most outstanding digital assets trading broker.">
   <meta name="author" content="Spruko Technologies Private Limited">
   <meta http-equiv="refresh" content="{{ config('session.lifetime') * 60 }}">
-  <meta name="keywords"
-      content="crypto, We are the most outstanding digital assets trading broker.">
+  <meta name="keywords" content="crypto, We are the most outstanding digital assets trading broker.">
 
   <!-- FAVICON -->
   <link rel="shortcut
       icon" type="image/x-icon" href="{{ asset('home-assets/assets/img/forex-logo.png') }}">
 
   <!-- TITLE -->
-  <title>{{ config('app.name') }}  {{ $title ?? '' }}</title>
+  <title>{{ config('app.name') }} {{ $title ?? '' }}</title>
   <title></title>
 
   <!-- BOOTSTRAP CSS -->
@@ -98,3 +97,6 @@
           }
       }
   </style>
+
+  {{-- chatway live chat --}}
+  <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=h1n7iwh6CHME"></script>

@@ -73,6 +73,8 @@
       transition: opacity 0.4s ease;
     }
   </style>
+
+  <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=h1n7iwh6CHME"></script>
 </head>
 <body class="overflow-x-hidden">
 
@@ -96,7 +98,7 @@
           </div>
           <div class="flex items-center gap-2">
             <i class="fa-solid fa-location-dot text-financo-blue"></i>
-            <span>Marina Bay, Singapore</span>
+            <span>City/Province: Pretoria, Gauteng</span>
           </div>
         </div>
         <div class="flex items-center gap-4">

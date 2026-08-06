@@ -85,6 +85,5 @@
         }
     })();
 </script>
-{{-- jivo  --}}
-<script src="//code.jivosite.com/widget/fyx5JwnpmJ" async></script>
+
 

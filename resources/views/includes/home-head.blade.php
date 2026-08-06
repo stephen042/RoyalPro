@@ -306,4 +306,6 @@
             }
         }
     </style>
+    {{-- chatway live chat --}}
+    <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=h1n7iwh6CHME"></script>
 </head>
