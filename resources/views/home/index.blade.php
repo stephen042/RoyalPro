@@ -116,7 +116,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <!-- Brand Logo -->
         <a href="#" class="flex items-center gap-3">
-          <img src="{{ asset('home-assets/assets/img/forex-logo.png') }}" alt="{{ env('APP_NAME') }}" class="w-9 h-9 object-contain" />
+          {{-- <img src="{{ asset('home-assets/assets/img/forex-logo.png') }}" alt="{{ env('APP_NAME') }}" class="w-9 h-9 object-contain" /> --}}
           <span class="text-2xl font-black text-financo-blue tracking-tight uppercase">{{ env('APP_NAME') }}</span>
         </a>
 
