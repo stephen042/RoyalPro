@@ -14,7 +14,11 @@
 
     <!-- TITLE -->
     <title>{{ config('app.name') }} - {{ $title ?? '' }}</title>
-    <title></title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="{{ URL('assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -34,9 +38,5 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
-    <style>
-        option {
-            color: rgb(48, 46, 46);
-        }
-    </style>
+    <!-- PRODUCT UI -->
+    <link href="{{ URL('assets/css/revamp.css') }}?v=2" rel="stylesheet">

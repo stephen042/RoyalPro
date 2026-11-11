@@ -37,25 +37,30 @@ $(function () {
 
 function localStorageBackup() {
     'use strict'
-    
-    // Force set Dark Mode states globally into local storage
-    localStorage.setItem("zanexdarkMode", true);
-    localStorage.removeItem("zanexlightMode");
 
-    // Force add core Dark Mode template classes directly to layout components
     const bodyEl = document.querySelector('body');
-    if (bodyEl) {
+    if (!bodyEl) return;
+
+    const prefersDark = Boolean(localStorage.getItem('zanexdarkMode')) && !localStorage.getItem('zanexlightMode');
+    const prefersLight = Boolean(localStorage.getItem('zanexlightMode')) && !localStorage.getItem('zanexdarkMode');
+
+    if (prefersDark && !bodyEl.classList.contains('dark-mode')) {
         bodyEl.classList.remove('light-mode', 'light-menu', 'light-header', 'color-menu', 'color-header', 'gradient-menu', 'gradient-header');
         bodyEl.classList.add('dark-mode', 'dark-menu', 'dark-header');
     }
 
-    // Explicitly sync checkboxes to stay set on 'Dark' options
-    $('#myonoffswitch7').prop('checked', true);  // Dark Mode Layout Switch
-    $('#myonoffswitch10').prop('checked', true); // Dark Header Switch
-    $('#myonoffswitch14').prop('checked', true); // Dark Menu Switch
-    
-    // Turn off Light Mode toggle element visually if they exist in sidebar
-    $('#myonoffswitch6, #myonoffswitch8, #myonoffswitch12').prop('checked', false);
+    if (prefersLight && !bodyEl.classList.contains('light-mode')) {
+        bodyEl.classList.remove('dark-mode', 'dark-menu', 'dark-header', 'color-menu', 'color-header', 'gradient-menu', 'gradient-header');
+        bodyEl.classList.add('light-mode', 'light-menu', 'light-header');
+    }
+
+    const isDark = bodyEl.classList.contains('dark-mode');
+    $('#myonoffswitch7').prop('checked', isDark);
+    $('#myonoffswitch10').prop('checked', isDark);
+    $('#myonoffswitch14').prop('checked', isDark);
+    $('#myonoffswitch6').prop('checked', !isDark);
+    $('#myonoffswitch8').prop('checked', !isDark);
+    $('#myonoffswitch12').prop('checked', !isDark);
 
     // Apply custom branding accent primary color if available
     if (localStorage.zanexprimaryColor) {

@@ -8,15 +8,6 @@
 <script src="{{ URL('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
 <script src="{{ URL('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
-<!-- SIDE-MENU JS -->
-<script src="{{ URL('assets/plugins/sidemenu/sidemenu.js') }}"></script>
-
-<!-- STICKY JS -->
-<script src="{{ URL('assets/js/sticky.js') }}"></script>
-
-<!-- SIDEBAR JS -->
-<script src="{{ URL('assets/plugins/sidebar/sidebar.js') }}"></script>
-
 <!-- PERFECT SCROLLBAR JS-->
 <script src="{{ URL('assets/plugins/p-scroll/perfect-scrollbar.js') }}"></script>
 <script src="{{ URL('assets/plugins/p-scroll/pscroll.js') }}"></script>
@@ -39,9 +30,6 @@
 <script src="{{ URL('assets/plugins/peitychart/jquery.peity.min.js') }}"></script>
 <script src="{{ URL('assets/plugins/peitychart/peitychart.init.js') }}"></script>
 
-<!-- INTERNAL SELECT2 JS -->
-<script src="{{ URL('assets/plugins/select2/select2.full.min.js') }}"></script>
-
 <!-- DATA TABLE JS-->
 <script src="{{ URL('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ URL('assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
@@ -57,11 +45,6 @@
 <script src="{{ URL('assets/plugins/datatable/responsive.bootstrap5.min.js') }}"></script>
 <script src="{{ URL('assets/js/table-data.js') }}"></script>
 
-<!-- INTERNAL DATA TABLES JS -->
-<script src="{{ URL('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL('assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
-<script src="{{ URL('assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
-
 <!-- ECHART JS-->
 <script src="{{ URL('assets/plugins/echarts/echarts.js') }}"></script>
 
@@ -70,7 +53,6 @@
 
 <!-- INDEX JS -->
 <script src="{{ URL('assets/js/index1.js') }}"></script>
-
 
 <!-- COLOR THEME JS -->
 <script src="{{ URL('assets/js/themeColors.js') }}"></script>
@@ -84,16 +66,15 @@
 <!-- SWITCHER JS -->
 <script src="{{ URL('assets/switcher/js/switcher.js') }}"></script>
 
-<!-- Developer Custom JS(JQUERY) -->
-<script src="{{ URL('assets/app_js/user.js') }}"></script>
+<!-- DASHBOARD UI JS -->
+<script src="{{ URL('assets/app_js/royal.js') }}?v=2"></script>
 
 <script>
-    $(document).ready(function(){
-            $('.please-wait-btn').click(function(){
-                // Change text to "Please Wait" when clicked
-                $(this).text('Please Wait...');
-            });
+    $(document).ready(function () {
+        $('.please-wait-btn').click(function () {
+            $(this).text('Please Wait...');
         });
+    });
 </script>
 
 @stack('scripts')

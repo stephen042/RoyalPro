@@ -1,469 +1,218 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<x-user.layout title="Real Estate">
 
-<head>
+    @php
+        $properties = [
+            [
+                'title' => 'Bridge Labs at Pegasus Park',
+                'image' => 'first-img.png',
+                'description' => 'Life science redevelopment within a thriving new biotech-focused campus in Dallas, recognized as one of the top emerging life science markets.',
+                'minimum' => '$12K',
+                'roi' => '85%',
+                'strategy' => 'Fixed income',
+                'modal' => 'bridge',
+                'documents' => [
+                    'Site Plan' => 'assets/pdf/bridge/site-plans.pdf',
+                    'Organizational Chart' => 'assets/pdf/bridge/organizational-chart.pdf',
+                    'Sponsor Track Record' => 'assets/pdf/bridge/sponsor-track-record.pdf',
+                ],
+            ],
+            [
+                'title' => 'Go Store It Nashville',
+                'image' => 'second-img.png',
+                'description' => "Class A self-storage development in one of Nashville's fastest growing suburbs with constrained supply and a high barrier to entry.",
+                'minimum' => '$15K',
+                'roi' => '85%',
+                'strategy' => 'Fixed income',
+                'modal' => 'nashville',
+                'documents' => [
+                    'Investment Deck' => 'assets/pdf/class/floor-plans.pdf',
+                    'Floor Plan' => 'assets/pdf/class/investment-deck.pdf',
+                    'Organizational Chart' => 'assets/pdf/class/organizational-chart.pdf',
+                    'Sponsor Track Record' => 'assets/pdf/class/sponsor-track-record.pdf',
+                ],
+            ],
+            [
+                'title' => 'Palmetto Industrial Park',
+                'image' => 'third-img.png',
+                'description' => 'Acquisition of a newly constructed three-building industrial property, already garnering interest from prospective tenants.',
+                'minimum' => '$25K',
+                'roi' => '78%',
+                'strategy' => 'Fixed income',
+                'modal' => 'palmetto',
+                'documents' => [
+                    'Webinar Deck' => 'assets/pdf/Palmetto/investment-deck.pdf',
+                    'Demographics' => 'assets/pdf/Palmetto/demographics.pdf',
+                    'Organizational Chart' => 'assets/pdf/Palmetto/organizational-chart.pdf',
+                    'Sponsor Track Record' => 'assets/pdf/Palmetto/sponsor-track-record.pdf',
+                ],
+            ],
+            [
+                'title' => 'Hilton Philadelphia City Avenue',
+                'image' => 'fourth-img.png',
+                'description' => 'Discounted acquisition of a recently renovated hotel property in Philadelphia with below-market, assumable debt.',
+                'minimum' => '$33K',
+                'roi' => '68.7%',
+                'strategy' => 'Growth & income',
+                'modal' => 'hilton',
+                'documents' => [
+                    'Homewood Floor Plan' => 'assets/pdf/Hilton/hilton-floor-plans.pdf',
+                    'Hilton Floor Plans' => 'assets/pdf/Hilton/homewood-floor-plans.pdf',
+                    'Organizational Chart' => 'assets/pdf/Hilton/organizational-chart.pdf',
+                ],
+            ],
+            [
+                'title' => 'Fabian Labs, Palo Alto',
+                'image' => 'fifth-img.png',
+                'description' => 'Two-building life science conversion in the heart of Silicon Valley and minutes from Stanford University, one of the top U.S. research institutions.',
+                'minimum' => '$24K',
+                'roi' => '57%',
+                'strategy' => 'Growth & income',
+                'modal' => 'fabian',
+                'documents' => [
+                    'Investment Deck' => 'assets/pdf/Fabian/investment-deck.pdf',
+                    'Demographics' => 'assets/pdf/Fabian/demographic-deck.pdf',
+                    'Sponsor Track Record' => 'assets/pdf/Fabian/sponsor-track-record.pdf',
+                ],
+            ],
+            [
+                'title' => 'The Mirage - Texas State Student Housing',
+                'image' => 'sixth.png',
+                'description' => 'A Texas State University student housing acquisition assuming below-market fixed-rate debt, with a renovation and rebranding strategy to seek higher rents and NOI.',
+                'minimum' => '$32.5K',
+                'roi' => '84.35%',
+                'strategy' => 'Growth & income',
+                'modal' => 'mirage',
+                'documents' => [
+                    'Investment Deck' => 'assets/pdf/Mirage/investment-deck.pdf',
+                    'Demographics' => 'assets/pdf/Mirage/demographics.pdf',
+                    'Floor Plans' => 'assets/pdf/Mirage/floor-plans.pdf',
+                ],
+            ],
+        ];
+    @endphp
 
-    @include('includes.user-head')
+    <x-user.page-head
+        eyebrow="<i class='fe fe-home'></i> Investments"
+        title="Real estate"
+        subtitle="Explore selected property opportunities and review the supporting documents.">
+        <x-slot:actions>
+            <a href="{{ route('user_deposit') }}" class="btn btn-primary">
+                <i class="fe fe-plus"></i> Add funds
+            </a>
+        </x-slot:actions>
+    </x-user.page-head>
 
-</head>
-
-<body class="app sidebar-mini ltr light-mode">
-
-    <!-- GLOBAL-LOADER -->
-    @include('includes.loader')
-    <!-- /GLOBAL-LOADER -->
-
-    <!-- PAGE -->
-    <div class="page">
-        <div class="page-main">
-
-            <!-- APP-NAv -->
-            @include('includes.user-nav')
-            <!-- /APP-NAv -->
-
-            <!--APP-SIDEBAR-->
-            @include('includes.user-sidebar')
-            <!--/APP-SIDEBAR-->
-
-            <!-- APP-CONTENT OPEN -->
-            <div class="main-content app-content mt-0">
-                <div class="side-app">
-
-                    <!-- CONTAINER -->
-                    <div class="main-container container-fluid">
-
-                        <!-- PAGE-HEADER -->
-                        <div class="page-header">
-                            <div>
-                                <h1 class="page-title">RealEstate | Invest & Purchase Property</h1>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">RealEstate</li>
-                                </ol>
+    <div class="row g-4">
+        @foreach ($properties as $property)
+            <div class="col-xl-6">
+                <div class="rx-property">
+                    <div class="rx-property__media">
+                        <img src="{{ URL('assets/images/realEstate/' . $property['image']) }}"
+                            alt="{{ $property['title'] }}">
+                        <span class="rx-badge rx-badge--success rx-property__badge">Open</span>
+                    </div>
+                    <div class="rx-property__body">
+                        <h2 class="rx-property__title">{{ $property['title'] }}</h2>
+                        <p class="rx-property__text">{{ $property['description'] }}</p>
+                        <div class="rx-property__stats">
+                            <div class="rx-property__stat">
+                                <small>Minimum</small>
+                                <strong>{{ $property['minimum'] }}</strong>
                             </div>
-                            <div class="ms-auto pageheader-btn">
-                                <a href="deposit" class="btn btn-primary btn-icon text-white me-2">
-                                    <span>
-                                        <i class="fe fe-plus"></i>
-                                    </span> Add Fund
-                                </a>
+                            <div class="rx-property__stat">
+                                <small>ROI</small>
+                                <strong>{{ $property['roi'] }}</strong>
+                            </div>
+                            <div class="rx-property__stat">
+                                <small>Strategy</small>
+                                <strong>{{ $property['strategy'] }}</strong>
                             </div>
                         </div>
-                        <!-- PAGE-HEADER END -->
-                        <div class="row row-cards">
-                            <div class="card col-xl-12 col-lg-12 col-sm-12">
-                                <div class="card-body p-1">
-                                    <div class="panel panel-primary">
-                                        <div class=" tab-menu-heading ">
-                                            <div class="">
-                                                <!-- Tabs -->
-                                                <ul class="nav panel-tabs ps-2 pe-2 flex justify-content-around" style="background-color: #161616;border-radius: 10px">
-                                                    <li>
-                                                        <a style="color: #ADADAD;font-weight: bold;font-family:'Roboto', sans-serif;" href="#tab5" class="active btn m-1 p-2 px-5" id="tab-5" data-bs-toggle="tab">Open
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a style="color: #ADADAD;font-weight: bold;font-family:'Roboto', sans-serif;" href="#tab6" class="btn m-1 p-2 px-5" data-bs-toggle="tab">Closed
-
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a style="color: #ADADAD;font-weight: bold;font-family:'Roboto', sans-serif;" href="#tab7" class="btn m-1 p-2 px-2" data-bs-toggle="tab">Running
-                                                        </a>
-                                                    </li>
-                                                    <!-- <li><a href="#tab8" data-bs-toggle="tab">Tab 4</a></li> -->
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="panel-body tabs-menu-body">
-                                            <div class="tab-content">
-                                                <div class="tab-pane active " id="tab5">
-                                                    <div class="row">
-
-                                                        <div class="col-md-12  col-xl-6">
-                                                            <div class="card">
-                                                                <div class="card-status bg-blue br-tr-7 br-tl-7"></div>
-                                                                <div class="card-header">
-                                                                    <h3 class="card-title">Bridge Labs at Pegasus Park</h3>
-                                                                    <div class="card-options">
-                                                                        <a href="javascript:void(0);" class="card-options-collapse" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <img class="img-fluid" src="{{URL('assets/images/realEstate/first-img.png')}}" width="100%" height="100%" style="border-radius: 10px;">
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    Life science redevelopment within a thriving new biotech-focused campus in Dallas, recognized as one of the top emerging life science markets.
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <h4>$12K <span class="d-block fs-6">Minimum</span></h4>
-                                                                    <h4>85% <span class="d-block fs-6">ROI</span></h4>
-                                                                    <h4>Fixed income <span class="d-block fs-6">STRATEGY</span></h4>
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-info" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modalBridge">
-                                                                            View Documents
-                                                                        </a>
-                                                                    </button>
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-primary" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modaldemoRealEstate"> Invest now </a>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            <!-- modal -->
-                                                            <div class="modal fade" id="modalBridge">
-                                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                                                                    <div class="modal-content modal-content-demo">
-                                                                        <div class="modal-header">
-                                                                            <h3 class="modal-title">Asset Details</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/bridge/site-plans.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Site Plan</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/bridge/organizational-chart.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Organizational Chart</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/bridge/sponsor-track-record.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Sponsor Track Record</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- modal end -->
-
-                                                        </div>
-
-                                                        <div class="col-md-12  col-xl-6">
-                                                            <div class="card">
-                                                                <div class="card-status bg-blue br-tr-7 br-tl-7"></div>
-                                                                <div class="card-header">
-                                                                    <h3 class="card-title">Go Store It Nashville</h3>
-                                                                    <div class="card-options">
-                                                                        <a href="javascript:void(0);" class="card-options-collapse" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <img class="img-fluid" src="{{URL('assets/images/realEstate/second-img.png')}}" width="100%" height="100%" style="border-radius: 10px;">
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    Class A self-storage development in one of Nashville's fastest growing suburbs with constrained supply and a high barrier to entry.
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <h4>$15K <span class="d-block fs-6">Minimum</span></h4>
-                                                                    <h4>85% <span class="d-block fs-6">ROI</span></h4>
-                                                                    <h4>Fixed income <span class="d-block fs-6">STRATEGY</span></h4>
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-info" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modalClass">
-                                                                            View Documents
-                                                                        </a>
-                                                                    </button>
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-primary" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modaldemoRealEstate"> Invest now </a>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- modal -->
-                                                            <div class="modal fade" id="modalClass">
-                                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                                                                    <div class="modal-content modal-content-demo">
-                                                                        <div class="modal-header">
-                                                                            <h3 class="modal-title">Asset Details</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/class/floor-plans.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Investment Deck</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/class/investment-deck.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Floor Plan</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/class/organizational-chart.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Organizational Chart</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/class/sponsor-track-record.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Sponsor Track Record</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- modal end -->
-                                                        </div>
-
-                                                        <div class="col-md-12  col-xl-6">
-                                                            <div class="card">
-                                                                <div class="card-status bg-blue br-tr-7 br-tl-7"></div>
-                                                                <div class="card-header">
-                                                                    <h3 class="card-title">Palmetto Industrial Park</h3>
-                                                                    <div class="card-options">
-                                                                        <a href="javascript:void(0);" class="card-options-collapse" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <img class="img-fluid" src="{{URL('assets/images/realEstate/third-img.png')}}" width="100%" height="100%" style="border-radius: 10px;">
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    Acquisition of a newly constructed three-building industrial property, already garnering interest from prospective tenants.
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <h4>$25K <span class="d-block fs-6">Minimum</span></h4>
-                                                                    <h4>78% <span class="d-block fs-6">ROI</span></h4>
-                                                                    <h4>Fixed income <span class="d-block fs-6">STRATEGY</span></h4>
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-info" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modalPalmetto">
-                                                                            View Documents
-                                                                        </a>
-                                                                    </button>
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-primary" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modaldemoRealEstate"> Invest now </a>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- modal -->
-                                                            <div class="modal fade" id="modalPalmetto">
-                                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                                                                    <div class="modal-content modal-content-demo">
-                                                                        <div class="modal-header">
-                                                                            <h3 class="modal-title">Asset Details</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Palmetto/investment-deck.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Webinar Deck</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Palmetto/demographics.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Demographics</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Palmetto/organizational-chart.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Organizational Chart</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Palmetto/sponsor-track-record.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Sponsor Track Record</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- modal end -->
-                                                        </div>
-
-                                                        <div class="col-md-12  col-xl-6">
-                                                            <div class="card">
-                                                                <div class="card-status bg-blue br-tr-7 br-tl-7"></div>
-                                                                <div class="card-header">
-                                                                    <h3 class="card-title">Hilton Philadelphia City Avenue</h3>
-                                                                    <div class="card-options">
-                                                                        <a href="javascript:void(0);" class="card-options-collapse" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <img class="img-fluid" src="{{URL('assets/images/realEstate/fourth-img.png')}}" width="100%" height="100%" style="border-radius: 10px;">
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    Discounted acquisition of a recently renovated hotel property in Philadelphia with below-market, assumable debt.
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <h4>$33K <span class="d-block fs-6">Minimum</span></h4>
-                                                                    <h4>68.7%<span class="d-block fs-6">ROI</span></h4>
-                                                                    <h4>Growth & Income <span class="d-block fs-6">STRATEGY</span></h4>
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-info" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modalHilton">
-                                                                            View Documents
-                                                                        </a>
-                                                                    </button>
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-primary" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modaldemoRealEstate"> Invest now </a>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <!-- modal -->
-                                                            <div class="modal fade" id="modalHilton">
-                                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                                                                    <div class="modal-content modal-content-demo">
-                                                                        <div class="modal-header">
-                                                                            <h3 class="modal-title">Asset Details</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Hilton/hilton-floor-plans.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Homewood - floor Plan</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Hilton/homewood-floor-plans.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Hilton - Floor Plans</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Hilton/organizational-chart.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Organizational Chart</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- modal end -->
-
-                                                        </div>
-
-                                                        <div class="col-md-12  col-xl-6">
-                                                            <div class="card">
-                                                                <div class="card-status bg-blue br-tr-7 br-tl-7"></div>
-                                                                <div class="card-header">
-                                                                    <h3 class="card-title">Fabian Labs, Palo Alto</h3>
-                                                                    <div class="card-options">
-                                                                        <a href="javascript:void(0);" class="card-options-collapse" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <img class="img-fluid" src="{{URL('assets/images/realEstate/fifth-img.png')}}" width="100%" height="100%" style="border-radius: 10px;">
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    Two-building life science conversion in the heart of Silicon Valley and minutes from Stanford University, one of the top U.S. research institutions.
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <h4>$24K <span class="d-block fs-6">Minimum</span></h4>
-                                                                    <h4>57%<span class="d-block fs-6">ROI</span></h4>
-                                                                    <h4>Growth & Income <span class="d-block fs-6">STRATEGY</span></h4>
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-info" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modalFabian">
-                                                                            View Documents
-                                                                        </a>
-                                                                    </button>
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-primary" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modaldemoRealEstate"> Invest now </a>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- modal -->
-                                                            <div class="modal fade" id="modalFabian">
-                                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                                                                    <div class="modal-content modal-content-demo">
-                                                                        <div class="modal-header">
-                                                                            <h3 class="modal-title">Asset Details</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Fabian/investment-deck.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Investment Deck</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Fabian/demographic-deck.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Demographics</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Fabian/sponsor-track-record.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Sponsor Track Record</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- modal end -->
-                                                        </div>
-
-                                                        <div class="col-md-12  col-xl-6">
-                                                            <div class="card">
-                                                                <div class="card-status bg-blue br-tr-7 br-tl-7"></div>
-                                                                <div class="card-header">
-                                                                    <h3 class="card-title">The Mirage - Texas State Student Housing</h3>
-                                                                    <div class="card-options">
-                                                                        <a href="javascript:void(0);" class="card-options-collapse" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <img class="img-fluid" src="{{URL('assets/images/realEstate/sixth.png')}}" width="100%" height="100%" style="border-radius: 10px;">
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    A Texas State University student housing acquisition assuming below-market fixed-rate debt, with a renovation and rebranding strategy to seek higher rents and NOI.
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <h4>$32.5K <span class="d-block fs-6">Minimum</span></h4>
-                                                                    <h4>84.35%<span class="d-block fs-6">ROI</span></h4>
-                                                                    <h4>Growth & Income <span class="d-block fs-6">STRATEGY</span></h4>
-                                                                </div>
-                                                                <div class="card-body d-flex justify-content-around">
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-info" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modalMirage">
-                                                                            View Documents
-                                                                        </a>
-                                                                    </button>
-                                                                    <button class="">
-                                                                        <a class="modal-effect text-white btn px-4 py-2 m-1 btn-primary" data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal" href="#modaldemoRealEstate"> Invest now </a>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <!-- modal -->
-                                                            <div class="modal fade" id="modalMirage">
-                                                                <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                                                                    <div class="modal-content modal-content-demo">
-                                                                        <div class="modal-header">
-                                                                            <h3 class="modal-title">Asset Details</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Mirage/investment-deck.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Investment Deck</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Mirage/demographics.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Demographics</a></p>
-                                                                            <p class="fs-5"><a href="{{URL('assets/pdf/Mirage/floor-plans.pdf')}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Floor Plans - Mirage</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- modal end -->
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane " id="tab6">
-                                                    lorem close
-                                                </div>
-                                                <div class="tab-pane " id="tab7">
-                                                    lorem running
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="rx-property__actions">
+                            <a href="#modal{{ $property['modal'] }}"
+                                class="btn btn-light btn-sm" data-bs-toggle="modal">
+                                <i class="fe fe-file-text"></i> Documents
+                            </a>
+                            <a href="#modaldemoRealEstate"
+                                class="btn btn-primary btn-sm modal-effect"
+                                data-bs-effect="effect-flip-horizontal" data-bs-toggle="modal">
+                                <i class="fe fe-trending-up"></i> Invest now
+                            </a>
                         </div>
                     </div>
-                    <!-- CONTAINER END -->
                 </div>
             </div>
-            <!-- APP-CONTENT END -->
-        </div>
-
-        <!-- modal -->
-        <div class="modal fade" id="modaldemoRealEstate">
-            <div class="modal-dialog modal-dialog-centered text-center" role="document">
-                <div class="modal-content modal-content-demo">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Investment Details</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <form class="m-2" action="javascript:(void);">
-                        <div class="modal-body">
-
-                            <div class="form-group">
-                                <label>Amount: <i class="fa fa-question-circle" data-bs-placement="top" data-bs-toggle="tooltip" title="Investing amount in USD $"></i></label> <i class="fa fa-dollar">
-                                </i>
-                                <input type="number" class="form-control amount" value="" placeholder="min: 1000" required>
-                            </div>
-                            <div class="form-group col-12">
-                                <label class="form-label text-bold">Duration:
-                                    <i class="fa fa-question-circle" data-bs-placement="top" data-bs-toggle="tooltip" title="Your Trade will auto close at the chosen time"></i>
-                                </label>
-                                <select class="form-control form-select select2" style="width: 100%;" data-bs-placeholder="Select" required>
-                                    <option>select duration</option>
-                                    <option value="1 day">1 day</option>
-                                    <option value="2 days">2 days</option>
-                                    <option value="3 days">3 days</option>
-                                    <option value="4 days">4 days</option>
-                                    <option value="5 days">5 days</option>
-                                    <option value="6 days">6 days</option>
-                                </select>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label>Description <i class="fa fa-question-circle" data-bs-placement="top" data-bs-toggle="tooltip" title="Describe what you are investing on E.g Am investing on Hilton with $1000"></i></label> <i class="fa fa-dollar">
-                                </i>
-                                <textarea class="form-control mb-4" placeholder="Describe what you are investing on E.g Am investing on Hilton with $10,000" rows="3"></textarea>
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button href="" class="btn btn-primary col-12" name="invest">invest</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- modal end -->
-
-        <!-- FOOTER -->
-        @include('includes.user-footer')
-        <!-- FOOTER END -->
-
+        @endforeach
     </div>
-    <!-- CONTAINER END -->
 
-    @include('includes.user-scripts')
+    @foreach ($properties as $property)
+        <div class="modal fade" id="modal{{ $property['modal'] }}">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="rx-modal__title-block">
+                            <h3 class="modal-title">Asset documents</h3>
+                            <p>{{ $property['title'] }}</p>
+                        </div>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="rx-doc-list">
+                            @foreach ($property['documents'] as $label => $document)
+                                <a href="{{ URL($document) }}" target="_blank" rel="noopener" class="rx-doc-link">
+                                    <i class="fe fe-file-text"></i> {{ $label }}
+                                    <i class="fe fe-external-link"></i>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
-</body>
+    <div class="modal fade" id="modaldemoRealEstate">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="rx-modal__title-block">
+                        <h3 class="modal-title">Investment details</h3>
+                        <p>Tell us how you would like to invest.</p>
+                    </div>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form action="javascript:(void);">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control amount" placeholder="Minimum 1000" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Duration</label>
+                            <select class="form-control form-select select2" required>
+                                <option>Select duration</option>
+                                <option value="1 day">1 day</option>
+                                <option value="2 days">2 days</option>
+                                <option value="3 days">3 days</option>
+                                <option value="4 days">4 days</option>
+                                <option value="5 days">5 days</option>
+                                <option value="6 days">6 days</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label>Description</label>
+                            <textarea class="form-control" placeholder="Describe what you are investing in" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary w-100" name="invest">Invest</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-</html>
+</x-user.layout>

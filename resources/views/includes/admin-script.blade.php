@@ -96,6 +96,9 @@
    <!-- Developer Custom JS(JQUERY) -->
    <script src="{{ URL('assets/app_js/user.js') }}"></script>
 
+   <!-- PRODUCT UI JS -->
+   <script src="{{ URL('assets/app_js/revamp.js') }}?v=2"></script>
+
    <script>
        $(document).ready(function() {
            $(document).ready(function() {

@@ -1,32 +1,41 @@
 <div class="card-body">
-    <div class="row">
+    <div class="row g-3">
         @forelse ($ai_plans as $key => $data)
-            <div class="col-xl-4 col-lg-6 col-md-6 mb-3" wire:key="{{$key}}">
-                <div class="card">
-                    <form wire:submit.throttle.1000.prevent="ai_plans({{$data->id}})">
+            <div class="col-xl-4 col-lg-6 col-md-6" wire:key="{{ $key }}">
+                <div class="rx-plan">
+                    <form wire:submit.throttle.1000.prevent="ai_plans({{ $data->id }})">
                         @csrf
-                        <div class="card-header">
-                            <div class="card-title">{{ $data->name }}</div>
+                        <div class="rx-plan__head">
+                            <span class="rx-plan__eyebrow"><i class="fe fe-cpu"></i> AI strategy</span>
+                            <h3 class="rx-plan__name">{{ $data->name }}</h3>
                         </div>
-                        <div class="card-body">
-                            <h4>Amount : ${{ number_format($data->amount, 2) }}</h4>
-
-                            <h4>Duration : {{ $data->duration }}</h4>
-
-                            <h4>ROI : {{ $data->ROI }}%</h4>
-
-                            <button class="login100-form-btn please-wait-btn btn-primary col-10"
-                                type="submit"
-                            >
-                                Purchase
+                        <div class="rx-plan__body">
+                            <div class="rx-plan__price"><span>$</span>{{ number_format((float) $data->amount, 2) }}</div>
+                            <div class="rx-plan__rows">
+                                <div class="rx-plan__row">
+                                    <span>Duration</span>
+                                    <strong>{{ $data->duration }}</strong>
+                                </div>
+                                <div class="rx-plan__row">
+                                    <span>Expected ROI</span>
+                                    <strong>{{ $data->ROI }}%</strong>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100 please-wait-btn" type="submit">
+                                <i class="fe fe-shopping-bag"></i> Purchase plan
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
         @empty
-            <h2>No Plans Available</h2>
+            <div class="col-12">
+                <div class="rx-empty">
+                    <div class="rx-empty__icon"><i class="fe fe-cpu"></i></div>
+                    <h3 class="rx-empty__title">No AI plans available</h3>
+                    <p class="rx-empty__text">New automated strategies will appear here when they are published.</p>
+                </div>
+            </div>
         @endforelse
-
     </div>
 </div>

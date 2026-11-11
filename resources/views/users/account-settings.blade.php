@@ -1,136 +1,66 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<x-user.layout title="Account Settings">
 
-<head>
+    <x-user.page-head
+        eyebrow="<i class='fe fe-user'></i> Account"
+        title="Account settings"
+        subtitle="Manage your personal details, profile picture, and password.">
+        <x-slot:actions>
+            <span class="rx-chip rx-chip--success">
+                <i class="fe fe-shield"></i> Secure profile
+            </span>
+        </x-slot:actions>
+    </x-user.page-head>
 
-    @include('includes.user-head')
+    <div class="row g-4">
+        <livewire:user.account-settings />
 
-</head>
-
-<body class="app sidebar-mini ltr light-mode">
-
-    <!-- GLOBAL-LOADER -->
-    @include('includes.loader')
-    <!-- /GLOBAL-LOADER -->
-
-    <!-- PAGE -->
-    <div class="page">
-        <div class="page-main">
-
-            <!-- APP-NAv -->
-            @include('includes.user-nav')
-            <!-- /APP-NAv -->
-
-            <!--APP-SIDEBAR-->
-            @include('includes.user-sidebar')
-            <!--/APP-SIDEBAR-->
-
-            <!-- APP-CONTENT OPEN -->
-            <div class="main-content app-content mt-0">
-                <div class="side-app">
-
-                    <!-- CONTAINER -->
-                    <div class="main-container container-fluid">
-                        <center>
-                            @if (session()->has('error'))
-                                <div class="alert alert-danger alert-dismissible fade show w-80" role="alert">
-                                    <span class="alert-inner--icon"><i class="fe fe-slash"></i></span>
-                                    <span class="alert-inner--text"><strong>error!</strong>
-                                        {{ session('error') }}
-                                    </span>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                            @endif
-                            @if (session()->has('success'))
-                                <div class="alert alert-success alert-dismissible fade show w-80" role="alert">
-                                    <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
-                                    <span class="alert-inner--text"><strong>Success!</strong>
-                                        {{ session('success') }}
-                                    </span>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                            @endif
-                        </center>
-
-                        <!-- PAGE-HEADER -->
-                        <div class="page-header">
-                            <div>
-                                <h1 class="page-title">Welcome | {{auth()->user()->first_name }}</h1>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/users">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Account Settings</li>
-                                </ol>
-                            </div>
-                        </div>
-                        <!-- PAGE-HEADER END -->
-                        <div class="row">
-                            <livewire:user.account-settings />
-                            <div class="col-xl-8 col-md-12 col-sm-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Edit Profile</h3>
-                                    </div>
-                                    <form action="{{ route('account_settings_update')}}" method="POST" >
-                                        @csrf 
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputname">First Name</label>
-                                                        <input type="text" class="form-control" id="exampleInputname"
-                                                            required placeholder="First Name" name="first_name" value="{{$user_data->first_name}}">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputname1">Last Name</label>
-                                                        <input type="text" class="form-control" name="last_name"
-                                                            required placeholder="Enter Last Name" value="{{$user_data->last_name}}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control" name="email" required placeholder="email address" value="{{$user_data->email}}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputnumber">Conatct Number</label>
-                                                <input type="number" class="form-control" name="phone" required placeholder="phone number" value="{{$user_data->phone}}">
-                                            </div>
-                                        </div>
-                                        <div class="card-footer text-end">
-                                            <button class="btn btn-success" type="submit">
-                                                Save
-                                            </button>
-                                            <button type="reset" class="btn btn-danger">Undo</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ROW-1 CLOSED -->
+        <div class="col-xl-8 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Personal information</h2>
+                        <p class="card-subtitle">Keep your contact details up to date.</p>
                     </div>
-                    <!-- CONTAINER END -->
                 </div>
+                <form action="{{ route('account_settings_update') }}" method="POST">
+                    @csrf
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="first_name">First name</label>
+                                    <input type="text" class="form-control" id="first_name"
+                                        required placeholder="First name" name="first_name" value="{{ $user_data->first_name }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="last_name">Last name</label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name"
+                                        required placeholder="Last name" value="{{ $user_data->last_name }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" required
+                                placeholder="Email address" value="{{ $user_data->email }}">
+                        </div>
+                        <div class="form-group mb-0">
+                            <label for="phone">Contact number</label>
+                            <input type="number" class="form-control" id="phone" name="phone" required
+                                placeholder="Phone number" value="{{ $user_data->phone }}">
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-end gap-2">
+                        <button type="reset" class="btn btn-light">Undo</button>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fe fe-check"></i> Save changes
+                        </button>
+                    </div>
+                </form>
             </div>
-            <!-- APP-CONTENT END -->
         </div>
-
-        <!-- FOOTER -->
-        @include('includes.user-footer')
-        <!-- FOOTER END -->
-        <!-- APP-NAv -->
-        @include('includes.user-nav-down')
-        <!-- /APP-NAv -->
     </div>
-    <!-- CONTAINER END -->
 
-    @include('includes.user-scripts')
-
-</body>
-
-</html>
+</x-user.layout>

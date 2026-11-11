@@ -1,34 +1,29 @@
-<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-    {{-- Trading Progress Section --}}
-    <div class="card overflow-hidden">
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <p class="mb-2 number-font">Trading Progress {{ $user_data->progress_bar_status }}%</p>
-                    <div class="progress progress-md">
-                        <div
-                            class="progress-bar progress-bar-striped progress-bar-animated bg-info-1 w-{{ $user_data->progress_bar_status }}">
-                            {{ $user_data->progress_bar_status }}%
-                        </div>
-                    </div>
+<div class="row g-4">
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <div>
+                    <h2 class="card-title">Trading progress</h2>
+                    <p class="rg-panel__sub mb-0">Update the progress shown on the customer dashboard.</p>
                 </div>
+                <span class="rg-chip rg-chip--primary">{{ $user_data->progress_bar_status }}%</span>
             </div>
-
-            <div class="row mt-3">
+            <div class="card-body">
+                <div class="progress mb-4">
+                    <div class="progress-bar" role="progressbar" style="width: {{ $user_data->progress_bar_status }}%"
+                        aria-valuenow="{{ $user_data->progress_bar_status }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
                 <form wire:submit.prevent="trade">
-                    <div class="form-group col-10">
-                        <label class="form-label">Manage Trading Progress</label>
+                    <div class="form-group mb-0">
+                        <label class="form-label">Manage trading progress</label>
                         <div class="input-group">
-                            <input type="number" wire:model.defer="trade_progress" class="form-control form-control-sm"
-                                placeholder="e.g 47">
-                            <span class="input-group-btn ms-0">
-                                <button class="btn btn-sm btn-success fs-6" type="submit">
-                                    Submit
-                                </button>
-                            </span>
+                            <input type="number" wire:model.defer="trade_progress" class="form-control"
+                                placeholder="e.g. 47">
+                            <span class="input-group-text">%</span>
+                            <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
                         @error('trade_progress')
-                        <em class="text-danger">{{ $message }}</em>
+                            <em class="text-danger">{{ $message }}</em>
                         @enderror
                     </div>
                 </form>
@@ -36,36 +31,31 @@
         </div>
     </div>
 
-    {{-- Signals Strength Section --}}
-    <div class="card overflow-hidden mt-4">
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <p class="mb-2 number-font">Signals Strength Progress {{ $user_data->signal_strength }}%</p>
-                    <div class="progress" style="height: 20px;">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                            style="width: {{ $user_data->signal_strength }}%;">
-                            {{ $user_data->signal_strength }}%
-                        </div>
-                    </div>
+    <div class="col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <div>
+                    <h2 class="card-title">Signal strength</h2>
+                    <p class="rg-panel__sub mb-0">Update the signal strength shown to the customer.</p>
                 </div>
+                <span class="rg-chip rg-chip--success">{{ $user_data->signal_strength }}%</span>
             </div>
-
-            <div class="row mt-3">
+            <div class="card-body">
+                <div class="progress mb-4">
+                    <div class="progress-bar" role="progressbar" style="width: {{ $user_data->signal_strength }}%"
+                        aria-valuenow="{{ $user_data->signal_strength }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
                 <form wire:submit.prevent="signal">
-                    <div class="form-group col-10">
-                        <label class="form-label">Manage Signals Strength Progress</label>
+                    <div class="form-group mb-0">
+                        <label class="form-label">Manage signal strength</label>
                         <div class="input-group">
-                            <input type="number" wire:model.defer="signal_progress" class="form-control form-control-sm"
-                                placeholder="e.g 47">
-                            <span class="input-group-btn ms-0">
-                                <button class="btn btn-sm btn-success fs-6" type="submit">
-                                    Submit
-                                </button>
-                            </span>
+                            <input type="number" wire:model.defer="signal_progress" class="form-control"
+                                placeholder="e.g. 47">
+                            <span class="input-group-text">%</span>
+                            <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
                         @error('signal_progress')
-                        <em class="text-danger">{{ $message }}</em>
+                            <em class="text-danger">{{ $message }}</em>
                         @enderror
                     </div>
                 </form>

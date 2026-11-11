@@ -1,30 +1,5 @@
-<div class="container-fluid px-2 px-sm-3 px-md-4 py-4 min-vh-50 d-flex align-items-center">
-    <div class="row d-flex justify-content-center align-items-center w-100 m-0 virtual-card-workspace">
-
-        <center class="w-100 mb-4">
-            @if (session()->has('error'))
-                <div class="alert alert-danger alert-dismissible fade show w-80" role="alert">
-                    <span class="alert-inner--icon"><i class="fe fe-slash"></i></span>
-                    <span class="alert-inner--text"><strong>error!</strong>
-                        {{ session('error') }}
-                    </span>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-            @endif
-            @if (session()->has('success'))
-                <div class="alert alert-success alert-dismissible fade show w-80" role="alert">
-                    <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
-                    <span class="alert-inner--text"><strong>Success!</strong>
-                        {{ session('success') }}
-                    </span>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-            @endif
-        </center>
+<div class="virtual-card-workspace py-2">
+    <div class="row g-4 justify-content-center align-items-stretch w-100 m-0">
 
         @if ($has_card)
             <div class="col-12 col-md-6 col-lg-4 mb-4 mb-md-0">
@@ -108,9 +83,9 @@
         @endif
 
         <div class="{{ $has_card ? 'col-12 col-md-6 col-lg-6' : 'col-12 col-md-8 col-lg-6' }}">
-            <div class="custom-tabs-container card bg-card text-body border-0 shadow-sm">
+            <div class="custom-tabs-container card h-100">
 
-                <div class="tabs-header-bar d-flex border-bottom border-light-subtle bg-body-tertiary">
+                <div class="tabs-header-bar rx-card-tabs d-flex">
                     @if ($has_card)
                         <button class="custom-tab-btn active" id="btnDetails" onclick="switchTab('details')">
                             <i class="fe fe-eye"></i> Card Details
@@ -177,7 +152,7 @@
 
                     @if (!$card_status)
                         <div class="tab-panel-view {{ !$has_card ? 'active' : '' }}" id="panelAcquire"
-                            wire:ignore.self style="color: white;">
+                            wire:ignore.self>
                             <h5 class="panel-main-title mb-1">Request Premium Virtual Card</h5>
                             <p class="panel-sub-title text-muted mb-3 small">Deploy instant secondary card tied straight
                                 into your trading parameter nodes.</p>
@@ -186,14 +161,14 @@
                                 <div class="d-flex gap-2 align-items-center">
                                     <i class="fe fe-info text-primary fs-5"></i>
                                     <div>
-                                        <span class="d-block fw-bold small text-primary">Fixed Generation Fee</span>
-                                        <span class="small text-body-secondary">Issuing transaction structure process
-                                            fee set explicitly at <strong>$250.00</strong>.</span>
+                                        <span class="d-block fw-bold small text-primary">Generation fee</span>
+                                        <span class="small text-body-secondary">The current issuance fee is
+                                            <strong>${{ number_format((float) Auth::user()->card_price, 2) }}</strong>.</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <form class="pure-form-layout d-flex flex-column gap-3" wire:submit.prevent="purchaseCard" style="color: white;">
+                            <form class="pure-form-layout d-flex flex-column gap-3" wire:submit.prevent="purchaseCard">
                                 <div class="row g-2">
                                     <div class="col-12 col-sm-6">
                                         <label class="form-label small  mb-1 fw-medium">Preferred

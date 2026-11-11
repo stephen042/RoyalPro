@@ -1,13 +1,15 @@
 $(document).ready(function () {
-    
-    // set loader time out
     setTimeout(() => {
-        $('#global-loader').hide();
-    }, 3000);
+        const loader = document.getElementById('global-loader');
+        if (!loader) return;
+        loader.classList.add('is-hidden');
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 320);
+    }, 450);
 
-    // active link on side-bar
     $('.slide').on('click', '.side-menu__item', function () {
-        $('.side-menu__item').removeClass("active");
-        $(this).addClass("active");
+        $('.side-menu__item').removeClass('active');
+        $(this).addClass('active');
     });
 });

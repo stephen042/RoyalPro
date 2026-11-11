@@ -1,126 +1,74 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<x-user.layout title="Withdrawal History">
 
-<head>
+    <x-user.page-head
+        eyebrow="<i class='fe fe-clock'></i> Activity"
+        title="Withdrawal history"
+        subtitle="Track every payout request and its current processing status.">
+        <x-slot:actions>
+            <a href="{{ route('user_withdraw') }}" class="btn btn-primary">
+                <i class="fe fe-arrow-up-circle"></i> Request withdrawal
+            </a>
+        </x-slot:actions>
+    </x-user.page-head>
 
-    @include('includes.user-head')
-
-</head>
-
-<body class="app sidebar-mini ltr light-mode">
-
-    <!-- GLOBAL-LOADER -->
-    @include('includes.loader')
-    <!-- /GLOBAL-LOADER -->
-
-    <!-- PAGE -->
-    <div class="page">
-        <div class="page-main">
-
-            <!-- APP-NAv -->
-            @include('includes.user-nav')
-            <!-- /APP-NAv -->
-
-            <!--APP-SIDEBAR-->
-            @include('includes.user-sidebar')
-            <!--/APP-SIDEBAR-->
-
-            <!-- APP-CONTENT OPEN -->
-            <div class="main-content app-content mt-0">
-                <div class="side-app">
-
-                    <!-- CONTAINER -->
-                    <div class="main-container container-fluid">
-
-                        <!-- PAGE-HEADER -->
-                        <div class="page-header">
-                            <div>
-                                <h1 class="page-title">Withdraw History</h1>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('user_dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Withdraw History</li>
-                                </ol>
-                            </div>
-                        </div>
-
-                        <!-- ROW -->
-                        <div class="row row-sm">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">ALL Withdraw History </h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered text-nowrap border-bottom w-100 "
-                                                id="responsive-datatable">
-                                                <thead>
-                                                    <tr>
-                                                        <td class="wd-15p border-bottom-0">#</td>
-                                                        <td class="wd-15p border-bottom-0">Date</td>
-                                                        <td class="wd-15p border-bottom-0">Amount</td>
-                                                        <td class="wd-15p border-bottom-0">Asset</td>
-                                                        <td class="wd-15p border-bottom-0">Wallet Address</td>
-                                                        <td class="wd-15p border-bottom-0">Status</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @forelse ($withdrawals as $count => $withdrawal)
-                                                        <tr>
-                                                            <td>{{ $count + 1 }}</td>
-                                                            <td>{{ date('Y/M/d h:i a', strtotime($withdrawal->created_at)) }}
-                                                            </td>
-                                                            <td>${{ number_format($withdrawal->transaction_amount, 2) }}
-                                                            </td>
-                                                            <td>{{ $withdrawal->transaction_asset }}</td>
-                                                            <td style="overflow-x: auto;max-width: 200px;">
-                                                                {{ $withdrawal->transaction_ewallet_address }}
-                                                            </td>
-                                                            @if ($withdrawal->transaction_status == 2)
-                                                                <td class="text-success fs-15 fw-semibold">
-                                                                    {{ config('app.transaction_status')[$withdrawal->transaction_status] }}
-                                                                </td>
-                                                            @elseif ($withdrawal->transaction_status == 3)
-                                                                <td class="text-danger fs-15 fw-semibold">
-                                                                    {{ config('app.transaction_status')[$withdrawal->transaction_status] }}
-                                                                </td>
-                                                            @else
-                                                                <td class="text-info fs-15 fw-semibold">
-                                                                    {{ config('app.transaction_status')[$withdrawal->transaction_status] }}
-                                                                </td>
-                                                            @endif
-                                                        </tr>
-                                                    @empty
-                                                        <tr></tr>
-                                                    @endforelse
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END ROW -->
-                    </div>
-                    <!-- CONTAINER END -->
-                </div>
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">All withdrawals</h2>
+                <p class="card-subtitle">Payout activity sent to your saved wallet addresses.</p>
             </div>
-            <!-- APP-CONTENT END -->
+            <span class="rx-chip rx-chip--neutral">{{ $withdrawals->count() }} records</span>
         </div>
-
-        <!-- FOOTER -->
-        @include('includes.user-footer')
-        <!-- FOOTER END -->
-        <!-- APP-NAv -->
-        @include('includes.user-nav-down')
-        <!-- /APP-NAv -->
-
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle w-100" id="responsive-datatable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Asset</th>
+                            <th>Wallet address</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($withdrawals as $count => $withdrawal)
+                            <tr>
+                                <td class="rx-muted">{{ $count + 1 }}</td>
+                                <td>{{ date('M d, Y · h:i A', strtotime($withdrawal->created_at)) }}</td>
+                                <td><span class="rx-table-amount">${{ number_format((float) $withdrawal->transaction_amount, 2) }}</span></td>
+                                <td><span class="rx-badge rx-badge--neutral">{{ $withdrawal->transaction_asset }}</span></td>
+                                <td>
+                                    <span class="rx-mono" style="display:inline-block;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle;" title="{{ $withdrawal->transaction_ewallet_address }}">
+                                        {{ $withdrawal->transaction_ewallet_address }}
+                                    </span>
+                                </td>
+                                <td>
+                                    @if ($withdrawal->transaction_status == 2)
+                                        <span class="rx-badge rx-badge--success">{{ config('app.transaction_status')[$withdrawal->transaction_status] }}</span>
+                                    @elseif ($withdrawal->transaction_status == 3)
+                                        <span class="rx-badge rx-badge--danger">{{ config('app.transaction_status')[$withdrawal->transaction_status] }}</span>
+                                    @else
+                                        <span class="rx-badge rx-badge--warning">{{ config('app.transaction_status')[$withdrawal->transaction_status] }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6">
+                                    <div class="rx-empty">
+                                        <div class="rx-empty__icon"><i class="fe fe-inbox"></i></div>
+                                        <h3 class="rx-empty__title">No withdrawals yet</h3>
+                                        <p class="rx-empty__text">Your payout requests and their status will appear here.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <!-- CONTAINER END -->
 
-    @include('includes.user-scripts')
-
-</body>
-
-</html>
+</x-user.layout>

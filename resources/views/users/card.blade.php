@@ -1,26 +1,18 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<x-user.layout title="Virtual Card">
 
-<head>
-
-    @include('includes.user-head')
-
-    <!-- NATIVE HARDENED INTERACTIVE STYLING SPECIFICATIONS -->
-    <style>
-        /* Compact structural overrides and 3D Card Engine */
+    @push('styles')
+        <style>
         .virtual-card-workspace * {
             box-sizing: border-box;
         }
 
         .v-card-flip {
             width: 100%;
-            /* Allow the grid to control responsiveness */
             max-width: 380px;
             height: 220px;
             cursor: pointer;
             perspective: 1000px;
             -webkit-perspective: 1000px;
-            /* Crucial for iOS Safari structural rendering */
         }
 
         .v-card-inner {
@@ -31,7 +23,6 @@
             transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             transform-style: preserve-3d;
             -webkit-transform-style: preserve-3d;
-            /* Forces 3D space hierarchy tracking on mobile */
         }
 
         .v-card-flip.flipped .v-card-inner {
@@ -47,7 +38,6 @@
             width: 100%;
             height: 100%;
             -webkit-backface-visibility: hidden !important;
-            /* Fixed: Added strong isolation for WebKit */
             backface-visibility: hidden !important;
             border-radius: 14px;
             overflow: hidden;
@@ -55,13 +45,11 @@
         }
 
         .v-card-front {
-            /* Stacks a dark 85% opacity overlay on top of your faint asset image */
             background: linear-gradient(135deg, rgba(22, 42, 69, 0.85) 0%, rgba(2, 12, 27, 0.9) 100%),
                 url("{{ asset('home-assets/assets/img/forex-logo.png') }}");
             background-size: contain;
             background-position: center;
             z-index: 2;
-            /* Forces proper stack layer when unrotated */
         }
 
         .v-card-back {
@@ -73,13 +61,11 @@
 
         .card-bg-pattern {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             opacity: 0.08;
             pointer-events: none;
-            background-image: radial-gradient(circle at 20% 30%, #ffffff 1px, transparent 1px), radial-gradient(circle at 75% 60%, #ffffff 1px, transparent 1px);
+            background-image: radial-gradient(circle at 20% 30%, #ffffff 1px, transparent 1px),
+                radial-gradient(circle at 75% 60%, #ffffff 1px, transparent 1px);
             background-size: 16px 16px;
         }
 
@@ -123,7 +109,6 @@
             border-radius: 4px;
             margin-bottom: 8px;
             box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
-            position: relative;
         }
 
         .v-card-number {
@@ -131,7 +116,7 @@
             font-size: 16px;
             font-weight: 600;
             letter-spacing: 1.5px;
-            font-family: 'Courier New', monospace;
+            font-family: var(--rg-mono, 'Courier New', monospace);
         }
 
         .meta-label {
@@ -172,7 +157,6 @@
             right: 12px;
         }
 
-        /* Card Backside Elements */
         .card-magnetic-strip {
             width: 100%;
             height: 34px;
@@ -206,11 +190,10 @@
         }
 
         .flip-hint-text {
-            color: #888888;
+            color: var(--rg-text-3);
             font-size: 11px;
         }
 
-        /* Tabs Configuration Engine */
         .custom-tab-btn {
             flex: 1;
             padding: 12px 16px;
@@ -219,7 +202,7 @@
             outline: none;
             font-size: 13px;
             font-weight: 600;
-            color: #6c757d;
+            color: var(--rg-text-3);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -229,14 +212,14 @@
         }
 
         .custom-tab-btn:hover {
-            color: var(--bs-heading-color, #000);
-            background-color: rgba(0, 0, 0, 0.02);
+            color: var(--rg-text);
+            background-color: var(--rg-surface-2);
         }
 
         .custom-tab-btn.active {
-            color: #3858f9;
+            color: var(--rg-primary);
             background: transparent;
-            border-bottom: 2px solid #3858f9;
+            border-bottom: 2px solid var(--rg-primary);
         }
 
         .tab-panel-view {
@@ -247,15 +230,14 @@
             display: block;
         }
 
-        /* View Table Details */
         .panel-main-title {
             font-size: 14px;
             font-weight: 600;
         }
 
         .custom-status-badge {
-            background-color: rgba(40, 167, 69, 0.08);
-            color: #28a745;
+            background-color: var(--rg-success-soft);
+            color: var(--rg-success);
             font-weight: 600;
             padding: 4px 10px;
             font-size: 11px;
@@ -267,14 +249,14 @@
         .status-dot {
             width: 6px;
             height: 6px;
-            background-color: #28a745;
+            background-color: var(--rg-success);
             border-radius: 50%;
             margin-right: 5px;
         }
 
         .pure-details-table td {
             font-size: 12.5px;
-            border-bottom-color: rgba(0, 0, 0, 0.04) !important;
+            border-bottom-color: var(--rg-border) !important;
         }
 
         .lbl-col {
@@ -282,22 +264,20 @@
         }
 
         .mono-text {
-            font-family: monospace;
+            font-family: var(--rg-mono, monospace);
             font-weight: 700;
         }
 
         .custom-info-alert {
-            background-color: rgba(56, 88, 249, 0.04);
+            background-color: var(--rg-primary-soft);
         }
 
         .style-line-height {
             line-height: 1.3;
         }
 
-        /* FIXED MEDIA BREAKPOINT ENHANCEMENTS */
         @media (max-width: 767.98px) {
             .v-card-flip {
-                /* Kept width: 100% stable; removed the max-width conflict inside the media block */
                 height: 200px;
             }
 
@@ -317,119 +297,76 @@
             }
         }
     </style>
-</head>
+    @endpush
 
-<body class="app sidebar-mini ltr light-mode">
+    <x-user.page-head
+        eyebrow="<i class='fe fe-credit-card'></i> Banking"
+        title="Virtual cards"
+        subtitle="Request and manage a virtual card linked to your account.">
+        <x-slot:actions>
+            <span class="rx-chip rx-chip--neutral"><i class="fe fe-lock"></i> Secured by {{ config('app.name') }}</span>
+        </x-slot:actions>
+    </x-user.page-head>
 
-    <!-- GLOBAL-LOADER -->
-    @include('includes.loader')
-    <!-- /GLOBAL-LOADER -->
+    <livewire:user.virtual-card-manager />
 
-    <!-- PAGE -->
-    <div class="page">
-        <div class="page-main">
+    @push('scripts')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const card = document.getElementById("virtualCard");
+                const revealCvvBtn = document.getElementById("revealCvvBtn");
+                const cardCvv = document.getElementById("cardCvv");
+                const cvvRaw = document.getElementById("cvvRaw");
 
-            <!-- APP-NAv -->
-            @include('includes.user-nav')
-            <!-- /APP-NAv -->
+                if (card) {
+                    card.addEventListener("click", function() {
+                        this.classList.toggle("flipped");
+                    });
+                }
 
-            <!--APP-SIDEBAR-->
-            @include('includes.user-sidebar')
-            <!--/APP-SIDEBAR-->
-            <!-- APP-CONTENT OPEN -->
-            <livewire:user.virtual-card-manager />
-            <!-- APP-CONTENT END -->
-        </div>
-
-
-        <!-- FOOTER -->
-        @include('includes.user-footer')
-        <!-- FOOTER END -->
-        <!-- APP-NAv -->
-        @include('includes.user-nav-down')
-        <!-- /APP-NAv -->
-
-    </div>
-
-    <!-- CODE CONTROLLER SCRIPT (Handles local actions safely) -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const card = document.getElementById("virtualCard");
-            const revealCvvBtn = document.getElementById("revealCvvBtn");
-            const cardCvv = document.getElementById("cardCvv");
-            const cvvRaw = document.getElementById("cvvRaw");
-
-            // Flip front/back triggers on card zone click
-            card.addEventListener("click", function() {
-                this.classList.toggle("flipped");
+                if (revealCvvBtn && cardCvv && cvvRaw) {
+                    revealCvvBtn.addEventListener("click", function(e) {
+                        e.stopPropagation();
+                        const icon = this.querySelector("i");
+                        if (cardCvv.innerText === "***") {
+                            cardCvv.innerText = cvvRaw.innerText;
+                            if (icon) icon.classList.replace("fe-eye", "fe-eye-off");
+                        } else {
+                            cardCvv.innerText = "***";
+                            if (icon) icon.classList.replace("fe-eye-off", "fe-eye");
+                        }
+                    });
+                }
             });
 
-            // Clear event tracking bubbling specifically for nested action buttons
-            if (revealCvvBtn) {
-                revealCvvBtn.addEventListener("click", function(e) {
-                    e.stopPropagation();
-                    const icon = this.querySelector("i");
-                    if (cardCvv.innerText === "***") {
-                        cardCvv.innerText = cvvRaw.innerText;
-                        icon.classList.replace("fe-eye", "fe-eye-off");
-                    } else {
-                        cardCvv.innerText = "***";
-                        icon.classList.replace("fe-eye-off", "fe-eye");
-                    }
+            function switchTab(target) {
+                const detailsPanel = document.getElementById('panelDetails');
+                const acquirePanel = document.getElementById('panelAcquire');
+                const detailsBtn = document.getElementById('btnDetails');
+                const acquireBtn = document.getElementById('btnAcquire');
+
+                if (target === 'details' && detailsPanel) {
+                    detailsPanel.classList.add('active');
+                    if (acquirePanel) acquirePanel.classList.remove('active');
+                    if (detailsBtn) detailsBtn.classList.add('active');
+                    if (acquireBtn) acquireBtn.classList.remove('active');
+                } else if (target === 'acquire' && acquirePanel) {
+                    acquirePanel.classList.add('active');
+                    if (detailsPanel) detailsPanel.classList.remove('active');
+                    if (acquireBtn) acquireBtn.classList.add('active');
+                    if (detailsBtn) detailsBtn.classList.remove('active');
+                }
+            }
+
+            function copyText(text, successMsg) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert(successMsg);
+                }).catch(err => {
+                    console.error('Failed to copy info: ', err);
                 });
             }
-        });
+        </script>
+    @endpush
 
-        // Native Interface Switcher Module
-        function switchTab(targetPanel) {
-            document.getElementById('btnDetails').classList.remove('active');
-            document.getElementById('btnAcquire').classList.remove('active');
-            document.getElementById('panelDetails').classList.remove('active');
-            document.getElementById('panelAcquire').classList.remove('active');
+</x-user.layout>
 
-            if (targetPanel === 'details') {
-                document.getElementById('btnDetails').classList.add('active');
-                document.getElementById('panelDetails').classList.add('active');
-            } else {
-                document.getElementById('btnAcquire').classList.add('active');
-                document.getElementById('panelAcquire').classList.add('active');
-            }
-        }
-
-        // Clipboard Copy Helper System
-        function copyText(text, successMsg) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert(successMsg);
-            }).catch(err => {
-                console.error('Failed to copy info: ', err);
-            });
-        }
-    </script>
-
-    <script>
-        function switchTab(target) {
-            const detailsPanel = document.getElementById('panelDetails');
-            const acquirePanel = document.getElementById('panelAcquire');
-            const detailsBtn = document.getElementById('btnDetails');
-            const acquireBtn = document.getElementById('btnAcquire');
-
-            if (target === 'details' && detailsPanel) {
-                detailsPanel.classList.add('active');
-                if (acquirePanel) acquirePanel.classList.remove('active');
-                if (detailsBtn) detailsBtn.classList.add('active');
-                if (acquireBtn) acquireBtn.classList.remove('active');
-            } else if (target === 'acquire' && acquirePanel) {
-                acquirePanel.classList.add('active');
-                if (detailsPanel) detailsPanel.classList.remove('active');
-                if (acquireBtn) acquireBtn.classList.add('active');
-                if (detailsBtn) detailsBtn.classList.remove('active');
-            }
-        }
-    </script>
-
-    <!-- CONTAINER END -->
-    @include('includes.user-scripts')>
-
-</body>
-
-</html>

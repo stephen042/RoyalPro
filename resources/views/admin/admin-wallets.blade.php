@@ -9,149 +9,102 @@
 
 <body class="app sidebar-mini ltr light-mode">
 
-    <!-- GLOBAL-LOADER -->
     @include('includes.loader')
-    <!-- /GLOBAL-LOADER -->
 
-    <!-- PAGE -->
     <div class="page">
         <div class="page-main">
 
-            <!-- APP-NAv -->
             @include('includes.admin-nav')
-            <!-- <div class="app-header header sticky"> -->
-            <!-- /APP-NAv -->
-
-            <!--APP-SIDEBAR-->
             @include('includes.admin-sidebar')
-            <!--/APP-SIDEBAR-->
 
-            <!-- APP-CONTENT OPEN -->
             <div class="main-content app-content mt-0">
                 <div class="side-app">
-
-                    <!-- CONTAINER -->
                     <div class="main-container container-fluid">
 
-                        <center class="mt-5">
-                            @if (session()->has('error'))
-                            <div class="alert alert-danger alert-dismissible fade show w-80" role="alert">
-                                <span class="alert-inner--icon"><i class="fe fe-slash"></i></span>
-                                <span class="alert-inner--text"><strong>error!</strong>
-                                    {{ session('error') }}
-                                </span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            @endif
-                            @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show w-80" role="alert">
-                                <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
-                                <span class="alert-inner--text"><strong>Success!</strong>
-                                    {{ session('success') }}
-                                </span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            @endif
-                        </center>
+                        @include('includes.flash-alerts')
 
-                        <!-- ROW -->
-                        <div class="row row-sm mt-5">
-                            <div class="col-lg-12">
+                        <div class="rg-page-head">
+                            <div>
+                                <span class="rg-eyebrow"><i class="fe fe-wallet"></i> Settings</span>
+                                <h1>Deposit wallets</h1>
+                                <p>Manage the wallet addresses shown to customers when they make a deposit.</p>
+                            </div>
+                            <div class="rg-page-actions">
+                                <span class="rg-chip rg-chip--neutral"><i class="fe fe-hash"></i> Wallet #{{ $admin_wallets->id }}</span>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-xl-4">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Deposit Wallets</h3>
+                                        <div>
+                                            <h2 class="card-title">Current addresses</h2>
+                                            <p class="rg-panel__sub mb-0">Review the active deposit destinations.</p>
+                                        </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered text-nowrap border-bottom w-100 "
-                                                id="responsive-datatable">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="wd-15p border-bottom-0">#</th>
-                                                        <th class="wd-15p border-bottom-0">Bitcoin BTC</th>
-                                                        <th class="wd-15p border-bottom-0">Ethereum Eth</th>
-                                                        <th class="wd-15p border-bottom-0">USDT Trc20</th>
-                                                        <th class="wd-15p border-bottom-0">Cash App</th>
-                                                        <th class="wd-15p border-bottom-0">PayPal</th>
-                                                        <th class="wd-15p border-bottom-0">Zelle</th>
-                                                        <th class="wd-15p border-bottom-0">BNB Smart Chain (BEP20)</th>
-                                                        <th class="wd-15p border-bottom-0">Bitcoin chash BCH</th>
-                                                        <th class="wd-15p border-bottom-0">Litecoin LTC</th>
-                                                        <th class="wd-15p border-bottom-0">Ripple XRP</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{{ $admin_wallets->id }}</td>
-                                                        <td>{{ $admin_wallets->btc }}</td>
-                                                        <td>{{ $admin_wallets->eth }}</td>
-                                                        <td>{{ $admin_wallets->usdt }}</td>
-                                                        <td>{{ $admin_wallets->cash_app }}</td>
-                                                        <td>{{ $admin_wallets->paypal }}</td>
-                                                        <td>{{ $admin_wallets->zelle }}</td>
-                                                        <td>{{ $admin_wallets->bnb }}</td>
-                                                        <td>{{ $admin_wallets->bch }}</td>
-                                                        <td>{{ $admin_wallets->ltc }}</td>
-                                                        <td>{{ $admin_wallets->xrp }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                        <div class="d-flex flex-column gap-2">
+                                            @foreach (['btc' => 'Bitcoin BTC', 'eth' => 'Ethereum', 'usdt' => 'USDT TRC20', 'cash_app' => 'Cash App', 'paypal' => 'PayPal', 'zelle' => 'Zelle', 'bnb' => 'BNB Smart Chain', 'bch' => 'Bitcoin Cash', 'ltc' => 'Litecoin', 'xrp' => 'Ripple'] as $field => $label)
+                                                <div class="rg-wallet">
+                                                    <div class="rg-wallet__meta">
+                                                        <strong>{{ $label }}</strong>
+                                                        <small class="text-break">{{ $admin_wallets->$field ?: 'Not configured' }}</small>
+                                                    </div>
+                                                    @if ($admin_wallets->$field)
+                                                        <span class="rg-chip rg-chip--success"><i class="fe fe-check"></i></span>
+                                                    @else
+                                                        <span class="rg-chip rg-chip--neutral"><i class="fe fe-minus"></i></span>
+                                                    @endif
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- END ROW -->
 
-                        <div class="col-xl-12 col-md-12 col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Manage Your Deposit Wallets</h3>
-                                </div>
-                                <form action="{{ route('admin_wallets_post') }}" method="POST">
-                                    @csrf
-                                    <div class="card-body">
-                                        @foreach(['btc' => 'Bitcoin BTC','eth' => 'Ethereum', 'usdt' => 'USDT Trc20', 'cash_app' => 'Cash
-                                        App', 'paypal' => 'PayPal', 'zelle' => 'Zelle', 'bnb' => 'BNB Smart Chain
-                                        (BEP20)', 'bch' => 'Bitcoin Cash BCH', 'ltc' => 'Litecoin LTC', 'xrp' => 'Ripple
-                                        XRP'] as $field => $label)
-                                        <div class="form-group">
-                                            <label for="{{ $field }}">{{ $label }}</label>
-                                            <input type="text" class="form-control" name="{{ $field }}"
-                                                value="{{ $admin_wallets->$field }}"
-                                                placeholder="put your new address or tag and press update wallets">
+                            <div class="col-xl-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div>
+                                            <h2 class="card-title">Update wallet addresses</h2>
+                                            <p class="rg-panel__sub mb-0">Paste the new address or payment tag for each method.</p>
                                         </div>
-                                        @endforeach
                                     </div>
-                                    <div class="card-footer text-end">
-                                        <button class="btn btn-success please-wait-btn" type="submit">
-                                            Update Wallets
-                                        </button>
-                                        <button type="reset" class="btn btn-danger">Undo</button>
-                                    </div>
-                                </form>
+                                    <form action="{{ route('admin_wallets_post') }}" method="POST">
+                                        @csrf
+                                        <div class="card-body">
+                                            <div class="row">
+                                                @foreach (['btc' => 'Bitcoin BTC', 'eth' => 'Ethereum', 'usdt' => 'USDT TRC20', 'cash_app' => 'Cash App', 'paypal' => 'PayPal', 'zelle' => 'Zelle', 'bnb' => 'BNB Smart Chain (BEP20)', 'bch' => 'Bitcoin Cash BCH', 'ltc' => 'Litecoin LTC', 'xrp' => 'Ripple XRP'] as $field => $label)
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label for="{{ $field }}">{{ $label }}</label>
+                                                            <input type="text" class="form-control" name="{{ $field }}"
+                                                                id="{{ $field }}" value="{{ $admin_wallets->$field }}"
+                                                                placeholder="Enter address or payment tag">
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-end gap-2">
+                                            <button type="reset" class="btn btn-light">Undo</button>
+                                            <button class="btn btn-primary please-wait-btn" type="submit">
+                                                <i class="fe fe-save"></i> Update wallets
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
-                        {{-- content here --}}
 
                     </div>
-                    <!-- CONTAINER END -->
                 </div>
             </div>
-            <!-- APP-CONTENT END -->
         </div>
 
-        <!-- FOOTER -->
         @include('includes.admin-footer')
-        <!-- FOOTER END -->
-
     </div>
-    <!-- CONTAINER END -->
 
     @include('includes.admin-script')
 

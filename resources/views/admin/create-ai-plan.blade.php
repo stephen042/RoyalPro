@@ -9,125 +9,96 @@
 
 <body class="app sidebar-mini ltr light-mode">
 
-    <!-- GLOBAL-LOADER -->
     @include('includes.loader')
-    <!-- /GLOBAL-LOADER -->
 
-    <!-- PAGE -->
     <div class="page">
         <div class="page-main">
 
-            <!-- APP-NAv -->
             @include('includes.admin-nav')
-            <!-- <div class="app-header header sticky"> -->
-            <!-- /APP-NAv -->
-
-            <!--APP-SIDEBAR-->
             @include('includes.admin-sidebar')
-            <!--/APP-SIDEBAR-->
 
-            <!-- APP-CONTENT OPEN -->
             <div class="main-content app-content mt-0">
                 <div class="side-app">
-
-                    <!-- CONTAINER -->
                     <div class="main-container container-fluid">
 
-                        <center class="mt-5">
-                            @if (session()->has('error'))
-                                <div class="alert alert-danger alert-dismissible fade show w-80" role="alert">
-                                    <span class="alert-inner--icon"><i class="fe fe-slash"></i></span>
-                                    <span class="alert-inner--text"><strong>error!</strong>
-                                        {{ session('error') }}
-                                    </span>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                            @endif
-                            @if (session()->has('success'))
-                                <div class="alert alert-success alert-dismissible fade show w-80" role="alert">
-                                    <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
-                                    <span class="alert-inner--text"><strong>Success!</strong>
-                                        {{ session('success') }}
-                                    </span>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                            @endif
-                        </center>
+                        @include('includes.flash-alerts')
+
+                        <div class="rg-page-head">
+                            <div>
+                                <span class="rg-eyebrow"><i class="fe fe-cpu"></i> Products</span>
+                                <h1>AI plans</h1>
+                                <p>Create and manage automated investment plans.</p>
+                            </div>
+                            <div class="rg-page-actions">
+                                <span class="rg-chip rg-chip--neutral"><i class="fe fe-layers"></i> {{ $ai_plans->count() }} plans</span>
+                            </div>
+                        </div>
 
                         <livewire:admin.create-ai-plan />
-                        {{-- content here --}}
 
-                        <!-- ROW -->
-                        <div class="row row-sm mt-5">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">All Ai Plans</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered text-nowrap border-bottom w-100 "
-                                                id="responsive-datatable">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="wd-15p border-bottom-0">#</th>
-                                                        <th class="wd-15p border-bottom-0">Plan Name</th>
-                                                        <th class="wd-15p border-bottom-0">Plan Amount</th>
-                                                        <th class="wd-15p border-bottom-0">Plan Duration</th>
-                                                        <th class="wd-15p border-bottom-0">Plan ROI</th>
-                                                        <th class="wd-15p border-bottom-0">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($ai_plans as $counter => $plan)
-                                                        <tr>
-                                                            <td>{{ $counter + 1 }}</td>
-                                                            <td>{{ $plan->name }}</td>
-                                                            <td>${{ number_format($plan->amount, 2) }}</td>
-                                                            <td>{{ $plan->duration }}</td>
-                                                            <td>{{ $plan->ROI }}%</td>
-                                                            <td>
-                                                                <form action="{{ route('delete_ai_plan', [$plan->id]) }}"
-                                                                    method="post">
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <input type="hidden" name="id"
-                                                                        value="{{ $plan->id }}">
-                                                                    <button type="submit" class="btn btn-danger btn-sm confirm">
-                                                                        <i class="fas fa-trash-alt"></i>
-                                                                        Delete
-                                                                    </button>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div>
+                                    <h2 class="card-title">All AI plans</h2>
+                                    <p class="rg-panel__sub mb-0">Plans currently available to users.</p>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle w-100" id="responsive-datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Plan name</th>
+                                                <th>Amount</th>
+                                                <th>Duration</th>
+                                                <th>ROI</th>
+                                                <th class="text-end">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($ai_plans as $counter => $plan)
+                                                <tr>
+                                                    <td class="rg-muted">{{ $counter + 1 }}</td>
+                                                    <td class="fw-semibold">{{ $plan->name }}</td>
+                                                    <td><span class="rg-table-amount">${{ number_format((float) $plan->amount, 2) }}</span></td>
+                                                    <td>{{ $plan->duration }}</td>
+                                                    <td>{{ $plan->ROI }}%</td>
+                                                    <td class="text-end">
+                                                        <form action="{{ route('delete_ai_plan', [$plan->id]) }}" method="post">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <input type="hidden" name="id" value="{{ $plan->id }}">
+                                                            <button type="submit" class="btn btn-light btn-sm confirm">
+                                                                <i class="fe fe-trash-2"></i> Delete
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="6">
+                                                        <div class="rg-empty">
+                                                            <div class="rg-empty__icon"><i class="fe fe-cpu"></i></div>
+                                                            <h3 class="rg-empty__title">No AI plans yet</h3>
+                                                            <p class="rg-empty__text">Create your first plan using the form above.</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <!-- END ROW -->
 
                     </div>
-                    <!-- CONTAINER END -->
                 </div>
             </div>
-            <!-- APP-CONTENT END -->
         </div>
 
-        <!-- FOOTER -->
         @include('includes.admin-footer')
-        <!-- FOOTER END -->
-
     </div>
-    <!-- CONTAINER END -->
 
     @include('includes.admin-script')
 

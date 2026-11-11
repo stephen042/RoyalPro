@@ -1,33 +1,45 @@
-<div class="col-xl-12 col-md-12 col-sm-12 mt-5">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Create New Status Plan</h3>
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h2 class="card-title">Create a status plan</h2>
+            <p class="rg-panel__sub mb-0">Define the upgrade price and subscription duration.</p>
         </div>
-        <form wire:submit="create_status_plan">
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Plan Name</label>
-                    <input type="text" wire:model.blur="plan_name" class="form-control"
-                        placeholder="put your new plan name">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Plan Amount</label>
-                    <input type="number" wire:model.blur="plan_amount" class="form-control" 
-                        placeholder="put your new plan amount">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Duration</label>
-                    <input type="text" wire:model.blur="plan_duration" class="form-control" 
-                        placeholder="E.g 3 days or 1 day etc">
-                </div>
-            </div>
-            <div class="card-footer text-end">
-                <button class="btn btn-success" type="submit">
-                    create
-                    <x-spinner />
-                </button>
-                <button type="reset" class="btn btn-danger">Undo</button>
-            </div>
-        </form>
     </div>
+    <form wire:submit="create_status_plan">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Plan name</label>
+                        <input type="text" wire:model.blur="plan_name" class="form-control"
+                            placeholder="Enter a plan name">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Plan amount</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" wire:model.blur="plan_amount" class="form-control"
+                                placeholder="Enter plan amount">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group mb-0">
+                        <label>Duration</label>
+                        <input type="text" wire:model.blur="plan_duration" class="form-control"
+                            placeholder="e.g. 3 days">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end gap-2">
+            <button type="reset" class="btn btn-light">Reset</button>
+            <button class="btn btn-primary" type="submit">
+                <i class="fe fe-plus"></i> Create plan
+                <x-spinner />
+            </button>
+        </div>
+    </form>
 </div>

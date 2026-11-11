@@ -1,122 +1,68 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<x-user.layout title="Deposit History">
 
-<head>
+    <x-user.page-head
+        eyebrow="<i class='fe fe-clock'></i> Activity"
+        title="Deposit history"
+        subtitle="A complete record of funding transactions on your account.">
+        <x-slot:actions>
+            <a href="{{ route('user_deposit') }}" class="btn btn-primary">
+                <i class="fe fe-plus"></i> Add funds
+            </a>
+        </x-slot:actions>
+    </x-user.page-head>
 
-    @include('includes.user-head')
-
-</head>
-
-<body class="app sidebar-mini ltr light-mode">
-
-    <!-- GLOBAL-LOADER -->
-    @include('includes.loader')
-    <!-- /GLOBAL-LOADER -->
-
-    <!-- PAGE -->
-    <div class="page">
-        <div class="page-main">
-
-            <!-- APP-NAv -->
-            @include('includes.user-nav')
-            <!-- /APP-NAv -->
-
-            <!--APP-SIDEBAR-->
-            @include('includes.user-sidebar')
-            <!--/APP-SIDEBAR-->
-
-            <!-- APP-CONTENT OPEN -->
-            <div class="main-content app-content mt-0">
-                <div class="side-app">
-
-                    <!-- CONTAINER -->
-                    <div class="main-container container-fluid">
-
-                        <!-- PAGE-HEADER -->
-                        <div class="page-header">
-                            <div>
-                                <h1 class="page-title">Deposit History</h1>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('user_dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Deposit History</li>
-                                </ol>
-                            </div>
-                        </div>
-
-                        <!-- ROW -->
-                        <div class="row row-sm">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">ALL Deposit History </h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered text-nowrap border-bottom w-100 "
-                                                id="responsive-datatable">
-                                                <thead>
-                                                    <tr>
-                                                        <td class="wd-15p border-bottom-0">#</td>
-                                                        <td class="wd-15p border-bottom-0">Date</td>
-                                                        <td class="wd-15p border-bottom-0">Amount</td>
-                                                        <td class="wd-15p border-bottom-0">Asset</td>
-                                                        <td class="wd-15p border-bottom-0">Status</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @forelse ($deposits as $count => $deposit)
-                                                        <tr>
-                                                            <td>{{ $count + 1 }}</td>
-                                                            <td>{{ date('Y/M/d h:i a', strtotime($deposit->created_at)) }}
-                                                            </td>
-                                                            <td>${{ number_format($deposit->transaction_amount, 2) }}
-                                                            </td>
-                                                            <td>{{ $deposit->transaction_asset }}</td>
-                                                            @if ($deposit->transaction_status == 2)
-                                                                <td class="text-success fs-15 fw-semibold">
-                                                                    {{ config('app.transaction_status')[$deposit->transaction_status] }}
-                                                                </td>
-                                                            @elseif ($deposit->transaction_status == 3)
-                                                                <td class="text-danger fs-15 fw-semibold">
-                                                                    {{ config('app.transaction_status')[$deposit->transaction_status] }}
-                                                                </td>
-                                                            @else
-                                                                <td class="text-info fs-15 fw-semibold">
-                                                                    {{ config('app.transaction_status')[$deposit->transaction_status] }}
-                                                                </td>
-                                                            @endif
-                                                        </tr>
-                                                    @empty
-                                                        <tr></tr>
-                                                    @endforelse
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END ROW -->
-                    </div>
-                    <!-- CONTAINER END -->
-                </div>
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">All deposits</h2>
+                <p class="card-subtitle">Funding activity across all supported assets.</p>
             </div>
-            <!-- APP-CONTENT END -->
+            <span class="rx-chip rx-chip--neutral">{{ $deposits->count() }} records</span>
         </div>
-
-        <!-- FOOTER -->
-        @include('includes.user-footer')
-        <!-- FOOTER END -->
-        <!-- APP-NAv -->
-        @include('includes.user-nav-down')
-        <!-- /APP-NAv -->
-
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle w-100" id="responsive-datatable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Asset</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($deposits as $count => $deposit)
+                            <tr>
+                                <td class="rx-muted">{{ $count + 1 }}</td>
+                                <td>{{ date('M d, Y · h:i A', strtotime($deposit->created_at)) }}</td>
+                                <td><span class="rx-table-amount">${{ number_format((float) $deposit->transaction_amount, 2) }}</span></td>
+                                <td><span class="rx-badge rx-badge--neutral">{{ $deposit->transaction_asset }}</span></td>
+                                <td>
+                                    @if ($deposit->transaction_status == 2)
+                                        <span class="rx-badge rx-badge--success">{{ config('app.transaction_status')[$deposit->transaction_status] }}</span>
+                                    @elseif ($deposit->transaction_status == 3)
+                                        <span class="rx-badge rx-badge--danger">{{ config('app.transaction_status')[$deposit->transaction_status] }}</span>
+                                    @else
+                                        <span class="rx-badge rx-badge--warning">{{ config('app.transaction_status')[$deposit->transaction_status] }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5">
+                                    <div class="rx-empty">
+                                        <div class="rx-empty__icon"><i class="fe fe-inbox"></i></div>
+                                        <h3 class="rx-empty__title">No deposits yet</h3>
+                                        <p class="rx-empty__text">Your funding transactions will appear here after your first deposit.</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <!-- CONTAINER END -->
 
-    @include('includes.user-scripts')
-
-</body>
-
-</html>
+</x-user.layout>

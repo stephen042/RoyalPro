@@ -1,197 +1,50 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<x-user.layout title="Crypto Wallets">
 
-<head>
+    @php
+        $wallets = [
+            ['name' => 'Solana', 'ticker' => 'SOL', 'image' => 'solana.jpg', 'balance' => $crypto_accounts->solana_balance ?? 0],
+            ['name' => 'Ethereum', 'ticker' => 'ETH', 'image' => 'ethereum.png', 'balance' => $crypto_accounts->ethereum_balance ?? 0],
+            ['name' => 'Tether', 'ticker' => 'USDT', 'image' => 'tether-usdt.jpg', 'balance' => $crypto_accounts->usdt_balance ?? 0],
+            ['name' => 'Bitcoin', 'ticker' => 'BTC', 'image' => 'bitcoin.jpg', 'balance' => $crypto_accounts->bitcoin_balance ?? 0],
+            ['name' => 'Polygon', 'ticker' => 'POL', 'image' => 'polygon.png', 'balance' => $crypto_accounts->polygon_balance ?? 0],
+            ['name' => 'Ripple', 'ticker' => 'XRP', 'image' => 'xrp-logo.png', 'balance' => $crypto_accounts->ripple_balance ?? 0],
+        ];
+    @endphp
 
-    @include('includes.user-head')
+    <x-user.page-head
+        eyebrow="<i class='fe fe-grid'></i> Wallets"
+        title="Crypto wallets"
+        subtitle="View your available balances across supported digital assets.">
+        <x-slot:actions>
+            <a href="{{ route('user_deposit') }}" class="btn btn-primary">
+                <i class="fe fe-plus"></i> Add funds
+            </a>
+        </x-slot:actions>
+    </x-user.page-head>
 
-</head>
-
-<body class="app sidebar-mini ltr light-mode">
-
-    <!-- GLOBAL-LOADER -->
-    @include('includes.loader')
-    <!-- /GLOBAL-LOADER -->
-
-    <!-- PAGE -->
-    <div class="page">
-        <div class="page-main">
-
-            <!-- APP-NAv -->
-            @include('includes.user-nav')
-            <!-- /APP-NAv -->
-
-            <!--APP-SIDEBAR-->
-            @include('includes.user-sidebar')
-            <!--/APP-SIDEBAR-->
-
-            <!-- APP-CONTENT OPEN -->
-            <div class="main-content app-content mt-0">
-                <div class="side-app">
-                    <!-- CONTAINER -->
-                    <div class="main-container container-fluid">
-                        <!-- PAGE-HEADER -->
-                        <div class="page-header">
-                            <div>
-                                <h1 class="page-title">Crypto Wallets | View your balances in Crypto</h1>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('user_dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Crypto Wallets</li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div class="container my-4">
-                            <hr>
-                            <div class="row gy-1 gx-3">
-                                <!-- Solana -->
-                                <div class="col-md-6 m-0">
-                                    <div class="card shadow-sm m-1 m-0">
-                                        <div class="card-body d-flex justify-content-between align-items-center py-1"
-                                            style="min-height: 55px;">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img src="{{ asset('assets/images/crypto/solana.jpg') }}" alt="Solana"
-                                                    class="rounded-circle" width="36" height="36">
-                                                <div>
-                                                    <div class="fw-semibold text-dark mb-0">Solana</div>
-                                                    <small class="text-muted"><b>SOL</b></small>
-                                                </div>
-                                            </div>
-                                            <div class="text-end">
-                                                <div class="fw-bold text-dark mb-0">${{ number_format((float)
-                                                    ($crypto_accounts->solana_balance ?? 0), 2) }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Ethereum -->
-                                <div class="col-md-6 m-0">
-                                    <div class="card shadow-sm m-1">
-                                        <div class="card-body d-flex justify-content-between align-items-center py-1"
-                                            style="min-height: 55px;">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img src="{{ asset('assets/images/crypto/ethereum.png') }}"
-                                                    alt="Ethereum" class="rounded-circle" width="36" height="36">
-                                                <div>
-                                                    <div class="fw-semibold text-dark mb-0">Ethereum</div>
-                                                    <small class="text-muted"><b>ETH</b></small>
-                                                </div>
-                                            </div>
-                                            <div class="text-end">
-                                                <div class="fw-bold text-dark mb-0">${{ number_format((float)
-                                                    ($crypto_accounts->ethereum_balance ?? 0), 2) }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- USDT -->
-                                <div class="col-md-6 m-0">
-                                    <div class="card shadow-sm m-1">
-                                        <div class="card-body d-flex justify-content-between align-items-center py-1"
-                                            style="min-height: 55px;">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img src="{{ asset('assets/images/crypto/tether-usdt.jpg') }}"
-                                                    alt="USDT" class="rounded-circle" width="36" height="36">
-                                                <div>
-                                                    <div class="fw-semibold text-dark mb-0">USDT Tether</div>
-                                                    <small class="text-muted"><b>USDT</b></small>
-                                                </div>
-                                            </div>
-                                            <div class="text-end">
-                                                <div class="fw-bold text-dark mb-0">${{ number_format((float)
-                                                    ($crypto_accounts->usdt_balance ?? 0), 2) }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Bitcoin -->
-                                <div class="col-md-6 m-0">
-                                    <div class="card shadow-sm m-1">
-                                        <div class="card-body d-flex justify-content-between align-items-center py-1"
-                                            style="min-height: 55px;">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img src="{{ asset('assets/images/crypto/bitcoin.jpg') }}" alt="Bitcoin"
-                                                    class="rounded-circle" width="36" height="36">
-                                                <div>
-                                                    <div class="fw-semibold text-dark mb-0">Bitcoin</div>
-                                                    <small class="text-muted"><b>BTC</b></small>
-                                                </div>
-                                            </div>
-                                            <div class="text-end">
-                                                <div class="fw-bold text-dark mb-0">${{ number_format((float)
-                                                    ($crypto_accounts->bitcoin_balance ?? 0), 2) }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Polygon -->
-                                <div class="col-md-6 m-0">
-                                    <div class="card shadow-sm m-1">
-                                        <div class="card-body d-flex justify-content-between align-items-center py-1"
-                                            style="min-height: 55px;">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img src="{{ asset('assets/images/crypto/polygon.png') }}" alt="Polygon"
-                                                    class="rounded-circle" width="36" height="36">
-                                                <div>
-                                                    <div class="fw-semibold text-dark mb-0">Polygon</div>
-                                                    <small class="text-muted"><b>POL</b></small>
-                                                </div>
-                                            </div>
-                                            <div class="text-end">
-                                                <div class="fw-bold text-dark mb-0">${{ number_format((float)
-                                                    ($crypto_accounts->polygon_balance ?? 0), 2) }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Ripple / XRP -->
-                                <div class="col-md-6 m-0">
-                                    <div class="card shadow-sm m-1">
-                                        <div class="card-body d-flex justify-content-between align-items-center py-1"
-                                            style="min-height: 55px;">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img src="{{ asset('assets/images/crypto/xrp-logo.png') }}" alt="XRP"
-                                                    class="rounded-circle" width="36" height="36">
-                                                <div>
-                                                    <div class="fw-semibold text-dark mb-0">Ripple</div>
-                                                    <small class="text-muted"><b>XRP</b></small>
-                                                </div>
-                                            </div>
-                                            <div class="text-end">
-                                                <div class="fw-bold text-dark mb-0">${{ number_format((float)
-                                                    ($crypto_accounts->ripple_balance ?? 0), 2) }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <!-- CONTAINER END -->
-                </div>
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <h2 class="card-title">Asset balances</h2>
+                <p class="card-subtitle">Balances are displayed in your account currency.</p>
             </div>
-            <!-- APP-CONTENT END -->
+            <span class="rx-chip rx-chip--neutral"><i class="fe fe-shield"></i> Secured</span>
         </div>
-
-
-        <!-- FOOTER -->
-        @include('includes.user-footer')
-        <!-- FOOTER END -->
-        <!-- APP-NAv -->
-        @include('includes.user-nav-down')
-        <!-- /APP-NAv -->
-
+        <div class="card-body">
+            <div class="rx-wallet-grid">
+                @foreach ($wallets as $wallet)
+                    <div class="rx-wallet">
+                        <img src="{{ asset('assets/images/crypto/' . $wallet['image']) }}"
+                            alt="{{ $wallet['name'] }}" class="rx-wallet__icon">
+                        <div class="rx-wallet__meta">
+                            <strong>{{ $wallet['name'] }}</strong>
+                            <small>{{ $wallet['ticker'] }}</small>
+                        </div>
+                        <div class="rx-wallet__balance">${{ number_format((float) $wallet['balance'], 2) }}</div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
-    <!-- CONTAINER END -->
-    @include('includes.user-scripts')
 
-</body>
-
-</html>
+</x-user.layout>

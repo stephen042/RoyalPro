@@ -1,89 +1,72 @@
-<div class="navbar navbar-collapse responsive-navbar p-0">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-        <div class="d-flex order-lg-2">
-            <!-- FULL-SCREEN -->
-            <div class="dropdown d-md-flex">
-                <a class="nav-link icon full-screen-link nav-link-bg">
-                    <i class="fe fe-minimize fullscreen-button"></i>
-                </a>
-            </div>
-            <!-- FULL-SCREEN END -->
-            <div class="dropdown d-md-flex notifications">
-                <a class="nav-link icon" data-bs-toggle="dropdown">
-                    <i class="fe fe-bell"></i>
-                    @if (!empty($user_notifications_count))
-                        <span class=" pulse"></span>
-                    @endif
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
-                    style="max-height:80vh; overflow-y:auto;">
-                    <div class="drop-heading border-bottom">
-                        <div class="d-flex">
-                            <h6 class="mt-1 mb-0 fs-16 fw-semibold">You have Notification</h6>
-                            <div class="ms-auto">
-                                <span class="badge bg-success rounded-pill">{{ $user_notifications_count }}</span>
-                            </div>
-                        </div>
-                        <hr>
-                        @if (!empty($user_notifications_count))
-                            <a class="badge bg-danger" href="javascript:void(0);" wire:click="clear_notifications">
-                                clear all
-                            </a>
-                        @endif
+<div class="rx-nav-actions">
+    <div class="rx-dropdown-wrap">
+        <button class="rx-iconbtn" type="button" data-rx-dropdown="rx-notifications-panel" aria-label="Notifications"
+            aria-expanded="false">
+            <i class="fe fe-bell"></i>
+            @if (!empty($user_notifications_count))
+                <span class="rx-dot"></span>
+            @endif
+        </button>
 
-                    </div>
-                    <div class="notifications-menu">
-                        {{-- use popup to display messages if possible --}}
-                        @forelse ($user_notifications as $item)
-                            <div class="dropdown-item d-flex" href="chat.html">
-                                <div class="me-3 notifyimg  bg-primary-gradient brround box-shadow-primary">
-                                    <i class="fe fe-message-square"></i>
-                                </div>
-                                <div class="mt-1 wd-80p">
-                                    <h5 class="notification-label mb-1">{{ $item->notifications_category }}</h5>
-                                    <span class="notification-subtext">{{ $item->notifications_message }}</span>
-                                </div>
-                            </div>
-                        @empty
-                        @endforelse
+    <div class="rx-dropdown rx-notif" id="rx-notifications-panel" role="menu">
+        <div class="rx-notif__head">
+            <h6>Notifications <span class="rx-notif__count">{{ $user_notifications_count }}</span></h6>
+            @if (!empty($user_notifications_count))
+                <button type="button" class="rx-notif__clear" wire:click="clear_notifications">Clear all</button>
+            @endif
+        </div>
+
+        <div class="rx-notif__list">
+            @forelse ($user_notifications as $item)
+                <div class="rx-notif__item">
+                    <div class="rx-notif__icon"><i class="fe fe-message-square"></i></div>
+                    <div class="rx-notif__body">
+                        <h6>{{ $item->notifications_category }}</h6>
+                        <p>{{ $item->notifications_message }}</p>
                     </div>
                 </div>
-            </div>
-            <!-- NOTIFICATIONS -->
-            <div class="dropdown d-md-flex profile-1">
-                <a href="javascript:void(0);" data-bs-toggle="dropdown" class="nav-link leading-none d-flex px-1">
-                    <span>
-                        @if ($user_data->profile_pic)
-                            <img src="{{ asset('storage/' . $user_data->profile_pic) }}" alt="profile-user"
-                                class="avatar profile-user brround cover-image">
-                        @else
-                            <img src="{{asset('assets/images/profile.png')}}" alt="User Avatar"
-                                class="rounded-circle avatar-lg me-2">
-                        @endif
-                    </span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <div class="drop-heading">
-                        <div class="text-center">
-                            <h5 class="text-dark mb-0">{{ $user_data->first_name . ' ' . $user_data->last_name }}</h5>
-                            <small class="text-muted">User</small>
-                        </div>
-                    </div>
-                    <div class="dropdown-divider m-0"></div>
-                    <a class="dropdown-item" href="{{ route('account_settings') }}">
-                        <i class="dropdown-icon fe fe-user"></i> Account Settings
-                    </a>
-                    <a class="dropdown-item" href="{{ route('security_settings') }}">
-                        <i class="dropdown-icon fe fe-settings"></i> Security Settings
-                    </a>
-                    <a class="dropdown-item text-danger" wire:click="logout"
-                        wire:confirm="Are you sure you want to logout ?" href="javascript:void(0);">
-                        <i class="dropdown-icon fe fe-alert-circle text-danger"></i>
-                        <em>Sign out</em>
-                    </a>
+            @empty
+                <div class="rx-notif__empty">
+                    <i class="fe fe-bell mb-2 d-block" style="font-size: 22px; opacity: 0.5;"></i>
+                    You are all caught up.
                 </div>
-            </div>
-            <!-- SIDE-MENU -->
+            @endforelse
         </div>
     </div>
+</div>
+
+<div class="rx-dropdown-wrap ms-1">
+    <button class="rx-topbar__user" type="button" data-rx-dropdown="rx-profile-panel" aria-label="Account menu"
+        aria-expanded="false">
+        <span class="rx-avatar">
+            @if ($user_data->profile_pic)
+                <img src="{{ asset('storage/' . $user_data->profile_pic) }}" alt="{{ $user_data->first_name }}">
+            @else
+                {{ strtoupper(substr($user_data->first_name ?? '', 0, 1) . substr($user_data->last_name ?? '', 0, 1)) ?: 'U' }}
+            @endif
+        </span>
+        <span class="rx-topbar__user-name">{{ $user_data->first_name }}</span>
+        <i class="fe fe-chevron-down"></i>
+    </button>
+
+    <div class="rx-dropdown" id="rx-profile-panel" role="menu">
+        <div class="drop-heading">
+            <div class="text-center">
+                <h5 class="mb-0">{{ $user_data->first_name . ' ' . $user_data->last_name }}</h5>
+                <small class="rx-muted">{{ $user_data->email }}</small>
+            </div>
+        </div>
+        <a class="dropdown-item" href="{{ route('account_settings') }}">
+            <i class="dropdown-icon fe fe-user"></i> Account settings
+        </a>
+        <a class="dropdown-item" href="{{ route('security_settings') }}">
+            <i class="dropdown-icon fe fe-shield"></i> Security settings
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item text-danger" wire:click="logout"
+            wire:confirm="Are you sure you want to logout ?" href="javascript:void(0);">
+            <i class="dropdown-icon fe fe-log-out"></i> Sign out
+        </a>
+    </div>
+</div>
 </div>

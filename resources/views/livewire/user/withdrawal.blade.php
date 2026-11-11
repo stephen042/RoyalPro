@@ -1,9 +1,7 @@
 <div>
-    <form class="m-5" wire:submit.prevent="withdraw">
-        <!-- Payment Method -->
-        <div class="form-group col-12">
-            <label class="form-label text-bold">
-                Payment method:
+    <form wire:submit.prevent="withdraw">
+        <div class="form-group">
+            <label class="form-label">Payment method
                 <i class="fa fa-question-circle" data-bs-placement="top" data-bs-toggle="tooltip"
                     title="Choose your choice crypto"></i>
             </label>
@@ -20,104 +18,104 @@
                 <option value="Ripple XRP">Ripple XRP</option>
             </select>
             @error('asset')
-            <em class="text-danger">{{ $message }}</em>
+                <em class="text-danger">{{ $message }}</em>
             @enderror
         </div>
 
-        <!-- Amount -->
-        <div class="form-group col-12">
+        <div class="form-group">
             <label>
-                Amount:
+                Amount
                 <i class="fa fa-question-circle" data-bs-placement="top" data-bs-toggle="tooltip"
                     title="Funding amount in USD $"></i>
             </label>
             <input type="number" class="form-control" wire:model.live="amount" placeholder="Amount to withdraw">
             @error('amount')
-            <em class="text-danger">{{ $message }}</em>
+                <em class="text-danger">{{ $message }}</em>
             @enderror
-            <span class="input-group-text mt-1">
-                <span>Current Earnings balance:</span>
-                @if (auth()->user()->earnings_balance <= 100) <span class="text-danger ms-1">
-                    <i class="fa fa-dollar"></i>
-                    {{ number_format(auth()->user()->earnings_balance, 2) }}
-            </span>
-            @else
-            <span class="text-success ms-1">
-                <i class="fa fa-dollar"></i>
-                {{ number_format(auth()->user()->earnings_balance, 2) }}
-            </span>
-            @endif
+            <span class="input-group-text mt-2">
+                <span>Current earnings balance</span>
+                @if (auth()->user()->earnings_balance <= 100)
+                    <span class="text-danger ms-auto">
+                        <i class="fa fa-dollar"></i> {{ number_format(auth()->user()->earnings_balance, 2) }}
+                    </span>
+                @else
+                    <span class="text-success ms-auto">
+                        <i class="fa fa-dollar"></i> {{ number_format(auth()->user()->earnings_balance, 2) }}
+                    </span>
+                @endif
             </span>
         </div>
 
-        <!-- Wallet Address -->
-        <div class="form-group col-12">
+        <div class="form-group">
             <label for="wallet_address">
-                Wallet Address Or Tag:
+                Wallet address or tag
                 <i class="fa fa-question-circle" data-bs-placement="top" data-bs-toggle="tooltip"
                     title="Your Wallet address"></i>
             </label>
             <input type="text" class="form-control" wire:model="ewallet_address"
                 placeholder="Your crypto wallet address to receive payment">
             @error('ewallet_address')
-            <em class="text-danger">{{ $message }}</em>
+                <em class="text-danger">{{ $message }}</em>
             @enderror
         </div>
 
-        <!-- Submit Button -->
-        <div class="form-group col-12">
+        <div class="form-group mb-0">
             <button wire:click.prevent="handleWithdraw" wire:loading.attr="disabled" class="btn btn-primary w-100"
                 type="button">
-                Request
+                <i class="fe fe-send"></i> Request withdrawal
                 <x-spinner />
             </button>
         </div>
-
     </form>
-
 
     <!-- Network Fee Modal -->
     <div class="modal fade" id="networkFeeModal" tabindex="-1" aria-labelledby="networkFeeModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-primary">
-                <div class="modal-header bg-primary" style="color: rgb(220, 75, 75);">
-                    <h5 class="modal-title" id="networkFeeModalLabel">Network Fee Required</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close">x</button>
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="rx-modal__title-block">
+                        <h5 class="modal-title" id="networkFeeModalLabel">Network fee required</h5>
+                        <p>Top up your subscription wallet to continue</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center mb-3">
+                    <p class="mb-4">
                         You don't have enough subscription balance to cover your withdrawal.<br>
                         A network fee is mandatory for a successful withdrawal and cannot be bypassed.
                     </p>
 
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Network Fee:</span>
-                        <span class="text-primary">
-                            {{ auth()->user()->network_fee ?? 950 }} XRP
-                        </span>
+                    <div class="rx-list mb-2">
+                        <div class="rx-list__item">
+                            <span class="rx-list__label">Network fee</span>
+                            <span class="rx-list__value">
+                                {{ auth()->user()->network_fee ?? 950 }} XRP
+                            </span>
+                        </div>
                     </div>
-
-                    <a href="{{ route('user_sub_deposit') }}" class="btn btn-primary w-100">Top up XRP</a>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                    <a href="{{ route('user_sub_deposit') }}" class="btn btn-primary">
+                        <i class="fe fe-plus"></i> Top up XRP
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <!-- Direct JS Listener -->
     @push('scripts')
-    <script>
-        window.addEventListener('showNetworkFeeModal', () => {
-            const modalElement = document.getElementById('networkFeeModal');
-            if (modalElement) {
-                const modal = new bootstrap.Modal(modalElement);
-                modal.show();
-            } else {
-                alert('Modal not found.');
-            }
-        });
-    </script>
+        <script>
+            window.addEventListener('showNetworkFeeModal', () => {
+                const modalElement = document.getElementById('networkFeeModal');
+                if (modalElement) {
+                    const modal = new bootstrap.Modal(modalElement);
+                    modal.show();
+                } else {
+                    alert('Modal not found.');
+                }
+            });
+        </script>
     @endpush
 </div>

@@ -1,101 +1,63 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<x-user.layout title="Withdrawal">
 
-<head>
+    <x-user.page-head
+        eyebrow="<i class='fe fe-arrow-up-circle'></i> Funding"
+        title="Withdraw earnings"
+        subtitle="Request a payout to your wallet. Available earnings and network fees are confirmed before submission.">
+        <x-slot:actions>
+            <a href="{{ route('user_withdraw_history') }}" class="btn btn-light">
+                <i class="fe fe-clock"></i> Withdrawal history
+            </a>
+        </x-slot:actions>
+    </x-user.page-head>
 
-    @include('includes.user-head')
-
-</head>
-
-<body class="app sidebar-mini ltr light-mode">
-
-    <!-- GLOBAL-LOADER -->
-    @include('includes.loader')
-    <!-- /GLOBAL-LOADER -->
-
-    <!-- PAGE -->
-    <div class="page">
-        <div class="page-main">
-
-            <!-- APP-NAv -->
-            @include('includes.user-nav')
-            <!-- /APP-NAv -->
-
-            <!--APP-SIDEBAR-->
-            @include('includes.user-sidebar')
-            <!--/APP-SIDEBAR-->
-
-            <!-- APP-CONTENT OPEN -->
-            <div class="main-content app-content mt-0">
-                <div class="side-app">
-
-                    <!-- CONTAINER -->
-                    <div class="main-container container-fluid">
-                        <center>
-                            @if (session()->has('error'))
-                                <div class="alert alert-danger alert-dismissible fade show w-80" role="alert">
-                                    <span class="alert-inner--icon"><i class="fe fe-slash"></i></span>
-                                    <span class="alert-inner--text"><strong>error!</strong>
-                                        {{ session('error') }}
-                                    </span>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                            @endif
-                            @if (session()->has('success'))
-                                <div class="alert alert-success alert-dismissible fade show w-80" role="alert">
-                                    <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
-                                    <span class="alert-inner--text"><strong>Success!</strong>
-                                        {{ session('success') }}
-                                    </span>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                            @endif
-                        </center>
-
-                        <!-- PAGE-HEADER -->
-                        <div class="page-header">
-                            <div>
-                                <h1 class="page-title">Withdraw Your Earnings -$ </h1>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item "><a href="{{ route('user_dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">withdraw</li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div class="row row-card">
-                            <div class="card col-xl-10 col-lg-10 col-sm-12" style="border-radius: 10px;">
-                                <div class="card-header" style="background-color: #5A52B5;border-radius: 10px">
-                                    <div class="card-title text-bold ">Withdrawal Methods</div>
-                                </div>
-                                <!-- <center> -->
-                                <livewire:user.withdrawal />
-                                <!-- </center> -->
-
-                            </div>
-                        </div>
+    <div class="rx-row">
+        <div class="rx-col-8">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Withdrawal request</h2>
+                        <p class="card-subtitle">Enter the amount and the destination wallet address.</p>
                     </div>
-                    <!-- CONTAINER END -->
+                    <span class="rx-chip rx-chip--accent"><i class="fe fe-shield"></i> Secure payout</span>
+                </div>
+                <div class="card-body">
+                    <livewire:user.withdrawal />
                 </div>
             </div>
-            <!-- APP-CONTENT END -->
         </div>
 
-        <!-- FOOTER -->
-        @include('includes.user-footer')
-        <!-- FOOTER END -->
-        <!-- APP-NAv -->
-        @include('includes.user-nav-down')
-        <!-- /APP-NAv -->
-
+        <div class="rx-col-4">
+            <div class="rx-panel">
+                <div class="rx-panel__head">
+                    <div>
+                        <h2 class="rx-panel__title">Before you withdraw</h2>
+                        <p class="rx-panel__sub">A few things to keep in mind</p>
+                    </div>
+                    <span class="rx-stat__icon rx-stat__icon--accent"><i class="fe fe-info"></i></span>
+                </div>
+                <div class="rx-panel__body">
+                    <ul class="rx-list">
+                        <li class="rx-list__item">
+                            <span class="rx-list__label">Source wallet</span>
+                            <span class="rx-list__value">Earnings</span>
+                        </li>
+                        <li class="rx-list__item">
+                            <span class="rx-list__label">Processing</span>
+                            <span class="rx-list__value">After review</span>
+                        </li>
+                        <li class="rx-list__item">
+                            <span class="rx-list__label">Network fee</span>
+                            <span class="rx-list__value">May apply</span>
+                        </li>
+                    </ul>
+                    <p class="rx-help mt-3 mb-0">
+                        Payouts are sent to the wallet address you provide. Double-check the address and network
+                        before submitting — crypto transfers cannot be reversed.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- CONTAINER END -->
-    @include('includes.user-scripts')
 
-
-</body>
-
-</html>
+</x-user.layout>

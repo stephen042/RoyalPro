@@ -1,38 +1,24 @@
-<div id="global-loader">
-    <div id="global-loader"
-        class="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center"
-        style="z-index: 1050; background-color: #F1F5F9; transition: opacity 0.5s ease-in-out;">
-
-        <!-- Spinner Area -->
-        <div class="position-relative" style="width: 4rem; height: 4rem;">
-            <!-- Track Ring -->
-            <div class="position-absolute top-0 start-0 w-100 h-100 border border-4 rounded-circle"
-                style="border-color: rgba(5, 195, 251, 0.15) !important;"></div>
-
-            <!-- Animated Spin Ring -->
-            <div class="position-absolute top-0 start-0 w-100 h-100 border border-4 border-top-0 border-end-0 border-bottom-0 rounded-circle spinner-border text-primary"
-                style="border-color: #075065 !important; animation-duration: 0.75s;"></div>
-        </div>
-
-        <!-- Loading Message Status -->
-        <p class="mt-4 small font-weight-bold text-uppercase placeholder-glow"
-            style="letter-spacing: 0.15em; color: #6d9fe5; font-weight: 600; animation: pulse-text 1.5s ease-in-out infinite;">
-            {{ env('APP_NAME') }} Securing Connection...
-        </p>
+<script>
+    (function () {
+        try {
+            var dark = localStorage.getItem('zanexdarkMode');
+            var light = localStorage.getItem('zanexlightMode');
+            var body = document.body;
+            var useDark = Boolean(dark) && !light;
+            body.classList.remove('dark-mode', 'dark-menu', 'dark-header', 'light-mode', 'light-menu', 'light-header');
+            body.classList.add('rx-app');
+            body.classList.add(useDark ? 'dark-mode' : 'light-mode');
+            body.classList.add(useDark ? 'dark-menu' : 'light-menu');
+            body.classList.add(useDark ? 'dark-header' : 'light-header');
+            document.documentElement.dataset.rxTheme = useDark ? 'dark' : 'light';
+            document.documentElement.style.colorScheme = useDark ? 'dark' : 'light';
+        } catch (error) {}
+    })();
+</script>
+<div id="global-loader" class="rx-loader">
+    <div class="rx-loader__inner">
+        <div class="rx-loader__mark">{{ strtoupper(substr(config('app.name'), 0, 1)) }}</div>
+        <div class="rx-loader__bar"></div>
+        <p class="rx-loader__text">Loading workspace</p>
     </div>
-
-    <!-- Inline Animation Script Helper -->
-    <style>
-        @keyframes pulse-text {
-
-            0%,
-            100% {
-                opacity: 0.4;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-    </style>
 </div>
